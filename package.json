@@ -2,6 +2,6 @@
 	"dependencies": {
 		"express": "~4.13.0",
 		"ejs": "~2.3.2",
-		"mongoose": "~4.0.6"
+		"nedb": "~1.1.2"
 	}
 }

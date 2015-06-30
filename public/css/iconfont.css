@@ -8,16 +8,6 @@
   font-weight: normal;
   font-style: normal;
 }
-@font-face {
-  font-family: 'webfont';
-  src:url('fonts/webfont.eot?-nyam2h');
-  src:url('fonts/webfont.eot?#iefix-nyam2h') format('embedded-opentype'),
-    url('fonts/webfont.ttf?-nyam2h') format('truetype'),
-    url('fonts/webfont.woff?-nyam2h') format('woff'),
-    url('fonts/webfont.svg?-nyam2h#webfont') format('svg');
-  font-weight: normal;
-  font-style: normal;
-}
 
 .icon {
   font-family: 'webfont';
