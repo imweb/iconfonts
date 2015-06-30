@@ -1,0 +1,48 @@
+.layout{
+	width: 960px;
+	margin: 0 auto;
+}
+
+.border-bottom1px{
+	border-bottom: 1px dotted;
+}
+.list-title{
+	font-size: 20px;
+	height: 80px;
+	line-height: 80px;
+}
+
+.icon{
+	font-size: 42px;
+	line-height: 100px;
+	margin: 10px 0;
+	color:#333;
+	width: 100px;
+	text-align: center;
+	height: 100px;
+	line-height: 100px;
+	float: left;
+}
+
+.icon:hover{
+	font-size: 80px;
+	background: rgb(245, 245, 245);
+}
+
+.back2top{
+	font-size: 20px;
+	width: 38px;
+    height: 38px;
+    line-height: 38px;
+    text-align: center;
+    position: fixed;
+    _position: absolute;
+    right: 10px;
+    bottom: 100px;
+    _bottom: auto;
+    cursor: pointer;
+    font-size: 16px;
+    color: #9c9c9c;
+    background: rgb(245, 245, 245);
+    margin-top: 10px;
+}

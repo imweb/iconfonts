@@ -1,0 +1,15 @@
+.content{
+	width: 960px;
+	margin: 0 auto;
+}
+
+.title{
+	font-size: 20px;
+	height: 80px;
+	line-height: 80px;
+}
+.rule{
+	list-style: decimal;
+	margin-left: 24px;
+	line-height: 30px;
+}

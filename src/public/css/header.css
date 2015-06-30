@@ -1,0 +1,25 @@
+.header{
+	width: 100%;
+	background: #38b7ea;
+}
+.menu{
+	width: 960px;
+	margin: 0 auto;
+	height: 55px;
+	
+}
+.menu-item{
+	float: left;
+	padding: 0 15px;
+	height: 55px;
+	line-height: 55px;
+	font-size: 18px;
+}
+.menu-item a {
+	color: #fff;
+	display: block;
+}
+.menu-item a:hover{
+	text-decoration: none;
+	color: #fff;
+}
