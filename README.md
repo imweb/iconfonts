@@ -1,5 +1,5 @@
 # iconfonts
-已经部署到 iconfont.imweb.io 上面。
+已经部署到 [http://iconfont.imweb.io](http://iconfont.imweb.io) 上面。
 
 ===
 ### 存储icon
