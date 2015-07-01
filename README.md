@@ -1,4 +1,7 @@
 # iconfonts
+已经部署到 iconfont.imweb.io 上面。
+
+===
 ### 存储icon
 icon 相关文件存储到docs中，db/insert.js 会负责解析docs中的style.css，解析出其中的icon，并完成如下的工作：
 + 将style.css (关于iconfont的定义)copy到public/css/iconfont.css中
