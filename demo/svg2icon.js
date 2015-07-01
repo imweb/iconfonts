@@ -13,6 +13,7 @@ font.output({
 	path: './fonts/iconfont'
 });
 
+
 function generateCss(){
 	var content = [];
 	content.push('@font-face { ');
