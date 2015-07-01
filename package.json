@@ -1,27 +1,28 @@
-{	
-	"name": "imweb-iconfont",
-  	"private": true,
-  	"version": "0.0.1",
-  	"author": "imweb <imweb@imweb.io>",
-  	"keywords": [
-    	"imweb",
-    	"iconfonts"
-  	],
-  	"homepage": "http://iconfont.imweb.io",
-  	"repository": {
-    	"type": "git",
-    	"url": "https://github.com/imweb/iconfonts.git"
-  	},
-  	"scripts": {
-    	"start": "./node_modules/.bin/pm2 start index.js --name iconfont",
-    	"stop": "./node_modules/.bin/pm2 stop iconfont "
-  	},
-	"dependencies": {
-		"express": "~4.13.0",
-		"ejs": "~2.3.2",
-		"nedb": "~1.1.2"
-	},
-  	"devDependencies": {
-    	"pm2": "*"
-  	}
+{
+  "name": "imweb-iconfont",
+  "private": true,
+  "version": "0.0.1",
+  "author": "imweb <imweb@imweb.io>",
+  "keywords": [
+    "imweb",
+    "iconfonts"
+  ],
+  "homepage": "http://iconfont.imweb.io",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/imweb/iconfonts.git"
+  },
+  "scripts": {
+    "start": "./node_modules/.bin/pm2 start index.js --name iconfont",
+    "stop": "./node_modules/.bin/pm2 stop iconfont "
+  },
+  "dependencies": {
+    "express": "~4.13.0",
+    "ejs": "~2.3.2",
+    "nedb": "~1.1.2",
+    "font-carrier": "0.0.4"
+  },
+  "devDependencies": {
+    "pm2": "*"
+  }
 }
