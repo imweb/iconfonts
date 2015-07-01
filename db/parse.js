@@ -17,6 +17,7 @@ function getAllIcons(){
 	return matches || [];
 }
 
+
 // 将对应的 css 和 font copy到项目目录下面
 function copyCssAndFonts(){
 	var content = fs.readFileSync(cssPath);

@@ -16,14 +16,18 @@
 			<h1 class="list-title">平台图标库</h1>
 			<ul class="icon-list clearfix">
 			<% for(var i=0;i<platform.length;i++){ %>
-				<li class="icon iconfont <%= platform[i].name %>"></li>
+				<li class="icon">
+					<i class="icon-font <%= platform[i].name %>"></i>
+					<span class="icon-content"><%= platform[i].content %></span>
+					<span class="icon-name"><%= platform[i].name %></span>
+				</li>
 			<% } %>
 			</ul>
 		</div>
 		<div class="content-block">
 			<h1 class="list-title">移动端图标库</h1>
 			<ul class="icon-list clearfix">
-				<li class="icon iconfont"></li>
+				<li class="icon icon-font"></li>
 			</ul>
 		</div>
 	</div>

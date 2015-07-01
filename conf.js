@@ -15,6 +15,6 @@ module.exports = {
 	// db path
 	db_path: './data/icon.db',
 	// svg path
-	// svg_path: './docs/ke.qq.com_svg'
-	svg_path: './demo/svg'
+	svg_path: './docs/ke.qq.com-svg',
+	demo_svg_path: './demo/svg'
 }

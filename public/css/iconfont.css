@@ -1,175 +1,64 @@
-@font-face {
-	font-family: 'webfont';
-	src:url('fonts/webfont.eot?-nyam2h');
-	src:url('fonts/webfont.eot?#iefix-nyam2h') format('embedded-opentype'),
-		url('fonts/webfont.ttf?-nyam2h') format('truetype'),
-		url('fonts/webfont.woff?-nyam2h') format('woff'),
-		url('fonts/webfont.svg?-nyam2h#webfont') format('svg');
-	font-weight: normal;
-	font-style: normal;
-}
-
-.icon {
-	font-family: 'webfont';
-	speak: none;
-	font-style: normal;
-	font-weight: normal;
-	font-variant: normal;
-	text-transform: none;
-	line-height: 1;
-
-	/* Better Font Rendering =========== */
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
-}
-
-.i-add:before {
-	content: "\e600";
-}
-.i-a-education:before {
-	content: "\e601";
-}
-.i-alert:before {
-	content: "\e602";
-}
-.i-a-media:before {
-	content: "\e603";
-}
-.i-a-profession:before {
-	content: "\e604";
-}
-.i-arrow-bottom:before {
-	content: "\e605";
-}
-.i-arrow-top:before {
-	content: "\e606";
-}
-.i-a-teacher:before {
-	content: "\e607";
-}
-.i-back:before {
-	content: "\e608";
-}
-.i-calendar:before {
-	content: "\e609";
-}
-.i-checkbox:before {
-	content: "\e60a";
-}
-.i-checkbox-checked:before {
-	content: "\e60b";
-}
-.i-circle:before {
-	content: "\e60c";
-}
-.i-comment:before {
-	content: "\e60d";
-}
-.i-edit:before {
-	content: "\e60e";
-}
-.i-heart:before {
-	content: "\e60f";
-}
-.i-info:before {
-	content: "\e610";
-}
-.i-logo:before {
-	content: "\e611";
-}
-.i-lu:before {
-	content: "\e612";
-}
-.i-phone:before {
-	content: "\e613";
-}
-.i-play:before {
-	content: "\e614";
-}
-.i-qq:before {
-	content: "\e615";
-}
-.i-qq-border:before {
-	content: "\e616";
-}
-.i-qr-code:before {
-	content: "\e617";
-}
-.i-question:before {
-	content: "\e618";
-}
-.i-radio:before {
-	content: "\e619";
-}
-.i-radio-checked:before {
-	content: "\e61a";
-}
-.i-refresh:before {
-	content: "\e61b";
-}
-.i-right:before {
-	content: "\e61c";
-}
-.i-search:before {
-	content: "\e61d";
-}
-.i-share:before {
-	content: "\e61e";
-}
-.i-star:before {
-	content: "\e61f";
-}
-.i-star-border:before {
-	content: "\e620";
-}
-.i-success:before {
-	content: "\e621";
-}
-.i-tel:before {
-	content: "\e622";
-}
-.i-time:before {
-	content: "\e623";
-}
-.i-times:before {
-	content: "\e624";
-}
-.i-to-top:before {
-	content: "\e625";
-}
-.i-user:before {
-	content: "\e626";
-}
-.i-user-border:before {
-	content: "\e627";
-}
-.i-user-group:before {
-	content: "\e628";
-}
-.i-user-group-border:before {
-	content: "\e629";
-}
-.i-v-bottom:before {
-	content: "\e62a";
-}
-.i-v-left:before {
-	content: "\e62b";
-}
-.i-v-left-bold:before {
-	content: "\e62c";
-}
-.i-v-right:before {
-	content: "\e62d";
-}
-.i-v-right-bold:before {
-	content: "\e62e";
-}
-.i-v-top:before {
-	content: "\e62f";
-}
-.i-weixin:before {
-	content: "\e630";
-}
-.i-weixin-border:before {
-	content: "\e631";
-}
+@font-face { 
+font-family: "iconfont";src: url("./fonts/iconfont.eot");
+src: url("./fonts/iconfont.eot?#iefix") format("embedded-opentype"),
+url("./fonts/iconfont.woff") format("woff"),
+url("./fonts/iconfont.ttf") format("truetype"),
+url("./fonts/iconfont.svg#iconfont") format("svg");}
+.icon-font{font-family:"iconfont";font-size:16px;font-style:normal;}
+.i-1-27:after{content: "\f000";}
+.i-1-28:after{content: "\f001";}
+.i-1-30:after{content: "\f002";}
+.i-1-34:after{content: "\f003";}
+.i-1-35:after{content: "\f004";}
+.i-1-36:after{content: "\f005";}
+.i-21:after{content: "\f006";}
+.i-a-education:after{content: "\f007";}
+.i-a-media:after{content: "\f008";}
+.i-a-profession:after{content: "\f009";}
+.i-a-teacher:after{content: "\f00a";}
+.i-add:after{content: "\f00b";}
+.i-alert:after{content: "\f00c";}
+.i-arrow-bottom:after{content: "\f00d";}
+.i-arrow-top:after{content: "\f00e";}
+.i-back:after{content: "\f00f";}
+.i-calendar:after{content: "\f010";}
+.i-checkbox-checked:after{content: "\f011";}
+.i-checkbox:after{content: "\f012";}
+.i-circle:after{content: "\f013";}
+.i-comment:after{content: "\f014";}
+.i-edit:after{content: "\f015";}
+.i-heart:after{content: "\f016";}
+.i-info:after{content: "\f017";}
+.i-logo:after{content: "\f018";}
+.i-lu:after{content: "\f019";}
+.i-phone:after{content: "\f01a";}
+.i-play:after{content: "\f01b";}
+.i-qq-border:after{content: "\f01c";}
+.i-qq:after{content: "\f01d";}
+.i-qr-code:after{content: "\f01e";}
+.i-question:after{content: "\f01f";}
+.i-radio-checked:after{content: "\f020";}
+.i-radio:after{content: "\f021";}
+.i-refresh:after{content: "\f022";}
+.i-right:after{content: "\f023";}
+.i-search:after{content: "\f024";}
+.i-share:after{content: "\f025";}
+.i-star-border:after{content: "\f026";}
+.i-star:after{content: "\f027";}
+.i-success:after{content: "\f028";}
+.i-tel:after{content: "\f029";}
+.i-time:after{content: "\f02a";}
+.i-times:after{content: "\f02b";}
+.i-to-top:after{content: "\f02c";}
+.i-user-border:after{content: "\f02d";}
+.i-user-group-border:after{content: "\f02e";}
+.i-user-group:after{content: "\f02f";}
+.i-user:after{content: "\f030";}
+.i-v-bottom:after{content: "\f031";}
+.i-v-left-bold:after{content: "\f032";}
+.i-v-left:after{content: "\f033";}
+.i-v-right-bold:after{content: "\f034";}
+.i-v-right:after{content: "\f035";}
+.i-v-top:after{content: "\f036";}
+.i-weixin-border:after{content: "\f037";}
+.i-weixin:after{content: "\f038";}

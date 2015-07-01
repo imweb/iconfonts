@@ -4,7 +4,7 @@ src: url("./fonts/iconfont.eot?#iefix") format("embedded-opentype"),
 url("./fonts/iconfont.woff") format("woff"),
 url("./fonts/iconfont.ttf") format("truetype"),
 url("./fonts/iconfont.svg#iconfont") format("svg");}
-.iconfont{font-family:"iconfont";font-size:16px;font-style:normal;}
+.icon-font{font-family:"iconfont";font-size:16px;font-style:normal;}
 %i-add{
 	&:after{
 		content:"\f000";

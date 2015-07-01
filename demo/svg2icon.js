@@ -4,7 +4,7 @@ var fs = require('fs'),
 	fontCarrier = require('font-carrier');
 
 var font = fontCarrier.create(),
-	svgPath = path.join('../', conf.svg_path);
+	svgPath = path.join('../', conf.demo_svg_path);
 
 // 读取所有 svg, 并且自定义 content
 
@@ -20,12 +20,9 @@ var files = fs.readdirSync(svgPath),
 * http://astronautweb.co/snippet/font-awesome/
 */
 
-console.log(svgPath)
-
 files.forEach(function(file, index){
 	if(path.extname(file) == '.svg'){
 		iconContent = generateIconContent(svgCnt++);
-		console.log(iconContent)
 		iconNames.push(path.basename(file, '.svg'));
 		iconContents.push(iconContent);
 		svgsObj[iconContent] = fs.readFileSync(path.join(svgPath, file)).toString();
@@ -61,7 +58,7 @@ function generateCss(){
 	content.push('url("./fonts/iconfont.woff") format("woff"),');
 	content.push('url("./fonts/iconfont.ttf") format("truetype"),');
 	content.push('url("./fonts/iconfont.svg#iconfont") format("svg");}');
-	content.push('.iconfont{font-family:"iconfont";font-size:16px;font-style:normal;}');
+	content.push('.icon-font{font-family:"iconfont";font-size:16px;font-style:normal;}');
 	iconNames.forEach(function(iconName, index){
 		iconContents[index] = iconContents[index].replace('&#xf', '\\f');
 		content.push('%i-' + iconName + '{\r\n\t&:after{\r\n\t\tcontent:"' + iconContents[index] + '";\r\n\t}\r\n}');
@@ -78,7 +75,7 @@ function generateDemo(){
 	content.push('</head>\r\n<body>')
 
 	iconNames.forEach(function(iconName, index){
-		content.push('<i class="iconfont i-' + iconName + '"></i>');
+		content.push('<i class="icon-font i-' + iconName + '"></i>');
 	});
 	content.push('</body>\r\n</html>')
 

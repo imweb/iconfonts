@@ -13,18 +13,33 @@
 }
 
 .icon{
-	font-size: 42px;
 	margin: 10px 0;
 	color:#333;
 	width: 100px;
 	text-align: center;
 	height: 100px;
-	line-height: 100px;
 	float: left;
 }
+.icon .icon-font{
+	font-size: 42px;
+	display: block;
+}
+
+
+.icon .icon-content{
+	color: #c7254e;
+	background-color: #f9f2f4;
+	border-radius: 4px;
+	display: inline-block;
+	font-size: 14px;
+}
+.icon .icon-name{
+	display: block;
+	font-size: 14px;
+}
+
 
 .icon:hover{
-	font-size: 80px;
 	background: rgb(245, 245, 245);
 }
 

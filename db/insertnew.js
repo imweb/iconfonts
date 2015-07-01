@@ -6,18 +6,18 @@ var Datastore = require('nedb'),
 	conf = require('../conf.js'),
 	path = require('path'),
 	db = new Datastore({filename: path.join('../', conf.db_path), autoload: true});
-	parse = require('./parse.js');
+	parse = require('./parsesvg.js');
 
-var iconList = parse.getAllIcons(),
-	insertObj = [];
+var rets = parse.init();
+/*	insertObj = [];
 
 iconList.forEach(function(item, index){
 	insertObj.push({
 		name: item
 	});
-});
+});*/
 
-db.insert(insertObj, function (err) {
+db.insert(rets, function (err) {
 	if(err) console.log(err);
 });
 
