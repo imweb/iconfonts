@@ -15,7 +15,6 @@ iconList.forEach(function(item, index){
 	insertObj.push({name: item});
 });
 
-console.log(insertObj);
 db.insert(insertObj, function (err) {
 	if(err) console.log(err);
 });
