@@ -33,6 +33,10 @@ app.get('/rule', function(req, res){
 	res.render('rule');
 });
 
+app.get('/intro', function(req, res){
+	res.render('intro');
+});
+
 app.get('/upload', function(req, res){
 	res.render('upload');
 });
