@@ -16,7 +16,7 @@
 			<h1 class="list-title">平台图标库</h1>
 			<ul class="icon-list clearfix">
 			<% for(var i=0;i<platform.length;i++){ %>
-				<li class="icon">
+				<li class="icon" data-id="<%= platform[i].iconId %>">
 					<i class="icon-font <%= platform[i].name %>"></i>
 					<span class="icon-content"><%= platform[i].content %></span>
 					<span class="icon-name"><%= platform[i].name %></span>
@@ -31,7 +31,7 @@
 			</ul>
 		</div>
 	</div>
-	<section id="js-back2top" class="back2top iconfont icon-fanhuidingbu">	
+	<section id="js-back2top" class="icon-font i-to-top back2top">	
 	</section>
 	<%- include footer.html %>
 	<script src="lib/jquery-2.1.4.min.js"></script>

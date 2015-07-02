@@ -77,6 +77,7 @@ function init(){
 	genarateFonts(allIcons);
 	allIcons.forEach(function(icon, index){
 		ret.push({
+			iconId: index + 1,
 			name: 'i-' + icon.replace('.svg', ''),
 			svg: path.join(svgPath, icon),
 			content: iconContents[index]
