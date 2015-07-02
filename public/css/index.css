@@ -25,6 +25,22 @@
 	display: block;
 }
 
+.icon-checked{
+	background: rgb(245, 245, 245);
+	position: relative;
+}
+
+/*
+* 平台自身的iconfont和显示的iconfont区分开
+*/
+.icon-checked:after{
+    content: "\ffff";
+    position: absolute;
+    font-family: "platfont";
+    color: #ff4400;
+    top: 0;
+    right: 0;
+}
 
 .icon .icon-content{
 	color: #c7254e;
@@ -44,6 +60,7 @@
 }
 
 .back2top{
+	font-family: "platfont";
 	font-size: 20px;
 	width: 38px;
     height: 38px;
@@ -58,4 +75,7 @@
     color: #9c9c9c;
     background: rgb(245, 245, 245);
     margin-top: 10px;
+}
+.back2top:after{
+	content: "\fffe";
 }

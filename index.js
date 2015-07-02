@@ -2,7 +2,6 @@ var express = require('express'),
 	path = require('path'),
 	conf = require('./conf.js'),
 	db = require('./db/index.js'),
-	Q = require('q'),
 	download = require('./libs/download.js'),
 	ejs = require('ejs');
 

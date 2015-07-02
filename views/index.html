@@ -6,6 +6,7 @@
 	<link rel="stylesheet" href="css/reset.css">
 	<link rel="stylesheet" href="css/header.css">
 	<link rel="stylesheet" href="css/iconfont.css">
+	<link rel="stylesheet" href="css/platfont.css">
 	<link rel="stylesheet" href="css/index.css">
 	<link rel="stylesheet" href="css/footer.css">
 </head>
@@ -14,7 +15,7 @@
 	<div class="layout">
 		<div class="content-block border-bottom1px">
 			<h1 class="list-title">平台图标库</h1>
-			<ul class="icon-list clearfix">
+			<ul id="js-pcList" class="icon-list clearfix">
 			<% for(var i=0;i<platform.length;i++){ %>
 				<li class="icon" data-id="<%= platform[i].iconId %>">
 					<i class="icon-font <%= platform[i].name %>"></i>
@@ -31,7 +32,7 @@
 			</ul>
 		</div>
 	</div>
-	<section id="js-back2top" class="icon-font i-to-top back2top">	
+	<section id="js-back2top" class="back2top">	
 	</section>
 	<%- include footer.html %>
 	<script src="lib/jquery-2.1.4.min.js"></script>

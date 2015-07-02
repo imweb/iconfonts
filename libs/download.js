@@ -14,16 +14,20 @@ var Datastore = require('nedb'),
 var font = fontCarrier.create(),
 	svgPath = conf.svg_path;
 
-var folderName = 'download/iconfont-' + Date.now();
+
 
 function getIconsByIds(ids, cb){
-	db.find({"iconId": { $in: [1,2,3] }}, function(err, icons){
+	var _ids = [];
+	ids.forEach(function(id, index){
+		_ids.push(id - 0);
+	});
+	db.find({"iconId": { $in: _ids }}, function(err, icons){
 		typeof cb === 'function' && cb(err ? [] : icons)
 	});
 }
 
 function generateZip(icons, downloadCb){
-	
+	var folderName = 'download/iconfont-' + Date.now();
 	var folder = fs.mkdirSync(folderName);
 	var svgsObj = {},
 		iconNames = [];
@@ -41,11 +45,10 @@ function generateZip(icons, downloadCb){
 		font.output({
 			path: path.join(folderName, 'fonts/iconfont')
 		});
-		tools.generateCss(iconNames, path.join(folderName, 'iconfont.css'));
+		tools.generateCss(icons, path.join(folderName, 'iconfont.css'));
 		tools.generateHtml(iconNames, path.join(folderName, 'demo.html'));
 	}).then(function(){
 		var zip = new easyzip.EasyZip(); 
-		console.log(folderName);
 		zip.zipFolder('./' + folderName ,function(){
 		    zip.writeToFileSycn('./' + zipPath);
 		    typeof downloadCb === 'function' && downloadCb('./' + zipPath);

@@ -11,7 +11,7 @@ function generateIconContent(n){
 	return '&#xf' + decimal2Hex(n);
 }
 
-function generateCss(iconNames, cssPath){
+function generateCss(icons, cssPath){
 	var content = [],
 		iconContents = [];
 	content.push('@font-face { ');
@@ -21,11 +21,10 @@ function generateCss(iconNames, cssPath){
 	content.push('url("./fonts/iconfont.ttf") format("truetype"),');
 	content.push('url("./fonts/iconfont.svg#iconfont") format("svg");}');
 	content.push('.icon-font{font-family:"iconfont";font-size:16px;font-style:normal;}');
-	iconNames.forEach(function(iconName, index){
-		iconContents.push(generateIconContent(index));
-		iconContents[index] = iconContents[index].replace('&#xf', '\\f');
-		content.push('%i-' + iconName + '{\r\n\t&:after{\r\n\t\tcontent:"' + iconContents[index] + '";\r\n\t}\r\n}');
-		content.push('.i-' + iconName + ':after{content: "' + iconContents[index] + '";}');
+	icons.forEach(function(icon, index){
+/*		iconContents[index] = icon.replace('&#xf', '\\f');*/
+		content.push('%' + icon.name + '{\r\n\t&:after{\r\n\t\tcontent:"' + icon.content + '";\r\n\t}\r\n}');
+		content.push('.' + icon.name + ':after{content: "' + icon.content + '";}');
 	});
 	fs.writeFileSync(cssPath, content.join('\r\n'));
 }

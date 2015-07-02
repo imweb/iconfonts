@@ -9,7 +9,7 @@ var font = fontCarrier.create(),
 // 读取所有 svg, 并且自定义 content
 
 var files = fs.readdirSync(svgPath),
-	svgCnt = 0,
+	svgCnt = 4095, // \ffff
 	iconNames = [],
 	iconContents = [],
 	iconContent,
@@ -22,7 +22,7 @@ var files = fs.readdirSync(svgPath),
 
 files.forEach(function(file, index){
 	if(path.extname(file) == '.svg'){
-		iconContent = generateIconContent(svgCnt++);
+		iconContent = generateIconContent(svgCnt--);
 		iconNames.push(path.basename(file, '.svg'));
 		iconContents.push(iconContent);
 		svgsObj[iconContent] = fs.readFileSync(path.join(svgPath, file)).toString();
@@ -34,7 +34,7 @@ font.setSvg(svgsObj);
 
 // 导出字体
 font.output({
-	path: './fonts/iconfont'
+	path: './fonts/platfont'
 });
 
 // 十进制 转 16进制
@@ -53,25 +53,25 @@ function generateIconContent(n){
 function generateCss(){
 	var content = [];
 	content.push('@font-face { ');
-	content.push('font-family: "iconfont";src: url("./fonts/iconfont.eot");');
-	content.push('src: url("./fonts/iconfont.eot?#iefix") format("embedded-opentype"),');
-	content.push('url("./fonts/iconfont.woff") format("woff"),');
-	content.push('url("./fonts/iconfont.ttf") format("truetype"),');
-	content.push('url("./fonts/iconfont.svg#iconfont") format("svg");}');
-	content.push('.icon-font{font-family:"iconfont";font-size:16px;font-style:normal;}');
+	content.push('font-family: "platfont";src: url("./fonts/platfont.eot");');
+	content.push('src: url("./fonts/platfont.eot?#iefix") format("embedded-opentype"),');
+	content.push('url("./fonts/platfont.woff") format("woff"),');
+	content.push('url("./fonts/platfont.ttf") format("truetype"),');
+	content.push('url("./fonts/platfont.svg#platfont") format("svg");}');
+	content.push('.icon-font{font-family:"platfont";font-size:16px;font-style:normal;}');
 	iconNames.forEach(function(iconName, index){
 		iconContents[index] = iconContents[index].replace('&#xf', '\\f');
 		content.push('%i-' + iconName + '{\r\n\t&:after{\r\n\t\tcontent:"' + iconContents[index] + '";\r\n\t}\r\n}');
 		content.push('.i-' + iconName + ':after{content: "' + iconContents[index] + '";}');
 	});
-	fs.writeFileSync('iconfont.css', content.join('\r\n'));
+	fs.writeFileSync('platfont.css', content.join('\r\n'));
 }
 
 // 生成 demo 页面
 function generateDemo(){
 	var content = [];
 	content.push('<!DOCTYPE html>\r\n<html lang="en">\r\n<head>\r\n<meta charset="UTF-8">\r\n<title>iconfont demo</title>');
-	content.push('<link href="iconfont.css" rel="stylesheet" type="text/css" /> ');
+	content.push('<link href="platfont.css" rel="stylesheet" type="text/css" /> ');
 	content.push('</head>\r\n<body>')
 
 	iconNames.forEach(function(iconName, index){
