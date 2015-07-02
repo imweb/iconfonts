@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>iconfont 平台</title>
+	<link rel="stylesheet" href="css/reset.css">
+	<link rel="stylesheet" href="css/header.css">
+	<link rel="stylesheet" href="css/footer.css">
+	<style>
+	.upload-block{
+		width: 960px;
+		margin: 50px auto;
+		height: 550px;
+		border: 1px solid #ddd;
+	}
+	.upload-block p{
+		color: #666;
+		font-size: 14px;
+		line-height: 30px;
+		margin-top: 200px;
+		text-align: center;
+	}
+	</style>
+</head>
+<body>
+	<%- include header.html %>
+	<div id="upload" class="upload-block">
+		<p>将svg文件拖拽至框中上传</p>
+	</div>
+	<%- include footer.html %>
+	<script src="lib/jquery-2.1.4.min.js"></script>
+	<script>
+	var obj = $("#upload");
+	obj.on('dragenter', function (e){
+	    e.stopPropagation();
+	    e.preventDefault();
+	    $(this).css('border', '2px solid #0B85A1');
+	});
+	obj.on('dragover', function (e) {
+	     e.stopPropagation();
+	     e.preventDefault();
+	});
+	obj.on('drop', function (e) {
+	 
+	     $(this).css('border', '2px dotted #0B85A1');
+	    e.preventDefault();
+	    var files = e.originalEvent.dataTransfer.files;
+	 
+	     //We need to send dropped files to Server
+	     //console.log(files)
+	    handleFileUpload(files,obj);
+	});
+
+	function handleFileUpload(files,obj){
+	   for (var i = 0; i < files.length; i++){
+	        var fd = new FormData();
+	        fd.append('file', files[i]);
+	 
+	        //var status = new createStatusbar(obj); //Using this we can set progress.
+	        //status.setFileNameSize(files[i].name,files[i].size);
+	        sendFileToServer(fd,status);
+	   }
+	}
+
+	function sendFileToServer(formData,status){
+	    var uploadURL ="/upload"; //Upload URL
+	    var extraData ={}; //Extra Data.
+	    var jqXHR = $.ajax({
+	        xhr: function() {
+	            var xhrobj = $.ajaxSettings.xhr();
+	            if (xhrobj.upload) {
+	                    xhrobj.upload.addEventListener('progress', function(event) {
+	                        var percent = 0;
+	                        var position = event.loaded || event.position;
+	                        var total = event.total;
+	                        if (event.lengthComputable) {
+	                            percent = Math.ceil(position / total * 100);
+	                        }
+	                        //Set progress
+	                        //status.setProgress(percent);
+	                    }, false);
+	                }
+	            return xhrobj;
+	        },
+	        url: uploadURL,
+	        type: "POST",
+	        contentType:false,
+	        processData: false,
+	        cache: false,
+	        data: formData,
+	        success: function(data){
+	            //status.setProgress(100);
+	            //$("#status1").append("File upload Done<br>");
+	            console.log('succ');
+	            location.href = '/index';           
+	        },
+	        error: function(){
+	        	console.log('err');
+	        }
+	    });  
+	    //status.setAbort(jqXHR);
+	}
+
+	</script>
+</body>
+</html>
