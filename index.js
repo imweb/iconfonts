@@ -49,7 +49,7 @@ app.post('/upload', jsonParser, function(req, res){
 		extname = path.extname(svgPath),
 		fileName = file.originalname;
 
-	//if(extname !== '.svg') return;
+	if(extname !== '.svg') return;
 	
 	fs.readFile(svgPath, function(err, data){
 		if(err) {
@@ -57,7 +57,8 @@ app.post('/upload', jsonParser, function(req, res){
 			return;
 		}
 		fs.writeFile(__dirname + '/uploadSvg/' + fileName + path.extname(svgPath), data, function(er){
-
+			// 将上传的字体文件写入数据库
+			// iconfont 的 content 是根据图标自动生成的，如何确保不重复
 		});
 	});
 	res.writeHead(302, {

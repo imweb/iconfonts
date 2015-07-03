@@ -22,8 +22,9 @@
     "nedb": "~1.1.2",
     "font-carrier": "0.0.4",
     "body-parser": "^1.13.1",
-    "easy-zip": "0.0.4",
-    "multer": "^0.1.8"
+    "multer": "^0.1.8",
+    "archiver": "^0.14.4",
+    "q": "^1.4.1"
   },
   "devDependencies": {
     "pm2": "*"

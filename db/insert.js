@@ -11,11 +11,17 @@ var Datastore = require('nedb'),
 var iconList = parse.getAllIcons(),
 	insertObj = [];
 
-iconList.forEach(function(item, index){
-	insertObj.push({
-		name: item
+db.count({}, function(err, count){
+	iconList.forEach(function(item, index){
+		insertObj.push({
+			name: item,
+			iconId: count++,
+			content: '',
+			svgPath: ''
+		});
 	});
-});
+
+})
 
 db.insert(insertObj, function (err) {
 	if(err) console.log(err);

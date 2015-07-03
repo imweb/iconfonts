@@ -5,9 +5,8 @@
 		});
 
 		$('#js-pcList').on('click', 'li', function(){
-			var $this = $(this),
-				id = $this.data('id');
-			$this.addClass('icon-checked')
+			var $this = $(this);
+			$this.toggleClass('icon-checked');
 		});
 		$('#js-download-btn').on('click', function(){
 			var ids = [];

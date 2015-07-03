@@ -9,13 +9,6 @@ var Datastore = require('nedb'),
 	parse = require('./parsesvg.js');
 
 var rets = parse.init();
-/*	insertObj = [];
-
-iconList.forEach(function(item, index){
-	insertObj.push({
-		name: item
-	});
-});*/
 
 db.insert(rets, function (err) {
 	if(err) console.log(err);

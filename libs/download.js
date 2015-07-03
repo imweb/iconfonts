@@ -5,16 +5,15 @@ var Datastore = require('nedb'),
 	path = require('path'),
 	Q = require('q'),
 	fs = require('fs'),
-	easyzip = require('easy-zip'),
 	fontCarrier = require('font-carrier'),
 	conf = require('../conf.js'),
 	tools = require('./tools.js'),
+	fs = require('fs'),
+	archiver = require('archiver'),
 	db = new Datastore({filename: conf.db_path, autoload: true});
 
 var font = fontCarrier.create(),
 	svgPath = conf.svg_path;
-
-
 
 function getIconsByIds(ids, cb){
 	var _ids = [];
@@ -39,31 +38,44 @@ function generateZip(icons, downloadCb){
 	font.setSvg(svgsObj);
 	var zipPath = folderName + '.zip';
 	// 导出字体
-	fs.mkdirSync(path.join(folderName, 'fonts'));
+	// 多一层目录，.woff 文件在本地解压失败，原因未知
+	// fs.mkdirSync(path.join(folderName, 'fonts'));
 	// 异步
 	Q.fcall(function(){
 		font.output({
-			path: path.join(folderName, 'fonts/iconfont')
+			path: path.join(folderName, '/iconfont')
 		});
 		tools.generateCss(icons, path.join(folderName, 'iconfont.css'));
 		tools.generateHtml(iconNames, path.join(folderName, 'demo.html'));
 	}).then(function(){
-		var zip = new easyzip.EasyZip(); 
-		zip.zipFolder('./' + folderName ,function(){
-		    zip.writeToFileSycn('./' + zipPath);
-		    typeof downloadCb === 'function' && downloadCb('./' + zipPath);
-		});
+		Q.fcall(function(){
+			var output = fs.createWriteStream(zipPath);
+			var archive = archiver('zip');
+
+			archive.on('error', function(err){
+			    throw err;
+			});
+
+			archive.pipe(output);
+			archive.bulk([
+			    { src: [folderName + '/**']}
+			]);
+			archive.finalize();
+		}).then(function(){
+			// 下载的文件有问题，跟异步有关系
+			typeof downloadCb === 'function' && downloadCb(zipPath);
+		})
+
+		
+	}).then(function(){
 		
 	});
-	//return zipPath;
 }
 
 module.exports = {
 	download: function(ids, cb){
 		getIconsByIds(ids, function(icons){
 			generateZip(icons, cb);
-			//tools.generateCss(iconNames, path.join(folderName, 'iconfont.css'));
-			//tools.generateHtml(iconNames, path.join(folderName, 'demo.html'));
 		});
 	}
 }

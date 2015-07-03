@@ -79,7 +79,7 @@ function init(){
 		ret.push({
 			iconId: index + 1,
 			name: 'i-' + icon.replace('.svg', ''),
-			svg: path.join(svgPath, icon),
+			//svg: path.join(svgPath, icon),
 			content: iconContents[index]
 		})
 	});

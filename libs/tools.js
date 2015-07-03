@@ -15,11 +15,11 @@ function generateCss(icons, cssPath){
 	var content = [],
 		iconContents = [];
 	content.push('@font-face { ');
-	content.push('font-family: "iconfont";src: url("./fonts/iconfont.eot");');
-	content.push('src: url("./fonts/iconfont.eot?#iefix") format("embedded-opentype"),');
-	content.push('url("./fonts/iconfont.woff") format("woff"),');
-	content.push('url("./fonts/iconfont.ttf") format("truetype"),');
-	content.push('url("./fonts/iconfont.svg#iconfont") format("svg");}');
+	content.push('font-family: "iconfont";src: url("iconfont.eot");');
+	content.push('src: url("iconfont.eot?#iefix") format("embedded-opentype"),');
+	content.push('url("iconfont.woff") format("woff"),');
+	content.push('url("iconfont.ttf") format("truetype"),');
+	content.push('url("iconfont.svg#iconfont") format("svg");}');
 	content.push('.icon-font{font-family:"iconfont";font-size:16px;font-style:normal;}');
 	icons.forEach(function(icon, index){
 /*		iconContents[index] = icon.replace('&#xf', '\\f');*/
