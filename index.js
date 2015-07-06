@@ -19,6 +19,7 @@ app.set('view engine', 'html');
 app.set('views', path.join(__dirname, '/views'));
 
 app.use(express.static(path.join(__dirname, '/public')));
+app.use(express.static(path.join(__dirname, '/download')));
 app.use(multer({ dest: './uploads/'}))
 // 这里有问题
 //app.use(bodyParser({uploadDir:'./uploads/'}));
@@ -67,8 +68,12 @@ app.post('/upload', jsonParser, function(req, res){
 });
 
 app.get('/download/:ids', function(req, res){
-	download.download(req.params.ids.split('-'), function(path){
-		res.download(path, function(err){
+	download.download(req.params.ids.split('-'), function(p){
+ 		res.setHeader('Content-Type', 'application/zip');
+ 		var filename = path.basename(p);
+ 		console.log(filename, p)
+    	res.setHeader('Content-Disposition', 'attachment; filename=' + filename);
+		res.download(p, function(err){
 			if(err) console.log(err);
 		});
 	});

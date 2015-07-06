@@ -48,26 +48,25 @@ function generateZip(icons, downloadCb){
 		tools.generateCss(icons, path.join(folderName, 'iconfont.css'));
 		tools.generateHtml(iconNames, path.join(folderName, 'demo.html'));
 	}).then(function(){
-		Q.fcall(function(){
-			var output = fs.createWriteStream(zipPath);
-			var archive = archiver('zip');
+		var output = fs.createWriteStream(zipPath);
+		var archive = archiver('zip');
 
-			archive.on('error', function(err){
-			    throw err;
-			});
+		archive.on('error', function(err){
+		    throw err;
+		});
 
-			archive.pipe(output);
-			archive.bulk([
-			    { src: [folderName + '/**']}
-			]);
-			archive.finalize();
-		}).then(function(){
-			// 下载的文件有问题，跟异步有关系
-			typeof downloadCb === 'function' && downloadCb(zipPath);
+		archive.pipe(output);
+		archive.bulk([
+		    { src: [folderName + '/**']}
+		]);
+		archive.finalize();
+		// 这里没有回调，好蛋疼
+		archive.on('finish', function(){
+			setTimeout(function(){
+				typeof downloadCb === 'function' && downloadCb(zipPath);
+			}, 5000)
+			
 		})
-
-		
-	}).then(function(){
 		
 	});
 }
