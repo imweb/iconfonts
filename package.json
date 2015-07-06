@@ -24,7 +24,8 @@
     "body-parser": "^1.13.1",
     "multer": "^0.1.8",
     "archiver": "^0.14.4",
-    "q": "^1.4.1"
+    "q": "^1.4.1",
+    "lowdb": "^0.10.1"
   },
   "devDependencies": {
     "pm2": "*"

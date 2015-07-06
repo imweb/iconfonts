@@ -1,0 +1,436 @@
+{
+  "h5": [
+    {
+      "iconId": 23,
+      "name": "i-H-1",
+      "content": "\\f016"
+    },
+    {
+      "iconId": 24,
+      "name": "i-H-10",
+      "content": "\\f017"
+    },
+    {
+      "iconId": 25,
+      "name": "i-H-11",
+      "content": "\\f018"
+    },
+    {
+      "iconId": 26,
+      "name": "i-H-12",
+      "content": "\\f019"
+    },
+    {
+      "iconId": 27,
+      "name": "i-H-13",
+      "content": "\\f01a"
+    },
+    {
+      "iconId": 28,
+      "name": "i-H-14",
+      "content": "\\f01b"
+    },
+    {
+      "iconId": 29,
+      "name": "i-H-15",
+      "content": "\\f01c"
+    },
+    {
+      "iconId": 30,
+      "name": "i-H-16",
+      "content": "\\f01d"
+    },
+    {
+      "iconId": 31,
+      "name": "i-H-17",
+      "content": "\\f01e"
+    },
+    {
+      "iconId": 32,
+      "name": "i-H-18",
+      "content": "\\f01f"
+    },
+    {
+      "iconId": 33,
+      "name": "i-H-19",
+      "content": "\\f020"
+    },
+    {
+      "iconId": 34,
+      "name": "i-H-2",
+      "content": "\\f021"
+    },
+    {
+      "iconId": 35,
+      "name": "i-H-20",
+      "content": "\\f022"
+    },
+    {
+      "iconId": 36,
+      "name": "i-H-21",
+      "content": "\\f023"
+    },
+    {
+      "iconId": 37,
+      "name": "i-H-22",
+      "content": "\\f024"
+    },
+    {
+      "iconId": 38,
+      "name": "i-H-23",
+      "content": "\\f025"
+    },
+    {
+      "iconId": 39,
+      "name": "i-H-24",
+      "content": "\\f026"
+    },
+    {
+      "iconId": 40,
+      "name": "i-H-26",
+      "content": "\\f027"
+    },
+    {
+      "iconId": 41,
+      "name": "i-H-3",
+      "content": "\\f028"
+    },
+    {
+      "iconId": 42,
+      "name": "i-H-4",
+      "content": "\\f029"
+    },
+    {
+      "iconId": 43,
+      "name": "i-H-5",
+      "content": "\\f02a"
+    },
+    {
+      "iconId": 44,
+      "name": "i-H-6",
+      "content": "\\f02b"
+    },
+    {
+      "iconId": 45,
+      "name": "i-H-7",
+      "content": "\\f02c"
+    },
+    {
+      "iconId": 46,
+      "name": "i-H-8",
+      "content": "\\f02d"
+    },
+    {
+      "iconId": 47,
+      "name": "i-H-9",
+      "content": "\\f02e"
+    }
+  ],
+  "pc": [
+    {
+      "iconId": 1,
+      "name": "i-1-27",
+      "content": "\\f000"
+    },
+    {
+      "iconId": 2,
+      "name": "i-1-28",
+      "content": "\\f001"
+    },
+    {
+      "iconId": 3,
+      "name": "i-1-30",
+      "content": "\\f002"
+    },
+    {
+      "iconId": 4,
+      "name": "i-1-34",
+      "content": "\\f003"
+    },
+    {
+      "iconId": 5,
+      "name": "i-1-35",
+      "content": "\\f004"
+    },
+    {
+      "iconId": 6,
+      "name": "i-1-36",
+      "content": "\\f005"
+    },
+    {
+      "iconId": 7,
+      "name": "i-21",
+      "content": "\\f006"
+    },
+    {
+      "iconId": 8,
+      "name": "i-a-education",
+      "content": "\\f007"
+    },
+    {
+      "iconId": 9,
+      "name": "i-a-media",
+      "content": "\\f008"
+    },
+    {
+      "iconId": 10,
+      "name": "i-a-profession",
+      "content": "\\f009"
+    },
+    {
+      "iconId": 11,
+      "name": "i-a-teacher",
+      "content": "\\f00a"
+    },
+    {
+      "iconId": 12,
+      "name": "i-add",
+      "content": "\\f00b"
+    },
+    {
+      "iconId": 13,
+      "name": "i-alert",
+      "content": "\\f00c"
+    },
+    {
+      "iconId": 14,
+      "name": "i-arrow-bottom",
+      "content": "\\f00d"
+    },
+    {
+      "iconId": 15,
+      "name": "i-arrow-top",
+      "content": "\\f00e"
+    },
+    {
+      "iconId": 16,
+      "name": "i-back",
+      "content": "\\f00f"
+    },
+    {
+      "iconId": 17,
+      "name": "i-calendar",
+      "content": "\\f010"
+    },
+    {
+      "iconId": 18,
+      "name": "i-checkbox-checked",
+      "content": "\\f011"
+    },
+    {
+      "iconId": 19,
+      "name": "i-checkbox",
+      "content": "\\f012"
+    },
+    {
+      "iconId": 20,
+      "name": "i-circle",
+      "content": "\\f013"
+    },
+    {
+      "iconId": 21,
+      "name": "i-comment",
+      "content": "\\f014"
+    },
+    {
+      "iconId": 22,
+      "name": "i-edit",
+      "content": "\\f015"
+    },
+    {
+      "iconId": 48,
+      "name": "i-heart",
+      "content": "\\f02f"
+    },
+    {
+      "iconId": 49,
+      "name": "i-info",
+      "content": "\\f030"
+    },
+    {
+      "iconId": 50,
+      "name": "i-logo",
+      "content": "\\f031"
+    },
+    {
+      "iconId": 51,
+      "name": "i-lu",
+      "content": "\\f032"
+    },
+    {
+      "iconId": 52,
+      "name": "i-phone",
+      "content": "\\f033"
+    },
+    {
+      "iconId": 53,
+      "name": "i-play",
+      "content": "\\f034"
+    },
+    {
+      "iconId": 54,
+      "name": "i-qq-border",
+      "content": "\\f035"
+    },
+    {
+      "iconId": 55,
+      "name": "i-qq",
+      "content": "\\f036"
+    },
+    {
+      "iconId": 56,
+      "name": "i-qr-code",
+      "content": "\\f037"
+    },
+    {
+      "iconId": 57,
+      "name": "i-question",
+      "content": "\\f038"
+    },
+    {
+      "iconId": 58,
+      "name": "i-radio-checked",
+      "content": "\\f039"
+    },
+    {
+      "iconId": 59,
+      "name": "i-radio",
+      "content": "\\f03a"
+    },
+    {
+      "iconId": 60,
+      "name": "i-refresh",
+      "content": "\\f03b"
+    },
+    {
+      "iconId": 61,
+      "name": "i-right",
+      "content": "\\f03c"
+    },
+    {
+      "iconId": 62,
+      "name": "i-search",
+      "content": "\\f03d"
+    },
+    {
+      "iconId": 63,
+      "name": "i-share",
+      "content": "\\f03e"
+    },
+    {
+      "iconId": 64,
+      "name": "i-star-border",
+      "content": "\\f03f"
+    },
+    {
+      "iconId": 65,
+      "name": "i-star",
+      "content": "\\f040"
+    },
+    {
+      "iconId": 66,
+      "name": "i-success",
+      "content": "\\f041"
+    },
+    {
+      "iconId": 67,
+      "name": "i-tel",
+      "content": "\\f042"
+    },
+    {
+      "iconId": 68,
+      "name": "i-time",
+      "content": "\\f043"
+    },
+    {
+      "iconId": 69,
+      "name": "i-times",
+      "content": "\\f044"
+    },
+    {
+      "iconId": 70,
+      "name": "i-to-top",
+      "content": "\\f045"
+    },
+    {
+      "iconId": 71,
+      "name": "i-user-border",
+      "content": "\\f046"
+    },
+    {
+      "iconId": 72,
+      "name": "i-user-group-border",
+      "content": "\\f047"
+    },
+    {
+      "iconId": 73,
+      "name": "i-user-group",
+      "content": "\\f048"
+    },
+    {
+      "iconId": 74,
+      "name": "i-user",
+      "content": "\\f049"
+    },
+    {
+      "iconId": 75,
+      "name": "i-v-bottom",
+      "content": "\\f04a"
+    },
+    {
+      "iconId": 76,
+      "name": "i-v-double-bottom",
+      "content": "\\f04b"
+    },
+    {
+      "iconId": 77,
+      "name": "i-v-double-left",
+      "content": "\\f04c"
+    },
+    {
+      "iconId": 78,
+      "name": "i-v-double-right",
+      "content": "\\f04d"
+    },
+    {
+      "iconId": 79,
+      "name": "i-v-double-top",
+      "content": "\\f04e"
+    },
+    {
+      "iconId": 80,
+      "name": "i-v-left-bold",
+      "content": "\\f04f"
+    },
+    {
+      "iconId": 81,
+      "name": "i-v-left",
+      "content": "\\f050"
+    },
+    {
+      "iconId": 82,
+      "name": "i-v-right-bold",
+      "content": "\\f051"
+    },
+    {
+      "iconId": 83,
+      "name": "i-v-right",
+      "content": "\\f052"
+    },
+    {
+      "iconId": 84,
+      "name": "i-v-top",
+      "content": "\\f053"
+    },
+    {
+      "iconId": 85,
+      "name": "i-weixin-border",
+      "content": "\\f054"
+    },
+    {
+      "iconId": 86,
+      "name": "i-weixin",
+      "content": "\\f055"
+    }
+  ]
+}

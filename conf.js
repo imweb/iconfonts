@@ -14,6 +14,8 @@ module.exports = {
 	icon_reg: /i-([a-zA-z0-9\-]*)/g,
 	// db path
 	db_path: './data/icon.db',
+	// low db
+	low_db: './data/icons.json',
 	// svg path
 	svg_path: './docs/ke.qq.com-svg',
 	demo_svg_path: './demo/svg'

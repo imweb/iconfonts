@@ -5,14 +5,26 @@
 var Datastore = require('nedb'), 
 	conf = require('../conf.js'),
 	path = require('path'),
-	db = new Datastore({filename: path.join('../', conf.db_path), autoload: true});
+	low = require('lowdb'),
+	//db = new Datastore({filename: path.join('../', conf.db_path), autoload: true});
 	parse = require('./parsesvg.js');
+
+var db = low(path.join('../', conf.low_db));
 
 var rets = parse.init();
 
-db.insert(rets, function (err) {
-	if(err) console.log(err);
+rets.forEach(function(icon, index){
+	var filename = icon.name.replace('i-', '');
+	console.log(filename)
+	if(/^[mhHM]-(.*)/.test(filename)){
+		db('h5').push(icon);
+	}else{
+		db('pc').push(icon);
+	}
 });
+/*db.insert(rets, function (err) {
+	if(err) console.log(err);
+});*/
 
 
 

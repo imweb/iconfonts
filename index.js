@@ -5,6 +5,7 @@ var express = require('express'),
 	db = require('./db/index.js'),
 	download = require('./libs/download.js'),
 	multer  = require('multer'),
+	upload = require('./libs/upload.js'),
 	ejs = require('ejs');
 
 var app = express();
@@ -26,7 +27,7 @@ app.use(multer({ dest: './uploads/'}))
 
 app.get(['/', '/index'], function(req, res){
 	db.findAll(function(arr){
-		res.render('index', {'platform': arr})
+		res.render('index', {'platform': arr.pcs, 'h5s': arr.h5s})
 	});
 });
 
@@ -50,6 +51,7 @@ app.post('/upload', jsonParser, function(req, res){
 		extname = path.extname(svgPath),
 		fileName = file.originalname;
 
+	// console.log(file);
 	if(extname !== '.svg') return;
 	
 	fs.readFile(svgPath, function(err, data){
@@ -57,21 +59,24 @@ app.post('/upload', jsonParser, function(req, res){
 			console.log(err);
 			return;
 		}
-		fs.writeFile(__dirname + '/uploadSvg/' + fileName + path.extname(svgPath), data, function(er){
+		fs.writeFile('./docs/ke.qq.com-svg/' + fileName, data, function(er){
 			// 将上传的字体文件写入数据库
 			// iconfont 的 content 是根据图标自动生成的，如何确保不重复
+			if(er){
+				console.log(er);
+				return;
+			}
+			upload.insert([fileName]);
+			res.redirect('index');
 		});
-	});
-	res.writeHead(302, {
-	    'Location': '/index'
-	});
+		
+	});	
 });
 
 app.get('/download/:ids', function(req, res){
 	download.download(req.params.ids.split('-'), function(p){
  		res.setHeader('Content-Type', 'application/zip');
  		var filename = path.basename(p);
- 		console.log(filename, p)
     	res.setHeader('Content-Disposition', 'attachment; filename=' + filename);
 		res.download(p, function(err){
 			if(err) console.log(err);

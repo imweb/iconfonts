@@ -29,7 +29,13 @@
 		<div class="content-block">
 			<h1 class="list-title">移动端图标库</h1>
 			<ul class="icon-list clearfix">
-				<li class="icon icon-font"></li>
+			<% for(var i=0;i<h5s.length;i++){ %>
+				<li class="icon" data-id="<%= h5s[i].iconId %>">
+					<i class="icon-font <%= h5s[i].name %>"></i>
+					<span class="icon-content"><%= h5s[i].content %></span>
+					<span class="icon-name"><%= h5s[i].name %></span>
+				</li>
+			<% } %>
 			</ul>
 		</div>
 	</div>

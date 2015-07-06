@@ -10,19 +10,29 @@ var Datastore = require('nedb'),
 	tools = require('./tools.js'),
 	fs = require('fs'),
 	archiver = require('archiver'),
-	db = new Datastore({filename: conf.db_path, autoload: true});
+	low = require('lowdb')
+	/*db = new Datastore({filename: conf.db_path, autoload: true})*/;
 
 var font = fontCarrier.create(),
 	svgPath = conf.svg_path;
 
 function getIconsByIds(ids, cb){
-	var _ids = [];
+	var db = low(conf.low_db)('pc');
+	var _ids = [],
+		icons = [],
+		ret = [];
+
 	ids.forEach(function(id, index){
 		_ids.push(id - 0);
+		ret = db.find({'iconId': id - 0});
+		if(ret){
+			icons.push(ret);
+		}
 	});
-	db.find({"iconId": { $in: _ids }}, function(err, icons){
+	typeof cb === 'function' && cb(icons);
+/*	db.find({"iconId": { $in: _ids }}, function(err, icons){
 		typeof cb === 'function' && cb(err ? [] : icons)
-	});
+	});*/
 }
 
 function generateZip(icons, downloadCb){
@@ -39,11 +49,11 @@ function generateZip(icons, downloadCb){
 	var zipPath = folderName + '.zip';
 	// 导出字体
 	// 多一层目录，.woff 文件在本地解压失败，原因未知
-	// fs.mkdirSync(path.join(folderName, 'fonts'));
+	fs.mkdirSync(path.join(folderName, 'fonts'));
 	// 异步
 	Q.fcall(function(){
 		font.output({
-			path: path.join(folderName, '/iconfont')
+			path: path.join(folderName, 'fonts/iconfont')
 		});
 		tools.generateCss(icons, path.join(folderName, 'iconfont.css'));
 		tools.generateHtml(iconNames, path.join(folderName, 'demo.html'));
