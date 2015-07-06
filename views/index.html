@@ -16,7 +16,7 @@
 	<div class="layout">
 		<div class="content-block border-bottom1px">
 			<h1 class="list-title">平台图标库</h1>
-			<ul id="js-pcList" class="icon-list clearfix">
+			<ul class="icon-list clearfix js-pcList">
 			<% for(var i=0;i<platform.length;i++){ %>
 				<li class="icon" data-id="<%= platform[i].iconId %>">
 					<i class="icon-font <%= platform[i].name %>"></i>
@@ -28,7 +28,7 @@
 		</div>
 		<div class="content-block">
 			<h1 class="list-title">移动端图标库</h1>
-			<ul class="icon-list clearfix">
+			<ul class="icon-list clearfix js-pcList">
 			<% for(var i=0;i<h5s.length;i++){ %>
 				<li class="icon" data-id="<%= h5s[i].iconId %>">
 					<i class="icon-font <%= h5s[i].name %>"></i>

@@ -17,14 +17,15 @@ var font = fontCarrier.create(),
 	svgPath = conf.svg_path;
 
 function getIconsByIds(ids, cb){
-	var db = low(conf.low_db)('pc');
+	var pc = low(conf.low_db)('pc'),
+		h5 = low(conf.low_db)('h5');
 	var _ids = [],
 		icons = [],
 		ret = [];
 
 	ids.forEach(function(id, index){
 		_ids.push(id - 0);
-		ret = db.find({'iconId': id - 0});
+		ret = pc.find({'iconId': id - 0}) || h5.find({'iconId': id - 0});
 		if(ret){
 			icons.push(ret);
 		}

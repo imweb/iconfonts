@@ -4,7 +4,7 @@
 			$(window).scrollTop(0);
 		});
 
-		$('#js-pcList').on('click', 'li', function(){
+		$('.js-pcList').on('click', 'li', function(){
 			var $this = $(this);
 			$this.toggleClass('icon-checked');
 		});
