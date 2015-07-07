@@ -1,5 +1,4 @@
-var Datastore = require('nedb'), 
-	conf = require('../conf.js'),
+var conf = require('../conf.js'),
 	tools = require('../libs/tools.js'),
 	low = require('lowdb')/*,
 	db = new Datastore({filename: conf.db_path})*/;

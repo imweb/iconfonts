@@ -2,8 +2,7 @@
 /*
 * 将 style.css 中的 icon 插入到数据库
 */
-var Datastore = require('nedb'), 
-	conf = require('../conf.js'),
+var conf = require('../conf.js'),
 	path = require('path'),
 	low = require('lowdb'),
 	//db = new Datastore({filename: path.join('../', conf.db_path), autoload: true});

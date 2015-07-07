@@ -1,5 +1,4 @@
-var Datastore = require('nedb'), 
-	conf = require('../conf.js'),
+var conf = require('../conf.js'),
 	path = require('path'),
 	tools = require('./tools.js'),
 	parse = require('../db/parsesvg.js'),

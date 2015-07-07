@@ -1,8 +1,7 @@
 /*
 * 用户选择图标后，生成对应的字体文件和样式,
 */
-var Datastore = require('nedb'), 
-	path = require('path'),
+var path = require('path'),
 	Q = require('q'),
 	fs = require('fs'),
 	fontCarrier = require('font-carrier'),
