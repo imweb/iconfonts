@@ -41,3 +41,4 @@ icon 的解析依赖与给定的样式和font，目前的流程是：
 ##### 0707
 + 下载这里有坑，打包zip的插件没有提供回调机制，（fsstream的几个事件试过了，无效），所以不知道什么时候下载打包好的zip包，这里暂时用setTimeout hack了一下
 + 对于 ttf 文件 base64 内嵌到 css 中的需求，font-carrier 生成字体文件时，异步但是没有提供回调，已经向作者 pull request了，暂时把这里生成字体文件的操作改成同步。
++ 上传，目前支持单个 svg 上传到 iconfont 平台。
