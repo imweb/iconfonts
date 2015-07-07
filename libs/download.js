@@ -48,17 +48,20 @@ function generateZip(icons, downloadCb){
 	});
 	font.setSvg(svgsObj);
 	var zipPath = folderName + '.zip';
-	// 导出字体
-	// 多一层目录，.woff 文件在本地解压失败，原因未知
 	fs.mkdirSync(path.join(folderName, 'fonts'));
 	// 异步
 	Q.fcall(function(){
 		font.output({
 			path: path.join(folderName, 'fonts/iconfont')
 		});
+		// 这里生成字体后，需要读取字体文件，生成base64，但是output方法没有提供回调
 		tools.generateCss(icons, path.join(folderName, 'iconfont.css'));
 		tools.generateHtml(iconNames, path.join(folderName, 'demo.html'));
+		// 这里生成字体后，需要读取字体文件，生成base64，但是output方法没有提供回调, 已经向作者pull requrest
+		// font-carrier/lib/helpler/engine.js 280行，写文件 改正writeFileSync 同步
+		// tools.generateBase64Css(icons, path.join(folderName, 'iconfont-embedded.css'));
 	}).then(function(){
+
 		var output = fs.createWriteStream(zipPath);
 		var archive = archiver('zip');
 

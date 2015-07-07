@@ -68,10 +68,37 @@ function genarateFonts(icons, csspath){
 	});
 }
 
+// 文件转化成base64
+function file2Base64(fp){
+	//fp = 'download/iconfont.ttf';
+	var base64 = new Buffer(fs.readFileSync(fp)).toString('base64');
+	return base64;
+}
+
+function generateBase64Css(icons, cssPath, fontFileName){
+	var cssDir = path.dirname(cssPath),
+		fontFileDir = path.join(cssDir, 'fonts', fontFileName || 'iconfont' + '.ttf'),
+		fontBase64 = file2Base64(fontFileDir);
+
+	
+
+	var content = [];
+	content.push('@font-face { ');
+	content.push('font-family: "iconfont";');
+	content.push('src: url("data:application/octet-stream;base64,' + fontBase64 + '") format("truetype");}');
+	content.push('.icon-font{font-family:"iconfont";font-size:16px;font-style:normal;}');
+	icons.forEach(function(icon, index){
+		content.push('.' + icon.name + ':after{content: "' + icon.content + '";}');
+	});
+	fs.writeFileSync(cssPath? cssPath : outputCss, content.join('\r\n'));
+}
+
 module.exports = {
 	generateCss: generateCss,
 	generateHtml: generateHtml,
 	generateIconContent: generateIconContent,
-	genarateFonts: genarateFonts
+	genarateFonts: genarateFonts,
+	file2Base64: file2Base64,
+	generateBase64Css: generateBase64Css
 }
 
