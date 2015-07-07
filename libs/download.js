@@ -37,6 +37,7 @@ function getIconsByIds(ids, cb){
 }
 
 function generateZip(icons, downloadCb){
+	if(!fs.existsSync('download')) fs.mkdirSync('download');
 	var folderName = 'download/iconfont-' + Date.now();
 	var folder = fs.mkdirSync(folderName);
 	var svgsObj = {},

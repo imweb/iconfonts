@@ -19,7 +19,6 @@
   "dependencies": {
     "express": "~4.13.0",
     "ejs": "~2.3.2",
-    "nedb": "~1.1.2",
     "font-carrier": "0.0.4",
     "body-parser": "^1.13.1",
     "multer": "^0.1.8",
