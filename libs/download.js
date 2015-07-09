@@ -51,15 +51,22 @@ function generateZip(icons, downloadCb){
 	fs.mkdirSync(path.join(folderName, 'fonts'));
 	// 异步
 	Q.fcall(function(){
-		font.output({
+/*		font.output({
 			path: path.join(folderName, 'fonts/iconfont')
-		});
+		});*/
+		var output = path.join(folderName, 'fonts/iconfont');
+		var outFonts = font.output({});
+		//  先生成字体 buffer，然后手动写文件
+		for(var type in outFonts){
+			fs.writeFileSync(output + '.' + type, outFonts[type]);
+		}
 		// 这里生成字体后，需要读取字体文件，生成base64，但是output方法没有提供回调
 		tools.generateCss(icons, path.join(folderName, 'iconfont.css'));
 		tools.generateHtml(iconNames, path.join(folderName, 'demo.html'));
+		// console.log(font.output().ttf);
 		// 这里生成字体后，需要读取字体文件，生成base64，但是output方法没有提供回调, 已经向作者pull requrest
 		// font-carrier/lib/helpler/engine.js 280行，写文件 改正writeFileSync 同步
-		// tools.generateBase64Css(icons, path.join(folderName, 'iconfont-embedded.css'));
+		tools.generateBase64Css(icons, path.join(folderName, 'iconfont-embedded.css'));
 	}).then(function(){
 
 		var output = fs.createWriteStream(zipPath);
