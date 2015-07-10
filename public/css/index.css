@@ -12,6 +12,25 @@
 	line-height: 80px;
 }
 
+.relative{
+	position: relative;
+}
+.rightBtn{
+	position: absolute;
+	display: block;
+	right: 0;
+	top: 20px;
+	height: 40px;
+	line-height: 40px;
+	font-size: 16px;
+	width: 120px;
+	border-radius: 4px;
+	text-align: center;
+	background-color: #38b7ea;
+	color: #fff;
+	display: none;
+}
+
 .icon{
 	margin: 10px 0;
 	color:#333;
@@ -19,6 +38,10 @@
 	text-align: center;
 	height: 100px;
 	float: left;
+}
+
+.icon:hover{
+	cursor: pointer;
 }
 .icon .icon-font{
 	font-size: 42px;

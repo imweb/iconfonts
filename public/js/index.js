@@ -7,6 +7,9 @@
 		$('.js-pcList').on('click', 'li', function(){
 			var $this = $(this);
 			$this.toggleClass('icon-checked');
+			if($('.icon-checked').length > 0){
+				$('#js-download-btn').show();
+			}
 		});
 		$('#js-download-btn').on('click', function(){
 			var ids = [];

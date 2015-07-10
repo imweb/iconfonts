@@ -14,8 +14,9 @@
 <body>
 	<%- include header.html %>
 	<div class="layout">
-		<div class="content-block border-bottom1px">
+		<div class="content-block border-bottom1px relative">
 			<h1 class="list-title">平台图标库</h1>
+			<a class="rightBtn" id="js-download-btn" href="javascript:;">下载</a>
 			<ul class="icon-list clearfix js-pcList">
 			<% for(var i=0;i<platform.length;i++){ %>
 				<li class="icon" data-id="<%= platform[i].iconId %>">
