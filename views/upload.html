@@ -21,12 +21,15 @@
 		margin-top: 200px;
 		text-align: center;
 	}
+	.upload-block .highlight{
+		color: red;
+	}
 	</style>
 </head>
 <body>
 	<%- include header.html %>
 	<div id="upload" class="upload-block">
-		<p>将svg文件拖拽至框中上传</p>
+		<p>将svg文件拖拽至框中上传，<span class="highlight">SVG名以H-(h-), M-(m-)开头被认为是移动端icon，其他默认为pc端icon</span>。</p>
 	</div>
 	<%- include footer.html %>
 	<script src="lib/jquery-2.1.4.min.js"></script>

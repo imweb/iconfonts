@@ -58,7 +58,7 @@ function generateCss(){
 	content.push('url("./fonts/platfont.woff") format("woff"),');
 	content.push('url("./fonts/platfont.ttf") format("truetype"),');
 	content.push('url("./fonts/platfont.svg#platfont") format("svg");}');
-	content.push('.icon-font{font-family:"platfont";font-size:16px;font-style:normal;}');
+	content.push('.icon-font{font-family:"platfont";font-size:40px;font-style:normal;}');
 	iconNames.forEach(function(iconName, index){
 		iconContents[index] = iconContents[index].replace('&#xf', '\\f');
 		content.push('%i-' + iconName + '{\r\n\t&:after{\r\n\t\tcontent:"' + iconContents[index] + '";\r\n\t}\r\n}');

@@ -14,7 +14,6 @@ var rets = parse.init();
 
 rets.forEach(function(icon, index){
 	var filename = icon.name.replace('i-', '');
-	console.log(filename)
 	if(/^[mhHM]-(.*)/.test(filename)){
 		db('h5').push(icon);
 	}else{

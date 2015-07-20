@@ -35,22 +35,26 @@ function insert(iconList){
 	var db = low(conf.low_db);
 	low.autoSave = true;
 
-	var pc = db('pc');
-	var id = pc.size();
+	var pc = db('pc'),
+		h5 = db('h5');
+
+	var realDB;
+	var id = pc.size() + h5.size();
 	var icons,
 		name;
 	iconList.forEach(function(item, index){
 		name = 'i-' + item.replace('.svg', '');
-		icons = pc.chain().where({name: name}).value();
+		realDB = /^[mhHM]-(.*)/.test(item) ? h5 : pc;
+		icons = realDB.chain().where({name: name}).value();
 		if(icons && icons.length > 0){
 			console.log('find', icons)
 			return;
 		}
 		id++;
-		db('pc').push({
+		realDB.push({
 			name: name,
 			iconId: id,
-			content: tools.generateIconContent(id).replace('&#xf', '\\f')
+			content: tools.generateIconContent(id - 1).replace('&#xf', '\\f')
 		});
 		
 	});
