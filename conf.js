@@ -18,5 +18,8 @@ module.exports = {
 	low_db: './data/icons.json',
 	// svg path
 	svg_path: './docs/ke.qq.com-svg',
-	demo_svg_path: './demo/svg'
+
+	demo_svg_path: './demo/svg',
+
+	cats: {'pc': '平台', 'h5': '移动端'}
 }

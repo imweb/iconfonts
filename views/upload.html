@@ -8,9 +8,22 @@
 	<link rel="stylesheet" href="css/footer.css">
 	<link rel="icon" href="images/icon.png" type="image/x-icon"/>
 	<style>
+	.form-control{
+		width: 960px;
+		display: block;
+		margin: 50px auto 0;
+	    height: 34px;
+	    padding: 6px 12px;
+	    font-size: 14px;
+	    line-height: 20px;
+	    color: #555;
+	    background-color: #fff;
+	    border: 1px solid #ccc;
+	    border-radius: 4px;
+	}
 	.upload-block{
 		width: 960px;
-		margin: 50px auto;
+		margin: 20px auto 50px;
 		height: 550px;
 		border: 1px solid #ddd;
 	}
@@ -28,6 +41,13 @@
 </head>
 <body>
 	<%- include header.html %>
+	<select class="form-control"> 
+		<option value="-1">-- 请选择项目 --</option>  
+		<!-- <option value=" 991"> (id=991) mobile app</option>   -->
+		<% for(var i in cats) { %>
+			<option value="<%= i %>"><%= cats[i] %></option>
+		<% } %>
+	</select>
 	<div id="upload" class="upload-block">
 		<p>将svg文件拖拽至框中上传，<span class="highlight">SVG名以H-(h-), M-(m-)开头被认为是移动端icon，其他默认为pc端icon</span>。</p>
 	</div>
@@ -59,6 +79,7 @@
 	   for (var i = 0; i < files.length; i++){
 	        var fd = new FormData();
 	        fd.append('file', files[i]);
+	        fd.append('platform', $('.form-control').val());
 	 
 	        //var status = new createStatusbar(obj); //Using this we can set progress.
 	        //status.setFileNameSize(files[i].name,files[i].size);

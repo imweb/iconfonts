@@ -27,7 +27,9 @@ app.use(multer({ dest: './uploads/'}))
 
 app.get(['/', '/index'], function(req, res){
 	db.findAll(function(arr){
-		res.render('index', {'platform': arr.pcs, 'h5s': arr.h5s})
+		// res.render('index', {'platform': arr.pcs, 'h5s': arr.h5s})
+
+		res.render('index', {all: arr, maps: conf.cats})
 	});
 });
 
@@ -40,12 +42,12 @@ app.get('/intro', function(req, res){
 });
 
 app.get('/upload', function(req, res){
-	res.render('upload');
+	res.render('upload', {cats: conf.cats});
 });
 
 // 上传
 app.post('/upload', jsonParser, function(req, res){
-	console.log(req.files);
+	var platform = req.body.platform;
 	var file = req.files.file,
 		svgPath = file.path,
 		extname = path.extname(svgPath),
@@ -66,7 +68,7 @@ app.post('/upload', jsonParser, function(req, res){
 				console.log(er);
 				return;
 			}
-			upload.insert([fileName]);
+			upload.insert([fileName], platform);
 			res.redirect('index');
 		});
 		

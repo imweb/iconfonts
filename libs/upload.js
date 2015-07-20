@@ -2,49 +2,36 @@ var conf = require('../conf.js'),
 	path = require('path'),
 	tools = require('./tools.js'),
 	parse = require('../db/parsesvg.js'),
-	low = require('lowdb')/*,
-	db = new Datastore({filename: conf.db_path})*/;
+	low = require('lowdb');
 
 
 
 
-// var	insertObj = [];
 
-
-function insert(iconList){
-/*	db.count({}, function(err, count){
-		if(err){
-			console.log(err);
-			return;
-		}
-		var id = count;
-		console.log(id);
-		iconList.forEach(function(item, index){
-			insertObj.push({
-				name: 'i-' + item.replace('.svg', ''),
-				iconId: id + 1,
-				content: tools.generateIconContent(id + 1)
-			});
-			id++;
-		});
-		db.insert(insertObj, function (err) {
-			if(err) console.log(err);
-		});
-		parse.init();
-	});*/
+function insert(iconList, platform){
 	var db = low(conf.low_db);
 	low.autoSave = true;
 
-	var pc = db('pc'),
-		h5 = db('h5');
+	var allDBs = conf.cats;
+	var dbName = platform == -1 ? 'pc' : platform;
 
 	var realDB;
-	var id = pc.size() + h5.size();
+	var id = 0;
+	for(var key in allDBs){
+		if(allDBs.hasOwnProperty(key)){
+			id += db(key).size();
+		}
+		
+	}
+	
 	var icons,
 		name;
 	iconList.forEach(function(item, index){
 		name = 'i-' + item.replace('.svg', '');
-		realDB = /^[mhHM]-(.*)/.test(item) ? h5 : pc;
+		if(/^[mhHM]-(.*)/.test(item) && platform == -1){
+			dbName = 'h5';
+		}
+		realDB = db(dbName);
 		icons = realDB.chain().where({name: name}).value();
 		if(icons && icons.length > 0){
 			console.log('find', icons)

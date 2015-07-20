@@ -4,7 +4,7 @@
 			$(window).scrollTop(0);
 		});
 
-		$('.js-pcList').on('click', 'li', function(){
+		$('body').on('click', '.js-pcList li', function(){
 			var $this = $(this);
 			$this.toggleClass('icon-checked');
 			$('#js-download-btn')[$('.icon-checked').length > 0 ? 'show' : 'hide']();
