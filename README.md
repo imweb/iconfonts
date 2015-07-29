@@ -49,3 +49,10 @@ localhost:4001
 + font-carrier 的问题已经fix（本身有些坑），已经支持到内嵌字体文件（ttf文件）的base64
 
 ### 后续规划
++ 生成 SCSS 文件
++ 除了类名外，生成 %类名，两个文件分开
++ 命名 i-svg文件名
++ svg 命名中划线，最好不要用数字、驼峰
++ svg 规范 rogerjs
++ 移动端字体名字mfont，PC上webfont
++ 导出 png 图片 32*32
