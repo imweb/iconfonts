@@ -33,9 +33,11 @@ font.setSvg(svgsObj);
 
 
 // 导出字体
-font.output({
+var fontContent = font.output({
 	path: './fonts/platfont'
 });
+
+console.log(fontContent);
 
 // 十进制 转 16进制
 function decimal2Hex(n){
@@ -82,5 +84,32 @@ function generateDemo(){
 	fs.writeFileSync('demo.html', content.join('\r\n'));
 }
 
+// 文件转化成base64
+function file2Base64(){
+	//fp = 'download/iconfont.ttf';
+	var base64 = new Buffer(fontContent.ttf).toString('base64');
+	return base64;
+}
+
+
+
+function generateBase64Css(){
+	var fontFileDir = path.join('fonts', 'platfont.ttf'),
+		fontBase64 = file2Base64(fontFileDir);
+
+	var content = [];
+	content.push('@font-face { ');
+	content.push('font-family: "iconfont";');
+	content.push('src: url("data:application/octet-stream;base64,' + fontBase64 + '") format("truetype");}');
+	content.push('.icon-font{font-family:"iconfont";font-size:16px;font-style:normal;}');
+	iconNames.forEach(function(iconName, index){
+		iconContents[index] = iconContents[index].replace('&#xf', '\\f');
+		content.push('.i-' + iconName + ':after{content: "' + iconContents[index] + '";}');
+	});
+	fs.writeFileSync('platfont--embedded.css', content.join('\r\n'));
+}
+
+
 generateCss();
 generateDemo();
+generateBase64Css();

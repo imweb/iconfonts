@@ -13,17 +13,36 @@
 <body>
 	<%- include header.html %>
 	<section class="content">
-<div id='preview-contents' class='note-content'>
-                        <div id="wmd-preview" class="preview-content"></div>
-                    <div id="wmd-preview-section-1" class="wmd-preview-section preview-content">
+    
+<div id="wmd-preview-section-9" class="wmd-preview-section preview-content">
 
-</div><div id="wmd-preview-section-5" class="wmd-preview-section preview-content">
+<h1 id="icon-font规范">icon font规范</h1>
+
+<p><a href="http://iconfont.imweb.io/" target="_blank">IMWEB icon font</a></p>
+
+</div><div id="wmd-preview-section-10" class="wmd-preview-section preview-content">
+
+<h2 id="命名规范">命名规范</h2>
+
+<p><strong>字体名字</strong></p>
+
+<p>pc上的字体名称为<code>webfont</code>，移动端上的字体名称为<code>mfont</code></p>
+
+<p><strong>图标名字</strong></p>
+
+<p>首先由设计先根据所画的svg进行英文命名，然后前端进行确认，如有疑问可讨论确定命名；</p>
+
+<p>然后平台生成的class在svg的英文名字基础上加上前缀’i-‘，（如search.svg，其对应的class就是<code>i-search</code>），使用的时候结合class<code>icon-font</code>一起使用，如<code>i.icon-font.i-search</code></p>
+
+<p>最后名字中禁止出现中文，大写字母，特殊字符，数字等，多个单词使用<code>-</code>连接</p>
+
+</div><div id="wmd-preview-section-11" class="wmd-preview-section preview-content">
 
 <h2 id="设计svg标准">设计svg标准</h2>
 
 <p>由设计补充</p>
 
-</div><div id="wmd-preview-section-6" class="wmd-preview-section preview-content">
+</div><div id="wmd-preview-section-12" class="wmd-preview-section preview-content">
 
 <h2 id="icon-font使用标准">icon font使用标准</h2>
 
@@ -72,12 +91,11 @@
 }
 </code></pre>
 
-<p>8、 可以使用vertical-align或绝对定位对齐文字，默认使用vertical-align</p>
-
-<p>9、 应该提供一个预览所有icon的地址，如平台的可放在’ui/icon-font’</p>
-
-<p>注：在没有搭建好工具之前，我们可以采用线上的<a href="http://icomoon.io" target="_blank">icomoon</a>上传svg生成字体，或者采用’grunt-webfont’插件生成字体</p></div><div id="wmd-preview-section-footnotes" class="preview-content"></div></div>
+<p>8、 可以使用vertical-align或绝对定位对齐文字，默认使用vertical-align</p></div>
+</div>
 	</section>
+
+
 	<%- include footer.html %>
 </body>
 </html>
