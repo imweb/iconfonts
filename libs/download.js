@@ -61,7 +61,7 @@ function generateZip(icons, downloadCb){
 			fs.writeFileSync(output + '.' + type, outFonts[type]);
 		}
 		// 这里生成字体后，需要读取字体文件，生成base64，但是output方法没有提供回调
-		tools.generateCss(icons, path.join(folderName, 'iconfont.css'));
+		tools.generateCss(icons, path.join(folderName, 'iconfont.scss'), true);
 		tools.generateHtml(iconNames, path.join(folderName, 'demo.html'));
 		// console.log(font.output().ttf);
 		// 这里生成字体后，需要读取字体文件，生成base64，但是output方法没有提供回调, 已经向作者pull requrest
@@ -81,15 +81,9 @@ function generateZip(icons, downloadCb){
 		    { src: [folderName + '/**']}
 		]);
 		archive.finalize();
-		// 这里没有回调，好蛋疼
-		archive.on('finish', function(){
-			setTimeout(function(){
-				typeof downloadCb === 'function' && downloadCb(zipPath);
-			}, 5000)	
-		});
 
-		// close event
-		archive.on('close', function(){
+		// stream close event
+		output.on('close', function(){
 			typeof downloadCb === 'function' && downloadCb(zipPath);
 		})
 		

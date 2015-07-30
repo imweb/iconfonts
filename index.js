@@ -56,24 +56,11 @@ app.post('/upload', jsonParser, function(req, res){
 	console.log(extname)
 	var allowExt = ['.svg', '.zip'/*, '.rar', '.7z', '.tar'*/];
 
-	if(allowExt.indexOf(extname) == -1) return;
-/*	
-	fs.readFile(svgPath, function(err, data){
-		if(err) {
-			console.log(err);
-			return;
-		}
-		fs.writeFile('./docs/ke.qq.com-svg/' + fileName, data, function(er){
-			// 将上传的字体文件写入数据库
-			// iconfont 的 content 是根据图标自动生成的，如何确保不重复
-			if(er){
-				console.log(er);
-				return;
-			}
-			upload.insert([fileName], platform);
-			res.redirect('index');
-		});
-	});	*/
+	if(allowExt.indexOf(extname) == -1) {
+		res.redirect('index');
+		return;
+	}
+
 
 	upload.upload({
 		path: file.path,

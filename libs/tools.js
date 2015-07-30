@@ -18,8 +18,9 @@ function generateIconContent(n){
 	return '&#xf' + decimal2Hex(n);
 }
 
-function generateCss(icons, cssPath){
+function generateCss(icons, cssPath, isExtended){
 	var content = [],
+		extendContents = [],
 		iconContents = [];
 	content.push('@font-face { ');
 	content.push('font-family: "iconfont";src: url("iconfont.eot");');
@@ -27,12 +28,16 @@ function generateCss(icons, cssPath){
 	content.push('url("./fonts/iconfont.woff") format("woff"),');
 	content.push('url("./fonts/iconfont.ttf") format("truetype"),');
 	content.push('url("./fonts/iconfont.svg#iconfont") format("svg");}');
+	extendContents = content.concat([]);
 	content.push('.icon-font{font-family:"iconfont";font-size:16px;font-style:normal;}');
+	extendContents.push('%icon-font{font-family:"iconfont";font-size:16px;font-style:normal;}');
 	icons.forEach(function(icon, index){
-/*		iconContents[index] = icon.replace('&#xf', '\\f');*/
-		//content.push('%' + icon.name + '{\r\n\t&:after{\r\n\t\tcontent:"' + icon.content + '";\r\n\t}\r\n}');
+		extendContents.push('%' + icon.name + '{\r\n\t&:after{\r\n\t\tcontent:"' + icon.content + '";\r\n\t}\r\n}');
 		content.push('.' + icon.name + ':after{content: "' + icon.content + '";}');
 	});
+	if(isExtended && path.extname(cssPath) === '.scss'){
+		fs.writeFileSync(path.join(path.dirname(cssPath), path.basename(cssPath).replace('.scss', '-extend.scss')), extendContents.join('\r\n'));
+	}
 	fs.writeFileSync(cssPath? cssPath : outputCss, content.join('\r\n'));
 }
 
@@ -40,7 +45,7 @@ function generateCss(icons, cssPath){
 function generateHtml(iconNames, htmlPath){
 	var content = [];
 	content.push('<!DOCTYPE html>\r\n<html lang="en">\r\n<head>\r\n<meta charset="UTF-8">\r\n<title>iconfont demo</title>');
-	content.push('<link href="iconfont.css" rel="stylesheet" type="text/css" /> ');
+	content.push('<link href="iconfont-embedded.css" rel="stylesheet" type="text/css" /> ');
 	content.push('</head>\r\n<body>')
 
 	iconNames.forEach(function(iconName, index){
