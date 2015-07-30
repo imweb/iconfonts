@@ -66,6 +66,9 @@ url("./fonts/iconfont.svg#iconfont") format("svg");}
 .i-v-top:after{content: "\f053";}
 .i-weixin-border:after{content: "\f054";}
 .i-weixin:after{content: "\f055";}
+.i-f-1-35:after{content: "\f059";}
+.i-f-1-36:after{content: "\f05a";}
+.i-f-1-37:after{content: "\f05b";}
 .i-H-1:after{content: "\f016";}
 .i-H-10:after{content: "\f017";}
 .i-H-11:after{content: "\f018";}
@@ -92,3 +95,5 @@ url("./fonts/iconfont.svg#iconfont") format("svg");}
 .i-H-8:after{content: "\f02d";}
 .i-H-9:after{content: "\f02e";}
 .i-H-28:after{content: "\f056";}
+.i-m-1-35:after{content: "\f057";}
+.i-m-1-36:after{content: "\f058";}

@@ -53,9 +53,11 @@ app.post('/upload', jsonParser, function(req, res){
 		extname = path.extname(svgPath),
 		fileName = file.originalname;
 
-	// console.log(file);
-	if(extname !== '.svg') return;
-	
+	console.log(extname)
+	var allowExt = ['.svg', '.zip'/*, '.rar', '.7z', '.tar'*/];
+
+	if(allowExt.indexOf(extname) == -1) return;
+/*	
 	fs.readFile(svgPath, function(err, data){
 		if(err) {
 			console.log(err);
@@ -71,8 +73,15 @@ app.post('/upload', jsonParser, function(req, res){
 			upload.insert([fileName], platform);
 			res.redirect('index');
 		});
-		
-	});	
+	});	*/
+
+	upload.upload({
+		path: file.path,
+		name: fileName,
+		platform: platform
+	}, function(){
+		res.redirect('index');
+	})
 });
 
 app.get('/download/:ids', function(req, res){

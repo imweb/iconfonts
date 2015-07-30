@@ -85,8 +85,12 @@ function generateZip(icons, downloadCb){
 		archive.on('finish', function(){
 			setTimeout(function(){
 				typeof downloadCb === 'function' && downloadCb(zipPath);
-			}, 5000)
-			
+			}, 5000)	
+		});
+
+		// close event
+		archive.on('close', function(){
+			typeof downloadCb === 'function' && downloadCb(zipPath);
 		})
 		
 	});
