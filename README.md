@@ -49,15 +49,15 @@ localhost:4001
 + font-carrier 的问题已经fix（本身有些坑），已经支持到内嵌字体文件（ttf文件）的base64
 
 ### 后续规划
-+ 生成 SCSS 文件
-+ 除了类名外，生成 %类名，两个文件分开
-+ 命名 i-svg文件名
++ 生成 SCSS 文件    `done`
++ 除了类名外，生成 %类名，两个文件分开  `done`
++ 命名 i-svg文件名  `done`
 + svg 命名中划线，最好不要用数字、驼峰
 + svg 规范 rogerjs
 + 移动端字体名字mfont，PC上webfont
 + 导出 png 图片 32*32
 + icon 更新
-+ svg 上传到平台（目录已支持文件，需要扩充多文件支持）
++ svg 上传到平台（目录已支持文件，需要扩充多文件支持） `done`
 + 使用命令同步 iconfont 平台的 svg 到本地项目目录
 + 构建分析 vm、tpl、html中挂在的 iconfont 类名
 + 根据类名找到对应的 svg 文件，生成字体文件
