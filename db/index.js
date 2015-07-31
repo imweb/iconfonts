@@ -19,14 +19,6 @@ function findAll(cb){
 		rets[name] = _ret;
 		icons = icons.concat(_ret);
 	}
-/*	var pcs = db('pc').sortBy('iconId'),
-		h5s = db('h5').sortBy('iconId'),
-		rets = [];
-	rets = pcs.concat(h5s);*/
-/*	typeof cb === 'function' && cb({
-		pcs: pcs,
-		h5s: h5s
-	});*/
 	typeof cb === 'function' && cb(rets);
 	tools.genarateFonts(icons);
 	tools.generateCss(icons)

@@ -7,6 +7,7 @@ var conf = require('../conf.js'),
 	parse = require('../db/parsesvg.js'),
 	low = require('lowdb');
 
+// TODO：存储icon的路径，上传的压缩包中可能包含文件夹
 function insert(iconList, platform){
 	var db = low(conf.low_db);
 	low.autoSave = true;
@@ -25,24 +26,26 @@ function insert(iconList, platform){
 	var icons,
 		name;
 	iconList.forEach(function(item, index){
-		name = 'i-' + item.replace('.svg', '');
-		if(/^[mhHM]-(.*)/.test(item) && platform == -1){
+		//带有路径信息
+		var fileName;
+		fileName = path.basename(typeof item == 'object' ? item.name : item, '.svg');
+		name = 'i-' + fileName;
+		if(/^[mhHM]-(.*)/.test(fileName) && platform == -1){
 			dbName = 'h5';
 		}
 		realDB = db(dbName);
 		icons = realDB.chain().where({name: name}).value();
 		if(icons && icons.length > 0){
-			console.log('find', icons)
 			return;
 		}
 		id++;
-		console.log(id, name);
-		// id这里有问题
-		realDB.push({
+		var pushParam = {
 			name: name,
 			iconId: id,
 			content: tools.generateIconContent(id - 1).replace('&#xf', '\\f')
-		});
+		}
+		typeof item == 'object' && (pushParam.path = item.path);
+		realDB.push(pushParam);
 		
 	});
 	db.save();
@@ -62,8 +65,6 @@ function upload(formInfo, cb) {
 				return;
 			}
 			fs.writeFile('./docs/ke.qq.com-svg/' + fileName, data, function(er){
-				// 将上传的字体文件写入数据库
-				// iconfont 的 content 是根据图标自动生成的，如何确保不重复
 				if(er){
 					console.log(er);
 					return;
@@ -75,27 +76,34 @@ function upload(formInfo, cb) {
 	}else if(['.zip'].indexOf(ext) > -1){
 		// 多文件上传
 		// 解压
+		// 上传的zip包中包含文件夹结构，会带上原来的文件夹结构
 		fs.createReadStream(formInfo.path)
 			.pipe(unzip.Extract({
 				path: './docs/ke.qq.com-svg'
 			}))
 
-		var arr = [];
+		var files= [],
+			fileInfo = {};
 		// 单文件处理
 		fs.createReadStream(formInfo.path)
 			.pipe(unzip.Parse())
 			.on('entry', function (entry) {
-				var _fileName = entry.path;
-				var type = entry.type; // 'Directory' or 'File'
-				if(type == 'File' && path.extname(_fileName) == '.svg'){
-					arr.push(_fileName)
-					//console.log(_fileName)
-					//insert([path.basename(_fileName)], formInfo.platform);
+				fileInfo = {
+					name: path.basename(entry.path),
+					type: entry.type,
+					path: entry.path
+				};
+				if(fileInfo.type == 'File' && path.extname(fileInfo.name) == '.svg'){
+					//files.push(fileInfo.name)
+					files.push({
+						name: fileInfo.name,
+						path: fileInfo.path
+					});
 				}
-
 			}).on('close', function(){
-				insert(arr, formInfo.platform);
+				insert(files, formInfo.platform);
 			}).on('finish', function(){
+				// not fire
 			});
 		// 过滤 svg 文件
 		typeof cb == 'function' && cb();

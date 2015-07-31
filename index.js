@@ -53,7 +53,6 @@ app.post('/upload', jsonParser, function(req, res){
 		extname = path.extname(svgPath),
 		fileName = file.originalname;
 
-	console.log(extname)
 	var allowExt = ['.svg', '.zip'/*, '.rar', '.7z', '.tar'*/];
 
 	if(allowExt.indexOf(extname) == -1) {

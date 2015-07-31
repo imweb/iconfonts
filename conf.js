@@ -21,5 +21,5 @@ module.exports = {
 
 	demo_svg_path: './demo/svg',
 
-	cats: {'pc': '平台', 'h5': '移动端'}
+	cats: {'pc': '平台', 'h5': '移动端', 'other': '其他项目'}
 }
