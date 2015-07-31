@@ -52,6 +52,7 @@ localhost:4001
 + 生成 SCSS 文件    `done`
 + 除了类名外，生成 %类名，两个文件分开  `done`
 + 命名 i-svg文件名  `done`
++ 命令规范层级问题
 + svg 命名中划线，最好不要用数字、驼峰
 + svg 规范 rogerjs
 + 移动端字体名字mfont，PC上webfont
