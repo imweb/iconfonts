@@ -62,4 +62,4 @@ localhost:4001
 + 使用命令同步 iconfont 平台的 svg 到本地项目目录
 + 构建分析 vm、tpl、html中挂在的 iconfont 类名
 + 根据类名找到对应的 svg 文件，生成字体文件
-+ 引入响应的 css
++ 引入相应的 css
