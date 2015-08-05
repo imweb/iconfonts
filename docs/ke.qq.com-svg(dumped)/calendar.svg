@@ -5,9 +5,12 @@
 	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="480px" height="480px"
 	 viewBox="0 0 480 480" xml:space="preserve">
 <g>
-	<path d="M340,10H140c-33.137,0-60,26.863-60,60v340c0,33.137,26.863,60,60,60h200c33.137,0,60-26.863,60-60V70
-		C400,36.863,373.137,10,340,10z M140,40h200c16.568,0,30,13.431,30,30v250H110V70C110,53.431,123.432,40,140,40z M340,440H140
-		c-16.568,0-30-13.432-30-30v-60h260v60C370,426.568,356.568,440,340,440z"/>
-	<circle cx="240" cy="395" r="15"/>
+	<path d="M45,90v300h390V90H45z M405,120v60H75v-60H405z M75,360V210h330v150H75z"/>
+	<rect x="105" y="240" width="60" height="30"/>
+	<rect x="105" y="300" width="60" height="30"/>
+	<rect x="195" y="240" width="90" height="30"/>
+	<rect x="195" y="300" width="90" height="30"/>
+	<rect x="315" y="240" width="60" height="30"/>
+	<rect x="315" y="300" width="60" height="30"/>
 </g>
 </svg>
