@@ -1,3 +1,4 @@
+'use strict';
 var conf = require('../conf.js'),
 	path = require('path'),
 	fontCarrier = require('font-carrier');
@@ -7,7 +8,7 @@ var font = fontCarrier.create(),
 	outputCss = './public/css/iconfont.css',
 	svgPath = path.join('./' + conf.svg_path);
 
-function decimal2Hex(n){
+function decimal2Hex(n) {
 	var hex = n.toString(16);
 	hex = '000'.substr(0, 3 - hex.length) + hex;
 	return hex;
@@ -20,20 +21,21 @@ function generateIconContent(n){
 
 function generateCss(icons, cssPath, isExtended){
 	var content = [],
-		extendContents = [],
-		iconContents = [];
+		extendContents = [];
 	content.push('@font-face { ');
-	content.push('font-family: "iconfont";src: url("iconfont.eot");');
+	content.push('font-family: "iconfont";'); 
+	content.push('src: url("iconfont.eot");');
 	content.push('src: url("./fonts/iconfont.eot?#iefix") format("embedded-opentype"),');
 	content.push('url("./fonts/iconfont.woff") format("woff"),');
 	content.push('url("./fonts/iconfont.ttf") format("truetype"),');
 	content.push('url("./fonts/iconfont.svg#iconfont") format("svg");}');
+	
 	extendContents = content.concat([]);
-	content.push('.icon-font{font-family:"iconfont";font-size:16px;font-style:normal;}');
-	extendContents.push('%icon-font{font-family:"iconfont";font-size:16px;font-style:normal;}');
-	icons.forEach(function(icon, index){
-		extendContents.push('%' + icon.name + '{\r\n\t&:after{\r\n\t\tcontent:"' + icon.content + '";\r\n\t}\r\n}');
-		content.push('.' + icon.name + ':after{content: "' + icon.content + '";}');
+	content.push('.icon-font{font-family:"iconfont";font-size:16px;font-style:normal;font-weight: normal;font-variant: normal;text-transform: none;line-height: 1;font-size: 16px;position: relative;vertical-align:-2px;-webkit-font-smoothing: antialiased;-moz-osx-font-smoothing: grayscale;}');
+	extendContents.push('%icon-font{font-family:"iconfont";font-size:16px;font-style:normal;font-weight: normal;font-variant: normal;text-transform: none;line-height: 1;font-size: 16px;position: relative;vertical-align:-2px;-webkit-font-smoothing: antialiased;-moz-osx-font-smoothing: grayscale;}');
+	icons.forEach(function (icon) {
+		extendContents.push('%' + icon.name + '{\r\n\t&:before{\r\n\t\tcontent:"' + icon.content + '";\r\n\t}\r\n}');
+		content.push('.' + icon.name + ':before{content: "' + icon.content + '";}');
 	});
 	if(isExtended && path.extname(cssPath) === '.scss'){
 		fs.writeFileSync(path.join(path.dirname(cssPath), path.basename(cssPath).replace('.scss', '-extend.scss')), extendContents.join('\r\n'));
@@ -46,12 +48,12 @@ function generateHtml(iconNames, htmlPath){
 	var content = [];
 	content.push('<!DOCTYPE html>\r\n<html lang="en">\r\n<head>\r\n<meta charset="UTF-8">\r\n<title>iconfont demo</title>');
 	content.push('<link href="iconfont-embedded.css" rel="stylesheet" type="text/css" /> ');
-	content.push('</head>\r\n<body>')
+	content.push('</head>\r\n<body>');
 
-	iconNames.forEach(function(iconName, index){
+	iconNames.forEach(function (iconName) {
 		content.push('<i class="icon-font i-' + iconName + '"></i>');
 	});
-	content.push('</body>\r\n</html>')
+	content.push('</body>\r\n</html>');
 
 	fs.writeFileSync(htmlPath, content.join('\r\n'));
 }
@@ -60,9 +62,8 @@ function generateHtml(iconNames, htmlPath){
 // svg 生成字体文件
 function genarateFonts(icons, csspath){
 	var svgsObj = {},
-		iconContents = [],
 		iconContent;
-	icons.forEach(function(icon, index){
+	icons.forEach(function (icon) {
 		iconContent = generateIconContent(icon.iconId - 1);
 		svgsObj[iconContent] = fs.readFileSync(path.join(svgPath, path.dirname(icon.path || ''), icon.name.replace('i-', '') + '.svg')).toString();
 	});
@@ -92,8 +93,8 @@ function generateBase64Css(icons, cssPath, fontFileName){
 	content.push('font-family: "iconfont";');
 	content.push('src: url("data:application/octet-stream;base64,' + fontBase64 + '") format("truetype");}');
 	content.push('.icon-font{font-family:"iconfont";font-size:16px;font-style:normal;}');
-	icons.forEach(function(icon, index){
-		content.push('.' + icon.name + ':after{content: "' + icon.content + '";}');
+	icons.forEach(function (icon) {
+		content.push('.' + icon.name + ':before{content: "' + icon.content + '";}');
 	});
 	fs.writeFileSync(cssPath? cssPath : outputCss, content.join('\r\n'));
 }
@@ -105,5 +106,5 @@ module.exports = {
 	genarateFonts: genarateFonts,
 	file2Base64: file2Base64,
 	generateBase64Css: generateBase64Css
-}
+};
 

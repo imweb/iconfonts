@@ -9,8 +9,7 @@ var path = require('path'),
 	tools = require('./tools.js'),
 	fs = require('fs'),
 	archiver = require('archiver'),
-	low = require('lowdb')
-	/*db = new Datastore({filename: conf.db_path, autoload: true})*/;
+	low = require('lowdb');
 
 var font = fontCarrier.create(),
 	svgPath = conf.svg_path;
@@ -30,9 +29,6 @@ function getIconsByIds(ids, cb){
 		}
 	});
 	typeof cb === 'function' && cb(icons);
-/*	db.find({"iconId": { $in: _ids }}, function(err, icons){
-		typeof cb === 'function' && cb(err ? [] : icons)
-	});*/
 }
 
 function generateZip(icons, downloadCb){
@@ -85,7 +81,7 @@ function generateZip(icons, downloadCb){
 		// stream close event
 		output.on('close', function(){
 			typeof downloadCb === 'function' && downloadCb(zipPath);
-		})
+		});
 		
 	});
 }
@@ -96,4 +92,4 @@ module.exports = {
 			generateZip(icons, cb);
 		});
 	}
-}
+};
