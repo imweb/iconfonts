@@ -1,16 +1,16 @@
 var conf = require('../conf.js'),
 	tools = require('../libs/tools.js'),
-	low = require('lowdb')/*,
-	db = new Datastore({filename: conf.db_path})*/;
-
-
+	db = require('./db.js'),
+	Icon = require('../models/icon.js');
 
 function findAll(cb){
-/*	db.find({}, function(err, icons){
+/*	
+	db.find({}, function(err, icons){
 		typeof cb === 'function' && cb(err ? [] : icons)
-	});*/
+	});
 	var db = low(conf.low_db);
-
+*/
+	IconModel.
 	var dbNames = conf.cats,
 		rets = {},
 		icons = [];

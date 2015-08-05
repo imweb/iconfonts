@@ -11,6 +11,6 @@ var IconSchema = mongoose.Schema({
 // create Schema methods
 // IconSchema.methods.methodname = fn() {}
 
-var IconModel = mongoose.Model('icon', iconSchema);
+var Icon = mongoose.Model('icon', iconSchema);
 
-module.exports = IconModel;
+module.exports = Icon;

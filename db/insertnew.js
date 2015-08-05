@@ -10,7 +10,7 @@ var conf = require('../conf.js'),
     db = require('./db.js'),
     parse = require('./parsesvg.js');
 
-var IconModel = require('../models/icon_model.js');
+var Icon = require('../models/icon.js');
 var rets = parse.init();
 
 rets.forEach(function(icon, index){
@@ -20,6 +20,8 @@ rets.forEach(function(icon, index){
     } else {
         icon.kind = 'pc';
     }
-    var aIcon = new IconModel(icon);
-    aIcon.save();
+    var one = new Icon(icon);
+    one.save(function(err, one) {
+        if (err) console.error(err, 'file insert failed: ' + one.name);
+    });
 });
