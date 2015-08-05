@@ -12,7 +12,7 @@ function getAllIconFromSvg(){
 	var allIcons = [];	
 		svgFiles = fs.readdirSync(svgPath);
 	svgFiles.forEach(function(file, index){
-		if(path.extname(file) == '.svg'){
+		if(path.extname(file) == '.svg') {
 			allIcons.push(file);
 		}
 	});
@@ -79,9 +79,9 @@ function init(){
 		ret.push({
 			iconId: index + 1,
 			name: 'i-' + icon.replace('.svg', ''),
-			//svg: path.join(svgPath, icon),
-			content: iconContents[index]
-		})
+			content: iconContents[index],
+			svg: path.join(svgPath, icon)
+		});
 	});
 	return ret;
 }

@@ -17,14 +17,15 @@
     "stop": "./node_modules/.bin/pm2 stop iconfont "
   },
   "dependencies": {
-    "express": "~4.13.0",
-    "ejs": "~2.3.2",
-    "font-carrier": "0.0.4",
-    "body-parser": "^1.13.1",
-    "multer": "^0.1.8",
     "archiver": "^0.14.4",
-    "q": "^1.4.1",
+    "body-parser": "^1.13.1",
+    "ejs": "~2.3.2",
+    "express": "~4.13.0",
+    "font-carrier": "0.0.4",
     "lowdb": "^0.10.1",
+    "mongoose": "^4.1.1",
+    "multer": "^0.1.8",
+    "q": "^1.4.1",
     "unzip": "^0.1.11"
   },
   "devDependencies": {
