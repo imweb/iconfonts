@@ -1,7 +1,7 @@
 'use strict';
 var conf = require('../conf.js'),
 	path = require('path'),
-	fontCarrier = require('font-carrier');
+	fontCarrier = require('font-carrier'),
 	fs = require('fs');
 
 var font = fontCarrier.create(),
