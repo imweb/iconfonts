@@ -80,7 +80,7 @@ function init(){
 			iconId: index + 1,
 			name: 'i-' + icon.replace('.svg', ''),
 			content: iconContents[index],
-			svg: path.join(svgPath, icon)
+			path: '/' + icon
 		});
 	});
 	return ret;

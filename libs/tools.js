@@ -65,7 +65,8 @@ function genarateFonts(icons, csspath){
 		iconContent;
 	icons.forEach(function (icon) {
 		iconContent = generateIconContent(icon.iconId - 1);
-		svgsObj[iconContent] = fs.readFileSync(path.join(svgPath, path.dirname(icon.path || ''), icon.name.replace('i-', '') + '.svg')).toString();
+		// svgsObj[iconContent] = fs.readFileSync(path.join(svgPath, path.dirname(icon.path || ''), icon.name.replace('i-', '') + '.svg')).toString();
+		svgsObj[iconContent] = fs.readFileSync(path.join(svgPath, icon.path)).toString();
 	});
 	font.setSvg(svgsObj);
 	// 导出字体

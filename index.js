@@ -2,7 +2,7 @@ var express = require('express'),
 	fs = require('fs');
 	path = require('path'),
 	conf = require('./conf.js'),
-	db = require('./db/index.js'),
+	iconHandler = require('./db/index.js'),
 	download = require('./libs/download.js'),
 	multer  = require('multer'),
 	upload = require('./libs/upload.js'),
@@ -26,7 +26,7 @@ app.use(multer({ dest: './uploads/'}))
 //app.use(bodyParser({uploadDir:'./uploads/'}));
 
 app.get(['/', '/index'], function(req, res){
-	db.findAll(function(arr){
+	iconHandler.findAll(function(arr){
 		// res.render('index', {'platform': arr.pcs, 'h5s': arr.h5s})
 
 		res.render('index', {all: arr, maps: conf.cats})

@@ -5,12 +5,12 @@ var IconSchema = mongoose.Schema({
     name: String,
     content: String,
     kind: String, // three kinds: h5, pc, other
-    svgPath: String
+    path: String
 });
 
 // create Schema methods
 // IconSchema.methods.methodname = fn() {}
 
-var Icon = mongoose.Model('icon', iconSchema);
+var Icon = mongoose.model('Icon', IconSchema);
 
 module.exports = Icon;
