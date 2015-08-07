@@ -37,6 +37,9 @@ function getIconsByIds(ids, cb){
 			'$in' : ids
 		}
 	}, function (err, icons) {
+		icons.forEach(function (icon) {
+			icon.content = tools.generateHtmlIconContent(icon.iconId);
+		});
 		typeof cb === 'function' && cb(icons);
 	});
 }

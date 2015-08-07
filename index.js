@@ -27,7 +27,7 @@ app.use(multer({ dest: './uploads/'}));
 
 app.get(['/', '/index'], function(req, res){
 	iconHandler.findAll(function(arr){
-		res.render('index', {all: arr, maps: conf.cats})
+		res.render('index', {all: arr, maps: conf.cats});
 	});
 });
 

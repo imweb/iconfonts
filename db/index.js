@@ -12,7 +12,8 @@ function findAll(cb){
 		.exec(function(err, docs) {
 			for (var i = 0, len = docs.length; i < len; i++) {
 				var icon = docs[i];
-				rets[icon.kind].push(icon);
+				icon.content = tools.generateHtmlIconContent(icon.iconId);
+				rets[icon.kind].push(icon);	
 			}
 			for (var name in cats) {
 				icons = icons.concat(rets[name]);

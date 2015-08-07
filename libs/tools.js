@@ -19,6 +19,10 @@ function generateIconContent(n){
 	return '&#xf' + decimal2Hex(n);
 }
 
+function generateHtmlIconContent (n) {
+	return generateIconContent(n).replace('&#xf', '\\f');
+}
+
 function generateCss(icons, cssPath, isExtended){
 	var content = [],
 		extendContents = [];
@@ -64,7 +68,7 @@ function genarateFonts(icons, csspath){
 	var svgsObj = {},
 		iconContent;
 	icons.forEach(function (icon) {
-		iconContent = generateIconContent(icon.iconId - 1);
+		iconContent = generateIconContent(icon.iconId);
 		// svgsObj[iconContent] = fs.readFileSync(path.join(svgPath, path.dirname(icon.path || ''), icon.name.replace('i-', '') + '.svg')).toString();
 		svgsObj[iconContent] = fs.readFileSync(path.join(svgPath, icon.path)).toString();
 	});
@@ -106,6 +110,7 @@ module.exports = {
 	generateIconContent: generateIconContent,
 	genarateFonts: genarateFonts,
 	file2Base64: file2Base64,
-	generateBase64Css: generateBase64Css
+	generateBase64Css: generateBase64Css,
+	generateHtmlIconContent: generateHtmlIconContent
 };
 

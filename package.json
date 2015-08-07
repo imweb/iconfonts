@@ -26,7 +26,8 @@
     "mongoose": "^4.1.1",
     "multer": "^0.1.8",
     "q": "^1.4.1",
-    "unzip": "^0.1.11"
+    "unzip": "^0.1.11",
+    "mongoose-auto-increment": "^4.0.0"
   },
   "devDependencies": {
     "pm2": "*"
