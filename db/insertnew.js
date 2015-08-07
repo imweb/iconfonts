@@ -11,17 +11,26 @@ var conf = require('../conf.js'),
     parse = require('./parsesvg.js');
 
 var Icon = require('../models/icon.js');
-var rets = parse.init();
+db.collections['icons'].drop(function(err) {
+    if (err) console.error('Icon drop failed.');
+    else console.log('Icon drop success.');
+    
+    var rets = parse.init();
+    console.log('parse init finished.')
 
-rets.forEach(function(icon, index){
-    var filename = icon.name.replace('i-', '');
-    if(/^[mhHM]-(.*)/.test(filename)) {
-        icon.kind = 'h5';
-    } else {
-        icon.kind = 'pc';
-    }
-    var one = new Icon(icon);
-    one.save(function(err, one) {
-        if (err) console.error(err, 'file insert failed: ' + one.name);
+    rets.forEach(function(icon, index){
+        var filename = icon.name.replace('i-', '');
+        if(/^[mhHM]-(.*)/.test(filename)) {
+            icon.kind = 'h5';
+        } else {
+            icon.kind = 'pc';
+        }
+        var one = new Icon(icon);
+        one.save(function(err, one) {
+            if (err) console.error(err, 'icon insert failed: ' + one.path);
+            else console.log('icon insert success: ' + one.path);
+        });
     });
 });
+
+module.exports = {}

@@ -4,24 +4,23 @@ var conf = require('../conf.js'),
 	Icon = require('../models/icon.js');
 
 function findAll(cb){
-/*	
-	db.find({}, function(err, icons){
-		typeof cb === 'function' && cb(err ? [] : icons)
-	});
-	var db = low(conf.low_db);
-*/
-	IconModel.
-	var dbNames = conf.cats,
-		rets = {},
+	var cats = conf.cats;
+		rets = {'pc': [], 'h5': [], 'other': []},
 		icons = [];
-	for(var name in dbNames){
-		_ret = db(name).sortBy('iconId');
-		rets[name] = _ret;
-		icons = icons.concat(_ret);
-	}
-	typeof cb === 'function' && cb(rets);
-	tools.genarateFonts(icons);
-	tools.generateCss(icons)
+	Icon.find()
+		.sort({iconId: 1})
+		.exec(function(err, docs) {
+			for (var i = 0, len = docs.length; i < len; i++) {
+				var icon = docs[i];
+				rets[icon.kind].push(icon);
+			}
+			for (var name in cats) {
+				icons = icons.concat(rets[name]);
+			}
+			typeof cb === 'function' && cb(rets);
+			tools.genarateFonts(icons);
+			tools.generateCss(icons);
+	});
 }
 
 module.exports = {
