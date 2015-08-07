@@ -10,8 +10,8 @@ var express = require('express'),
 
 var app = express();
 
-var bodyParser = require('body-parser')
-var jsonParser = bodyParser.json()       // to support JSON-encoded bodies
+var bodyParser = require('body-parser');
+var jsonParser = bodyParser.json();       // to support JSON-encoded bodies
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
 
 
@@ -21,14 +21,12 @@ app.set('views', path.join(__dirname, '/views'));
 
 app.use(express.static(path.join(__dirname, '/public')));
 app.use(express.static(path.join(__dirname, '/download')));
-app.use(multer({ dest: './uploads/'}))
+app.use(multer({ dest: './uploads/'}));
 // 这里有问题
 //app.use(bodyParser({uploadDir:'./uploads/'}));
 
 app.get(['/', '/index'], function(req, res){
 	iconHandler.findAll(function(arr){
-		// res.render('index', {'platform': arr.pcs, 'h5s': arr.h5s})
-
 		res.render('index', {all: arr, maps: conf.cats})
 	});
 });

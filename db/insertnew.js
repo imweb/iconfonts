@@ -11,12 +11,12 @@ var conf = require('../conf.js'),
     parse = require('./parsesvg.js');
 
 var Icon = require('../models/icon.js');
-db.collections['icons'].drop(function(err) {
+db.collections.icons.drop(function(err) {
     if (err) console.error('Icon drop failed.');
     else console.log('Icon drop success.');
     
     var rets = parse.init();
-    console.log('parse init finished.')
+    console.log('parse init finished.');
 
     rets.forEach(function(icon, index){
         var filename = icon.name.replace('i-', '');
@@ -33,4 +33,4 @@ db.collections['icons'].drop(function(err) {
     });
 });
 
-module.exports = {}
+module.exports = {};

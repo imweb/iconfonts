@@ -11,11 +11,13 @@ var path = require('path'),
 	archiver = require('archiver'),
 	low = require('lowdb');
 
+var Icon = require('../models/icon.js');
+
 var font = fontCarrier.create(),
 	svgPath = conf.svg_path;
 
 function getIconsByIds(ids, cb){
-	var pc = low(conf.low_db)('pc'),
+/*	var pc = low(conf.low_db)('pc'),
 		h5 = low(conf.low_db)('h5');
 	var _ids = [],
 		icons = [],
@@ -28,7 +30,15 @@ function getIconsByIds(ids, cb){
 			icons.push(ret);
 		}
 	});
-	typeof cb === 'function' && cb(icons);
+	typeof cb === 'function' && cb(icons);*/
+
+	Icon.find({
+		iconId : {
+			'$in' : ids
+		}
+	}, function (err, icons) {
+		typeof cb === 'function' && cb(icons);
+	});
 }
 
 function generateZip(icons, downloadCb){
@@ -47,9 +57,6 @@ function generateZip(icons, downloadCb){
 	fs.mkdirSync(path.join(folderName, 'fonts'));
 	// 异步
 	Q.fcall(function(){
-/*		font.output({
-			path: path.join(folderName, 'fonts/iconfont')
-		});*/
 		var output = path.join(folderName, 'fonts/iconfont');
 		var outFonts = font.output({});
 		//  先生成字体 buffer，然后手动写文件
