@@ -63,3 +63,8 @@ localhost:4001
 + 构建分析 vm、tpl、html中挂在的 iconfont 类名
 + 根据类名找到对应的 svg 文件，生成字体文件
 + 引入相应的 css
+
+
+### 0805 规划
++ 支持后续扩容，底层存储切换到 mongodb
++ 移动端（fis）和 pc 端构建（grunt）
