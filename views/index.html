@@ -14,30 +14,19 @@
 <body>
 	<%- include header.html %>
 	<div class="layout">
-		<% 	var platform,
-				i = 1;
-			for(var key in all) { 
-				platform = all[key];
-				if(platform.length > 0){
-		%>
-			<div  class="content-block border-bottom1px relative">
-				<h1 class="list-title">
-				<%= maps[key] %>图标库</h1>
-				<% if(i==1) {%>
-				<a class="rightBtn" id="js-download-btn" href="javascript:;">下载</a>
-				<% } %>
-				<ul class="icon-list clearfix js-pcList">
-				<% for(var i=0;i<platform.length;i++){ %>
-					<li class="icon" data-id="<%= platform[i].iconId %>">
-						<i class="icon-font <%= platform[i].name %>"></i>
-						<span class="icon-content"><%= platform[i].content %></span>
-						<span class="icon-name"><%= platform[i].name %></span>
-					</li>
-				<% } %>
-				</ul>
-			</div>
-		<% }
-		} %>
+		<div  class="content-block relative">
+			<h1 class="list-title">图标库</h1>
+			<a class="rightBtn" id="js-download-btn" href="javascript:;">下载</a>
+			<ul class="icon-list clearfix js-pcList">
+			<% for(var i=0;i<all.length;i++){ %>
+				<li class="icon" data-id="<%= all[i].iconId %>">
+					<i class="icon-font <%= all[i].className %>"></i>
+					<span class="icon-content"><%= all[i].content %></span>
+					<span class="icon-name"><%= all[i].className %></span>
+				</li>
+			<% } %>
+			</ul>
+		</div>
 	</div>
 	<section id="js-back2top" class="back2top">	
 	</section>

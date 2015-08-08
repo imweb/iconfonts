@@ -8,8 +8,7 @@ var path = require('path'),
 	conf = require('../conf.js'),
 	tools = require('./tools.js'),
 	fs = require('fs'),
-	archiver = require('archiver'),
-	low = require('lowdb');
+	archiver = require('archiver');
 
 var Icon = require('../models/icon.js');
 
@@ -17,20 +16,6 @@ var font = fontCarrier.create(),
 	svgPath = conf.svg_path;
 
 function getIconsByIds(ids, cb){
-/*	var pc = low(conf.low_db)('pc'),
-		h5 = low(conf.low_db)('h5');
-	var _ids = [],
-		icons = [],
-		ret = [];
-
-	ids.forEach(function(id, index){
-		_ids.push(id - 0);
-		ret = pc.find({'iconId': id - 0}) || h5.find({'iconId': id - 0});
-		if(ret){
-			icons.push(ret);
-		}
-	});
-	typeof cb === 'function' && cb(icons);*/
 
 	Icon.find({
 		iconId : {

@@ -1,9 +1,12 @@
-var mongoose = require('mongoose');
+var config = require('../conf.js'),
+    mongoose = require('mongoose');
 var autoIncrement = require('mongoose-auto-increment');
 
-mongoose.connect('mongodb://localhost:27017/');
+var dbInfo = config.dbInfo;
+mongoose.connect('mongodb://' + dbInfo.IP + ':' + dbInfo.port + '/' + dbInfo.dbName);
 
 var db = mongoose.connection;
+
 autoIncrement.initialize(db);
 
 db.on('error', console.error.bind(console, 'connection error'));

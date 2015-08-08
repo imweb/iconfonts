@@ -4,6 +4,7 @@ var express = require('express'),
 	conf = require('./conf.js'),
 	iconHandler = require('./db/index.js'),
 	download = require('./libs/download.js'),
+	tools = require('./libs/tools.js'),
 	multer  = require('multer'),
 	upload = require('./libs/upload.js'),
 	ejs = require('ejs');
@@ -22,12 +23,14 @@ app.set('views', path.join(__dirname, '/views'));
 app.use(express.static(path.join(__dirname, '/public')));
 app.use(express.static(path.join(__dirname, '/download')));
 app.use(multer({ dest: './uploads/'}));
-// 这里有问题
-//app.use(bodyParser({uploadDir:'./uploads/'}));
 
 app.get(['/', '/index'], function(req, res){
 	iconHandler.findAll(function(arr){
-		res.render('index', {all: arr, maps: conf.cats});
+		if(arr.length > 0) {
+			tools.genarateFonts(arr);
+		    tools.generateCss(arr);
+		}
+		res.render('index', {all: arr});
 	});
 });
 
@@ -57,7 +60,6 @@ app.post('/upload', jsonParser, function(req, res){
 		res.redirect('index');
 		return;
 	}
-
 
 	upload.upload({
 		path: file.path,
