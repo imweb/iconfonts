@@ -3,10 +3,7 @@ var Icon = require('../models/icon.js');
 function search(q, cb) {
     // todo: validate param q
     if (q === "") typeof cb === 'function' && cb([]);
-    var qReg = new RegExp(q, 'i');
-    Icon.find({
-            name: {"$regex": qReg}
-        })
+    Icon.$where('this.name.search("' + q + '") !== -1')
         .exec(function(err, docs) {
             if (err) {
                 console.error(err);

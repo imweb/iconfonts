@@ -85,7 +85,6 @@ app.get('/download/:ids', function(req, res){
 app.get('/search', function(req, res) {
 	search.search(req.query.q, function(arr) {
 		if(arr.length > 0) {
-			console.log(arr);
 			tools.genarateFonts(arr);
 		    tools.generateCss(arr);
 		}
