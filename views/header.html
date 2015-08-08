@@ -5,6 +5,21 @@
 			<li class="menu-item"><a href="/intro">功能介绍</a></li>
 			<li class="menu-item"><a href="/rule">规范</a></li>
 			<li class="menu-item"><a href="/upload">上传</a></li>
+            <li class="menu-item search-panel">
+                <form id="search_form" action="/search">
+                    <input type="text" name="q" placeholder="搜索图标">
+                    <script src="lib/jquery-2.1.4.min.js"></script>
+                    <script type="text/javascript">
+                    var $searchForm = $('#search_form');
+                    var ENTER_KEY = 13;
+                    function searchHandler (event) {
+                        if (event.charCode === ENTER_KEY)
+                            $searchForm.submit();
+                    }
+                    $searchForm.keypress(searchHandler);
+                    </script>
+                </form>
+            </li>
 		</ul>
 	</div>
 </div>

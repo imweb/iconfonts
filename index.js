@@ -7,6 +7,7 @@ var express = require('express'),
 	tools = require('./libs/tools.js'),
 	multer  = require('multer'),
 	upload = require('./libs/upload.js'),
+	search = require('./libs/search.js'),
 	ejs = require('ejs');
 
 var app = express();
@@ -78,6 +79,17 @@ app.get('/download/:ids', function(req, res){
 		res.download(p, function(err){
 			if(err) console.log(err);
 		});
+	});
+});
+
+app.get('/search', function(req, res) {
+	search.search(req.query.q, function(arr) {
+		if(arr.length > 0) {
+			console.log(arr);
+			tools.genarateFonts(arr);
+		    tools.generateCss(arr);
+		}
+		res.render('index', {all: arr});
 	});
 });
 
