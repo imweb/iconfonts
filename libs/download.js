@@ -22,10 +22,14 @@ function getIconsByIds(ids, cb){
 			'$in' : ids
 		}
 	}, function (err, icons) {
+		if (err) {
+			console.error(err);
+			return cb(err, icons);
+		}
 		icons.forEach(function (icon) {
 			icon.content = tools.generateHtmlIconContent(icon.iconId);
 		});
-		typeof cb === 'function' && cb(icons);
+		typeof cb === 'function' && cb(err, icons);
 	});
 }
 
@@ -64,7 +68,9 @@ function generateZip(icons, downloadCb){
 		var archive = archiver('zip');
 
 		archive.on('error', function(err){
-		    throw err;
+		    // throw err;
+		    console.error(err);
+		    downloadCb(err);
 		});
 
 		archive.pipe(output);
@@ -75,7 +81,7 @@ function generateZip(icons, downloadCb){
 
 		// stream close event
 		output.on('close', function(){
-			typeof downloadCb === 'function' && downloadCb(zipPath);
+			typeof downloadCb === 'function' && downloadCb(undefined, zipPath);
 		});
 		
 	});
@@ -83,7 +89,8 @@ function generateZip(icons, downloadCb){
 
 module.exports = {
 	download: function(ids, cb){
-		getIconsByIds(ids, function(icons){
+		getIconsByIds(ids, function(err, icons){
+			if (err) return cb(err, icons);
 			generateZip(icons, cb);
 		});
 	}

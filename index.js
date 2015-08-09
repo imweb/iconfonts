@@ -16,6 +16,7 @@ var bodyParser = require('body-parser');
 var jsonParser = bodyParser.json();       // to support JSON-encoded bodies
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
 
+var errorLogfile = fs.createWriteStream('error.log', {flags: 'a'});
 
 app.engine('.html', ejs.renderFile);
 app.set('view engine', 'html');
@@ -25,8 +26,9 @@ app.use(express.static(path.join(__dirname, '/public')));
 app.use(express.static(path.join(__dirname, '/download')));
 app.use(multer({ dest: './uploads/'}));
 
-app.get(['/', '/index'], function(req, res){
-	iconHandler.findAll(function(arr){
+app.get(['/', '/index'], function(req, res, next){
+	iconHandler.findAll(function(err, arr){
+		if (err) return next(err);
 		if(arr.length > 0) {
 			tools.genarateFonts(arr);
 		    tools.generateCss(arr);
@@ -48,7 +50,7 @@ app.get('/upload', function(req, res){
 });
 
 // 上传
-app.post('/upload', jsonParser, function(req, res){
+app.post('/upload', jsonParser, function(req, res, next){
 	var platform = req.body.platform;
 	var file = req.files.file,
 		svgPath = file.path,
@@ -66,13 +68,15 @@ app.post('/upload', jsonParser, function(req, res){
 		path: file.path,
 		name: fileName,
 		platform: platform
-	}, function(){
+	}, function(err){
+		if (err) return next(err);
 		res.redirect('index');
 	})
 });
 
-app.get('/download/:ids', function(req, res){
-	download.download(req.params.ids.split('-'), function(p){
+app.get('/download/:ids', function(req, res, next){
+	download.download(req.params.ids.split('-'), function(err, p){
+		if (err) return next(err);
  		res.setHeader('Content-Type', 'application/zip');
  		var filename = path.basename(p);
     	res.setHeader('Content-Disposition', 'attachment; filename=' + filename);
@@ -82,14 +86,21 @@ app.get('/download/:ids', function(req, res){
 	});
 });
 
-app.get('/search', function(req, res) {
-	search.search(req.query.q, function(arr) {
+app.get('/search', function(req, res, next) {
+	search.search(req.query.q, function(err, arr) {
+		if (err) return next(err);
 		if(arr.length > 0) {
 			tools.genarateFonts(arr);
 		    tools.generateCss(arr);
 		}
 		res.render('index', {all: arr});
 	});
+});
+
+app.use(function(err, req, res, next) {
+	var meta = '[' + new Date() + '] ' + req.url + '\r\n';
+	errorLogfile.write(meta + err.stack + '\r\n');
+	res.status(500).send({error: 'something blew up!'});
 });
 
 app.listen(conf.port);
