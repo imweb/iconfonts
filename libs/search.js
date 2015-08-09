@@ -2,7 +2,8 @@ var Icon = require('../models/icon.js');
 
 function search(q, cb) {
     // todo: validate param q
-    if (q === "") typeof cb === 'function' && cb([]);
+    if (toString.apply(q) !== "[object String]" || q === "")
+        typeof cb === 'function' && cb([]);
     Icon.$where('this.name.search("' + q + '") !== -1')
         .exec(function(err, docs) {
             if (err) {
