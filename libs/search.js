@@ -8,12 +8,12 @@ function search(q, cb) {
         .exec(function(err, docs) {
             if (err) {
                 console.error(err);
-                return;
+                return cb(err);
             }
             docs.forEach(function(icon) {
                 icon.content = tools.generateHtmlIconContent(icon.iconId);
             }); 
-            typeof cb === 'function' && cb(docs);
+            typeof cb === 'function' && cb(err, docs);
         });
 }
 

@@ -71,13 +71,13 @@ function uploadSvg(formInfo,cb) {
 		file = formInfo.name;
 	fs.readFile(filePath, function(err, data){
 		if(err) {
-			console.log(err);
-			return;
+			console.error(err);
+			return cb(err);
 		}
 		fs.writeFile('./docs/ke.qq.com-svg/' + file, data, function(er){
-			if(er){
-				console.log(er);
-				return;
+			if(err) {
+				console.error(err);
+				return cb(err);
 			}
 			db.insert({
 				name: path.basename(file, '.svg'),

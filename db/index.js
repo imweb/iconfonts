@@ -5,10 +5,18 @@ function findAll(cb){
 	Icon.find()
 		.sort({iconId: 1})
 		.exec(function(err, docs) {
+			// err = {
+			// 	msg: 'find all icons error.',
+			// 	stack: 'db/index.js function findAll()'
+			// }
+			if (err) {
+				console.error(err);
+				return cb(err);
+			}
 			docs.forEach(function(icon) {
 				icon.content = tools.generateHtmlIconContent(icon.iconId);
 			});	
-			typeof cb === 'function' && cb(docs);
+			typeof cb === 'function' && cb(err, docs);
 	});
 }
 
