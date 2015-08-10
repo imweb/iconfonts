@@ -23,3 +23,17 @@
 	text-decoration: none;
 	color: #fff;
 }
+
+.search-panel {
+	float: right;
+	padding-right: 0;
+}
+.search-form input {
+	border: none;
+	outline: none;
+	border-radius: 2px;
+	padding: 5px;
+	font-size: 14px;
+	color: #999;
+	line-height: 20px;
+}
