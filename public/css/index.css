@@ -1,5 +1,5 @@
 .layout{
-	width: 960px;
+	width: 1000px;
 	margin: 0 auto;
 }
 
@@ -11,6 +11,10 @@
 	font-size: 20px;
 	height: 80px;
 	line-height: 80px;
+}
+.list-title span {
+    font-size: 12px;
+    color: #757575;
 }
 
 .relative{
