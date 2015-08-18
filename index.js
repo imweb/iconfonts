@@ -75,15 +75,18 @@ app.post('/upload', jsonParser, function(req, res, next){
 });
 
 app.get('/download/:ids', function(req, res, next){
-	download.download(req.params.ids.split('-'), function(err, p){
+	var ids = req.params.ids.split('-');
+	var handler = function(err, p, name){
 		if (err) return next(err);
  		res.setHeader('Content-Type', 'application/zip');
  		var filename = path.basename(p);
     	res.setHeader('Content-Disposition', 'attachment; filename=' + filename);
-		res.download(p, function(err){
+		res.download(p, name, function(err){
 			if(err) console.log(err);
 		});
-	});
+	};
+	if (ids[0] === '$svgs') download.downloadSvgs(handler);
+	else download.download(req.params.ids.split('-'), handler);
 });
 
 app.get('/search', function(req, res, next) {
