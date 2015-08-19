@@ -34,19 +34,19 @@
 18 verbose url raw eventemitter2
 19 verbose url resolving [ 'http://registry.npmjs.org/', './eventemitter2' ]
 20 verbose url resolved http://registry.npmjs.org/eventemitter2
-21 info trying registry request attempt 1 at 18:39:39
+21 info trying registry request attempt 1 at 09:19:43
 22 verbose etag "5A7TVE65P6OQIUHUEOYPQFWML"
 23 http GET http://registry.npmjs.org/eventemitter2
 24 http 304 http://registry.npmjs.org/eventemitter2
 25 silly registry.get cb [ 304,
-25 silly registry.get   { date: 'Tue, 18 Aug 2015 10:39:39 GMT',
+25 silly registry.get   { date: 'Wed, 19 Aug 2015 01:19:44 GMT',
 25 silly registry.get     'cache-control': 'max-age=60',
 25 silly registry.get     etag: '"5A7TVE65P6OQIUHUEOYPQFWML"',
-25 silly registry.get     age: '11',
-25 silly registry.get     'x-served-by': 'cache-itm7425-ITM',
+25 silly registry.get     age: '59',
+25 silly registry.get     'x-served-by': 'cache-itm7426-ITM',
 25 silly registry.get     'x-cache': 'HIT, MISS from 10.133.2.230',
-25 silly registry.get     'x-cache-hits': '2',
-25 silly registry.get     'x-timer': 'S1439894379.337661,VS0,VE0',
+25 silly registry.get     'x-cache-hits': '4',
+25 silly registry.get     'x-timer': 'S1439947184.403962,VS0,VE0',
 25 silly registry.get     vary: 'Accept',
 25 silly registry.get     'x-cache-lookup': 'MISS from 10.133.2.230:3128',
 25 silly registry.get     via: '1.1 varnish, 1.0 10.133.2.230 (squid/3.1.10)',
