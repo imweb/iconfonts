@@ -81,39 +81,45 @@ function generateZip(icons, downloadCb){
 
 		// stream close event
 		output.on('close', function(){
-			typeof downloadCb === 'function' && downloadCb(undefined, zipPath, 'iconfont.zip');
+			typeof downloadCb === 'function' && downloadCb(undefined, zipPath);
 		});
 		
 	});
 }
 
 function getSvgs (cb) {
-	if(!fs.existsSync('download')) fs.mkdirSync('download');
-	var folderName = 'download/svgs-' + Date.now();
+	var folderName = 'download/svgs'
 	var zipPath = folderName + '.zip';
-	var svgNames = fs.readdirSync(svgPath);
-	fs.mkdirSync(folderName);
-	svgNames.forEach(function (svgName) {
-		var svgSrc = path.join(svgPath, svgName);
-			svgDest = path.join(folderName, svgName);
-		var content = fs.readFileSync(svgSrc).toString();
-		fs.writeFileSync(svgDest);
-	});
-	var output = fs.createWriteStream(zipPath);
-	var archive = archiver('zip');
-	archive.on('error', function (err) {
-		console.error(err);
-		typeof cb === 'function' && cb(err);
-	});
-	archive.pipe(output);
-	archive.bulk([
-		{expand: true, cwd: folderName, src: ['**']}
-	]);
-	archive.finalize();
+	if (!fs.existsSync('download')) fs.mkdirSync('download');
+	if (fs.existsSync(zipPath)) {
+		// 假设其存在的话，则未更改
+		// 当撒上传svg时，在upload逻辑中update或remove这个文件
+		typeof cb === 'function' && cb(undefined, zipPath);
+	} else {
+		var svgNames = fs.readdirSync(svgPath);
+		fs.mkdirSync(folderName);
+		svgNames.forEach(function (svgName) {
+			var svgSrc = path.join(svgPath, svgName);
+				svgDest = path.join(folderName, svgName);
+			var content = fs.readFileSync(svgSrc).toString();
+			fs.writeFileSync(svgDest);
+		});
+		var output = fs.createWriteStream(zipPath);
+		var archive = archiver('zip');
+		archive.on('error', function (err) {
+			console.error(err);
+			typeof cb === 'function' && cb(err);
+		});
+		archive.pipe(output);
+		archive.bulk([
+			{expand: true, cwd: folderName, src: ['**']}
+		]);
+		archive.finalize();
 
-	output.on('close', function () {
-		typeof cb === 'function' && cb(undefined, zipPath, 'svgs.zip');
-	});
+		output.on('close', function () {
+			typeof cb === 'function' && cb(undefined, zipPath);
+		});
+ 	}
 }
 
 module.exports = {

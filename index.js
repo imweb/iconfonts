@@ -19,6 +19,7 @@ var urlencodedParser = bodyParser.urlencoded({ extended: false });
 var errorLogfile = fs.createWriteStream('error.log', {flags: 'a'});
 
 app.engine('.html', ejs.renderFile);
+app.set('etag', 'strong');
 app.set('view engine', 'html');
 app.set('views', path.join(__dirname, '/views'));
 
