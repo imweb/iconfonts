@@ -5,19 +5,19 @@
 .menu{
 	width: 1000px;
 	margin: 0 auto;
-	height: 55px;
+	height: 70px;
 	
 }
 .menu-item{
 	float: left;
-	padding: 0 15px;
-	height: 55px;
-	line-height: 55px;
+	height: 70px;
+	line-height: 70px;
 	font-size: 18px;
 }
 .menu-item a {
 	color: #fff;
 	display: block;
+	padding: 0 15px;
 }
 .menu-item a:hover{
 	text-decoration: none;

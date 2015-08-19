@@ -35,15 +35,27 @@ function getIconsByIds(ids, cb){
 
 function generateZip(icons, downloadCb){
 	if(!fs.existsSync('download')) fs.mkdirSync('download');
-	var folderName = 'download/iconfont-' + Date.now();
-	var folder = fs.mkdirSync(folderName);
-	var svgsObj = {},
+	var folderName = 'download/iconfont-' + Date.now(),
+		
+		pngsFolder = path.join(folderName, 'pngs'),	
+	    svgsObj = {},
+		svgFilePath,
 		iconNames = [];
-	
+
+	fs.mkdirSync(folderName);
+	fs.mkdirSync(pngsFolder);
 	icons.forEach(function(icon, index){
-		svgsObj[icon.content.replace('\\f', '&#xf')] = fs.readFileSync(path.join(svgPath, icon.name.replace('i-', '') + '.svg')).toString();
+		svgFilePath = path.join(svgPath, icon.name.replace('i-', '') + '.svg');
+		svgsObj[icon.content.replace('\\f', '&#xf')] = fs.readFileSync(svgFilePath).toString();
 		iconNames.push(icon.name.replace('i-', ''));
+
+		// parse svg to png
+		//console.log(svgFilePath, path.join(pngsFolder, icon.name.replace('i-', '') + '.png'))
+/*		svg2png(svgFilePath, path.join(pngsFolder, icon.name.replace('i-', '') + '.png'), function(err) {
+			console.log(err);
+		});*/
 	});
+
 	font.setSvg(svgsObj);
 	var zipPath = folderName + '.zip';
 	fs.mkdirSync(path.join(folderName, 'fonts'));

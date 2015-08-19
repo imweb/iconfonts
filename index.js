@@ -101,6 +101,20 @@ app.get('/search', function(req, res, next) {
 	});
 });
 
+
+app.get('/tag/:id', function(req, res, next) {
+	iconHandler.find({
+		iconId: req.params.id
+	}, function(err, icons) {
+		var toString = Object.prototype.toString;
+		if(toString.apply(icons) === '[object Array]') {
+			icons = icons[0];
+		}
+		res.render('tag', {icon: icons});
+	});
+	
+});
+
 app.use(function(err, req, res, next) {
 	var meta = '[' + new Date() + '] ' + req.url + '\r\n';
 	errorLogfile.write(meta + err.stack + '\r\n');

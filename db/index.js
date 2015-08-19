@@ -24,6 +24,18 @@ function findAll(cb){
 }
 
 
+function find(condition, cb) {
+	Icon.find(condition)
+		.exec(function(err, icons) {
+			if (err) {
+				console.error(err);
+				return cb(err);
+			}
+			typeof cb === 'function' && cb(err, icons);
+		});
+}
+
+
 function generateType(name) {
     return /^[mhHM]-(.*)/.test(name) ? 'h5' : 'pc';
 }
@@ -76,6 +88,7 @@ function insert(icons) {
 
 module.exports = {
 	findAll: findAll,
-	insert: insert
+	insert: insert,
+	find: find
 };
 
