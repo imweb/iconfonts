@@ -97,6 +97,11 @@ app.get('/search', function(req, res, next) {
 	});
 });
 
+
+app.get('/tag/:id', function(req, res, next) {
+	res.render('tag');
+});
+
 app.use(function(err, req, res, next) {
 	var meta = '[' + new Date() + '] ' + req.url + '\r\n';
 	errorLogfile.write(meta + err.stack + '\r\n');

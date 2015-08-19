@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>添加标签</title>
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/iconfont.css">
+    <link rel="stylesheet" href="../css/platfont.css">
+    <link rel="stylesheet" href="../css/footer.css">
+    <link rel="icon" href="../images/icon.png" type="image/x-icon"/>
+    <style>
+    .container {
+        width: 960px;
+        margin: 50px auto 0;
+        height: 500px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+    </style>
+</head>
+<body>
+    <%- include header.html %>
+    <div class="container">
+        <div class="s-left">
+            <i class="icon-font i"></i>
+        </div>
+        <div class="s-right">
+            <ul class="tag-list">
+                <li class="tag"></li>
+            </ul>
+        </div>
+    </div>
+    <%- include footer.html %>
+    <script src="../lib/jquery-2.1.4.min.js"></script>
+    <script src="../js/index.js"></script>
+</body>
+</html>
