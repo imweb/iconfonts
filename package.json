@@ -22,11 +22,12 @@
     "ejs": "~2.3.2",
     "express": "~4.13.0",
     "font-carrier": "0.0.4",
+    "lowdb": "^0.10.1",
     "mongoose": "^4.1.1",
     "multer": "^0.1.8",
     "q": "^1.4.1",
     "unzip": "^0.1.11",
-    // "mongoose-auto-increment": "^4.0.0",
+    "mongoose-auto-increment": "^4.0.0",
     "eventemitter2": "^0.4.14"
   },
   "devDependencies": {

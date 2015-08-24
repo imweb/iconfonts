@@ -41,6 +41,12 @@
 </head>
 <body>
 	<%- include header.html %>
+<!-- 	<select class="form-control"> 
+	<option value="-1">-- 请选择项目 --</option>  
+	<% for(var i in cats) { %>
+		<option value="<%= i %>"><%= cats[i] %></option>
+	<% } %>
+</select> -->
 	<div id="upload" class="upload-block">
 		<p>将svg文件拖拽至框中上传，<span class="highlight">SVG名以H-(h-), M-(m-)开头被认为是移动端icon，其他默认为pc端icon</span>。</p>
 		<p>可以将 svg 文件打包成 zip 压缩包批量上传。<span class="highlight">(目前只支持 zip 压缩包)</span></p>
@@ -73,7 +79,7 @@
 	   for (var i = 0; i < files.length; i++){
 	        var fd = new FormData();
 	        fd.append('file', files[i]);
-	        // fd.append('platform', $('.form-control').val());
+	        fd.append('platform', $('.form-control').val());
 	 
 	        //var status = new createStatusbar(obj); //Using this we can set progress.
 	        //status.setFileNameSize(files[i].name,files[i].size);

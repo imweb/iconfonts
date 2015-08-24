@@ -1,12 +1,12 @@
 /*
- * @author moxhe
+* @author moxhe
+* TODO:
+* 1. 加入 mongoose-auto-increment，让iconId自增长，现在是通过程序来控制的
+* 2. 
  */
-var EventEmitter = require('eventemitter2').EventEmitter2,
-    emitter = new EventEmitter();
 var mongoose = require('mongoose'),
+    db = require('../db/db.js'),
     autoIncrement = require('mongoose-auto-increment');
-
-var db = require('../utils/db.js');
 
 var IconSchema = mongoose.Schema({
     name: String, // 文件名，不包含后缀
@@ -24,48 +24,6 @@ IconSchema.plugin(autoIncrement.plugin, {
     incrementBy: 1
 });
 
-function generateType(name) {
-    return /^[mhHM]-(.*)/.test(name) ? 'h5' : 'pc';
-}        
-
-// insert icon by name and path
-IconSchema.statics.insertByOrder = function (icons) {
-    var toString = Object.prototype.toString;
-    var current = 0;
-    if(toString.apply(icons) === '[object Array]') {
-        var eventName = 'insert_success';
-        emitter.on(eventName, function() {
-            if (++current < icons.length) {
-                insertOne(icons[current]);
-            } else {
-                emitter.off(eventName, arguments.callee);
-            }
-        });
-        if (icons.length) this.insertOne(icons[current]);
-    } else if(toString.apply(icons) === '[object Object]') {
-        this.insertOne(icons);
-    } else {
-        ;
-    }
-}
-
-IconSchema.statics.insertOne = function (obj) {
-    this.find({
-        name: obj.name
-    }).exec(function (err, icons) {
-        if (!icons.length) {
-            var icon = new Icon({
-                name: obj.name,
-                business: obj.business || generateType(obj.name),
-                path: obj.path,
-                className: 'i-' + obj.name
-            });
-            icon.save(function (err, icon) {
-                emitter.emit('insert_success');
-            })
-        }
-    });
-}
 
 var Icon = mongoose.model('Icon', IconSchema);
 
