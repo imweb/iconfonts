@@ -9,7 +9,7 @@ var app = express();
 
 var bodyParser = require('body-parser');
 var jsonParser = bodyParser.json();
-// var urlencodedParser = bodyParser.urlencoded({ extended: false });
+var urlencodedParser = bodyParser.urlencoded({ extended: false });
 
 var errorLogfile = fs.createWriteStream('error.log', {flags: 'a'});
 
@@ -23,6 +23,8 @@ app.use(express.static(path.join(__dirname, '/download')));
 app.use(multer({ dest: './uploads/'}));
 
 app.use(jsonParser);
+// 缺少这个，会导致 req.body = {}
+app.use(urlencodedParser);
 app.use(require('./routes'));
 
 
@@ -33,13 +35,3 @@ app.use(function(err, req, res, next) {
 });
 
 app.listen(conf.port);
-
-app.post('/add', jsonParser, function(req, res, next) {
-
-    console.log(req.body);
-    console.log(req.params);
-
-    res.status(200).send({
-        retcode: 0
-    });
-});

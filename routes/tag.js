@@ -44,11 +44,8 @@ router.get('/', function (req, res, next) {
 * referer 检查，
 * 鉴权
  */
-/*router.post('/add', function(req, res, next) {
+router.post('/add', function(req, res, next) {
 	var params = req.body;
-	console.log(req);
-	console.log(req.body);
-	console.log(req.params);
 	var tagInfo = {
 		tag: params.tag,
 		iconName: params.iconName,
@@ -62,7 +59,7 @@ router.get('/', function (req, res, next) {
 		});
 	});
 });
-*/
+
 
 router.post('/del',jsonParser, function(req, res, next) {
 	var id = req.body.id;

@@ -11,7 +11,7 @@
                 iconName = $icon.data('name'),
                 iconId = $icon.data('id');
             $.ajax({
-                url: '/add',
+                url: '/tag/add',
                 type: 'post', 
                 dataType: 'json',
                 data: {
@@ -21,17 +21,17 @@
                 },
                 success: function(data) {
                     console.log(data);
-                    // if(data.retcode === 0) {
-                    //     data = data.result;
-                    //     $tagList.append('\
-                    //         <li class="tag" data-id="' + data.tagId + '">' + data.tag + '\
-                    //             <a href="javascript:;" class="js-del del-btn">\
-                    //                 <i class="icon-font i-close"></i>\
-                    //                 </a>\
-                    //     </li>');
+                    if(data.retcode === 0) {
+                        data = data.result;
+                        $tagList.append('\
+                            <li class="tag" data-id="' + data.tagId + '">' + data.tag + '\
+                                <a href="javascript:;" class="js-del del-btn">\
+                                    <i class="icon-font i-close"></i>\
+                                    </a>\
+                        </li>');
 
-                    //     $input.val('');
-                    // }
+                        $input.val('');
+                    }
                 },
                 error: function(data) {
                     console.log(data);
