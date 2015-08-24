@@ -66,11 +66,15 @@ function generateHtml(iconNames, htmlPath){
 // svg 生成字体文件
 function genarateFonts(icons, csspath){
 	var svgsObj = {},
+		realPath,
 		iconContent;
 	icons.forEach(function (icon) {
 		iconContent = generateIconContent(icon.iconId);
-		// svgsObj[iconContent] = fs.readFileSync(path.join(svgPath, path.dirname(icon.path || ''), icon.className.replace('i-', '') + '.svg')).toString();
-		svgsObj[iconContent] = fs.readFileSync(path.join(svgPath, icon.path)).toString();
+		realPath = path.join(svgPath, icon.path);
+		if(fs.existsSync(realPath)) {
+			svgsObj[iconContent] = fs.readFileSync(realPath).toString();
+		}
+		
 	});
 	font.setSvg(svgsObj);
 	// 导出字体
@@ -82,6 +86,9 @@ function genarateFonts(icons, csspath){
 // 文件转化成base64
 function file2Base64(fp){
 	//fp = 'download/iconfont.ttf';
+	if(!fs.existsSync(fp)) {
+		return '';
+	}
 	var base64 = new Buffer(fs.readFileSync(fp)).toString('base64');
 	return base64;
 }
