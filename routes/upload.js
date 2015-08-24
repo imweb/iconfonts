@@ -1,7 +1,8 @@
 /*
  * @author helondeng, moxhe
  */
-var http = require('http');
+var http = require('http'),
+	fs = require('fs');
 var authOptions = {
 	// host: 'imweb.io',
 	// path: '/webauth',
@@ -41,6 +42,7 @@ router.post('/', jsonParser, authCheck, function (req, res, next) {
 
 	upload(file, function(err){
 		if (err) return next(err);
+		fs.unlink(conf.downloadPath + 'svgs.zip');
 		res.redirect('index');
 	});
 });

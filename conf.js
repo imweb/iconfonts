@@ -8,6 +8,7 @@ module.exports = {
 	port: 4001,
 	// svg path
 	svgPath: './store/ke.qq.com-svg',
+	downloadPath: 'download/',
 	// mongodb info
 	dbInfo: {
 		IP: '127.0.0.1',

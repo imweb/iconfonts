@@ -11,7 +11,7 @@ var conf = require('../conf.js'),
     svgPath = conf.svgPath;
 
 function packUpSvgs (downloadCb) {
-    var folderName = 'download/svgs'
+    var folderName = conf.downloadPath + 'svgs';
     var zipPath = folderName + '.zip';
     if (!fs.existsSync('download')) fs.mkdirSync('download');
     if (fs.existsSync(zipPath)) {
@@ -49,7 +49,7 @@ function packUpSvgs (downloadCb) {
 // 根据icons生成对应的字体文件和样式
 function packUpIconfonts (icons, downloadCb) {
     if(!fs.existsSync('download')) fs.mkdirSync('download');
-    var folderName = 'download/iconfont-' + Date.now(),
+    var folderName = conf.downloadPath + 'iconfont-' + Date.now(),
         pngsFolder = path.join(folderName, 'pngs'), 
         svgsObj = {},
         svgFilePath,

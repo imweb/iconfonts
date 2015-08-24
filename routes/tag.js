@@ -68,15 +68,9 @@ router.post('/del',jsonParser, function(req, res, next) {
 		if(err) {
 			return next(err);
 		}
-<<<<<<< HEAD
-		res.render('tag', {
-            user: req.user,
-			icon: icons
-=======
 		res.status(200).send({
 			retcode: 0,
 			result: tag
->>>>>>> 5d69ecd0d2a7afcc3b24d8a2e5989a2124504099
 		});
 	});
 });
