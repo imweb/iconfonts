@@ -18,7 +18,7 @@ router.get('/:ids', function (req, res, next) {
 	};
 	if (ids[0] === '$svgs') downloadSvgs(handler);
 	else downloadIconfonts(req.params.ids.split('-'), handler);
-})
+});
 
 function downloadSvgs (cb) {
 	// download by project name in future

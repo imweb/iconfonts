@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>添加标签</title>
-    <link rel="stylesheet" href="../css/reset.css">
-    <link rel="stylesheet" href="../css/header.css">
-    <link rel="stylesheet" href="../css/iconfont.css">
-    <link rel="stylesheet" href="../css/platfont.css">
-    <link rel="stylesheet" href="../css/footer.css">
-    <link rel="icon" href="../images/icon.png" type="image/x-icon"/>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/iconfont.css">
+    <link rel="stylesheet" href="css/platfont.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="icon" href="images/icon.png" type="image/x-icon"/>
     <style>
     .container {
         width: 960px;
@@ -28,18 +28,23 @@
         height: 400px;
         border-left: 1px dotted #ccc;
         padding-left: 50px;
+        max-width: 600px
     }
     .tag-list li {
         display: inline-block;
-        padding: 0 20px;
+        width: 120px;
         height: 40px;
         line-height: 40px;
         text-align: center;
         color: #fff;
         background: #38b7ea;
-        margin-top: 5px;
-        margin-right: 10px;
+        margin-top: 20px;
+        margin-right: 20px;
         border-radius: 5px;
+        position: relative;
+    }
+    .tag-list li:hover .del-btn{
+        display: inline-block;
     }
     .sr-add {
         margin-top: 20px;
@@ -66,35 +71,65 @@ border-radius: 5px; */
         color: #fff;
         border-radius: 5px;
     }
+    .sl-name {
+        margin-top: 50px;
+        display: block;
+        font-size: 20px;
+        margin-bottom: 20px;
+    }
     .icon-font {
         display: block;
-        margin-top: 150px;
         font-size: 200px;
+    }
+    .del-btn {
+        display: none;
+        height: 14px;
+        width: 14px;
+        position: absolute;
+        right: 0;
+        top: 13px;
+    }
+    .del-btn i{
+        font-size: 14px;
+        color: #fff;
+        display: inline;
+        margin: 0;
+        position: absolute;
+        top: 0;
+        left: 0;
     }
     </style>
 </head>
 <body>
     <%- include header.html %>
     <div class="container">
-        <div class="s-left">
+        <div class="s-left js-icon" data-id="<%=icon.iconId%>" data-name="<%=icon.name%>">
+            <span class="sl-name"><%=icon.className%></span>
             <i class="icon-font <%=icon.className%>"></i>
         </div>
         <div class="s-right">
-            <ul class="tag-list">
-                <li class="tag">tag1</li>
-                <li class="tag">tag1</li>
-                <li class="tag">tag1</li>
-                <li class="tag">tag1</li>
+            <ul id="js-taglist" class="tag-list">
+            <% 
+            var tag;
+            for(var i=0;i<(icon.tags || []).length;i++){ 
+                tag = icon.tags[i];
+            %>
+                <li class="tag" data-id="<%=tag.tagId %>">
+                    <%=tag.tag %>
+                    <a href="javascript:;" class="js-del del-btn">
+                        <i class="icon-font i-close"></i>
+                    </a>
+                </li>
+            <% } %>
             </ul>
             <div class="sr-add">
-                <!-- <label for="new-tag">请输入要添加的标签</label> -->
                 <input id="new-tag" type="text" name="tag" placeHolder="请输入要添加的标签"/>
-                <a href="javascript:;" class="btn add-btn">添加</a>
+                <a id="js-addtag" href="javascript:;" class="btn add-btn">添加</a>
             </div>
         </div>
     </div>
     <%- include footer.html %>
-    <script src="../lib/jquery-2.1.4.min.js"></script>
-    <script src="../js/index.js"></script>
+    <script src="lib/jquery-2.1.4.min.js"></script>
+    <script src="js/tag.js"></script>
 </body>
 </html>

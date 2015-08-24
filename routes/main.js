@@ -23,6 +23,7 @@ router.get(['/', '/index'], function (req, res, next) {
     getAllIcons(function(err, icons){
         if (err) return next(err);
         if(icons.length > 0) {
+            // svg 文件不存在情况兼容
             svgParser.genarateFonts(icons);
             svgParser.generateCss(icons);
         }
@@ -31,6 +32,6 @@ router.get(['/', '/index'], function (req, res, next) {
             all: icons
         });
     });
-})
+});
 
-module.exports = router
+module.exports = router;

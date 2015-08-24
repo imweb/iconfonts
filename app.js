@@ -8,9 +8,9 @@ var express = require('express'),
 
 var app = express();
 
-// var bodyParser = require('body-parser');
-// var jsonParser = bodyParser.json();
-// var urlencodedParser = bodyParser.urlencoded({ extended: false });
+var bodyParser = require('body-parser');
+var jsonParser = bodyParser.json();
+var urlencodedParser = bodyParser.urlencoded({ extended: false });
 
 var errorLogfile = fs.createWriteStream('error.log', {flags: 'a'});
 
@@ -31,6 +31,9 @@ app.use(function (req, res, next) {
     next();
 });
 
+app.use(jsonParser);
+// 缺少这个，会导致 req.body = {}
+app.use(urlencodedParser);
 app.use(require('./routes'));
 
 // for test

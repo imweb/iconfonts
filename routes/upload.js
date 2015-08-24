@@ -42,7 +42,7 @@ router.post('/', jsonParser, authCheck, function (req, res, next) {
 	upload(file, function(err){
 		if (err) return next(err);
 		res.redirect('index');
-	})
+	});
 });
 
 function authCheck(req, res, next) {
