@@ -21,4 +21,4 @@ router.get('/intro', function(req, res){
     res.render('intro');
 });
 
-module.exports = router
+module.exports = router;

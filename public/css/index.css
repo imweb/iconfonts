@@ -53,6 +53,11 @@
 	display: block;
 }
 
+.icon a {
+    color: #333;
+    display: block;
+}
+
 .icon-checked{
 	background: rgb(245, 245, 245);
 	position: relative;

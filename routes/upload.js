@@ -27,7 +27,7 @@ router.post('/', jsonParser, function (req, res, next) {
 	upload(file, function(err){
 		if (err) return next(err);
 		res.redirect('index');
-	})
+	});
 });
 
 

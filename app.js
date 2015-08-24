@@ -7,8 +7,8 @@ var express = require('express'),
 
 var app = express();
 
-// var bodyParser = require('body-parser');
-// var jsonParser = bodyParser.json();
+var bodyParser = require('body-parser');
+var jsonParser = bodyParser.json();
 // var urlencodedParser = bodyParser.urlencoded({ extended: false });
 
 var errorLogfile = fs.createWriteStream('error.log', {flags: 'a'});
@@ -22,7 +22,9 @@ app.use(express.static(path.join(__dirname, '/public')));
 app.use(express.static(path.join(__dirname, '/download')));
 app.use(multer({ dest: './uploads/'}));
 
+app.use(jsonParser);
 app.use(require('./routes'));
+
 
 app.use(function(err, req, res, next) {
 	var meta = '[' + new Date() + '] ' + req.url + '\r\n';
@@ -31,3 +33,13 @@ app.use(function(err, req, res, next) {
 });
 
 app.listen(conf.port);
+
+app.post('/add', jsonParser, function(req, res, next) {
+
+    console.log(req.body);
+    console.log(req.params);
+
+    res.status(200).send({
+        retcode: 0
+    });
+});
