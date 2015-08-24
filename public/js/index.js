@@ -20,6 +20,7 @@
 
 	function init(){
 		bindEvents();
+		$.get('/imwebauth');
 	}
 	root.init = init;
 

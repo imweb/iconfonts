@@ -26,7 +26,10 @@ router.get(['/', '/index'], function (req, res, next) {
             svgParser.genarateFonts(icons);
             svgParser.generateCss(icons);
         }
-        res.render('index', {all: icons});
+        res.render('index', {
+            user: req.user,
+            all: icons
+        });
     });
 })
 

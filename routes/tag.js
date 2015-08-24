@@ -15,7 +15,10 @@ router.get('/:id', function (req, res, next) {
 		if(toString.apply(icons) === '[object Array]') {
 			icons = icons[0];
 		}
-		res.render('tag', {icon: icons});
+		res.render('tag', {
+            user: req.user,
+			icon: icons
+		});
 	});
 });
 

@@ -21,6 +21,9 @@
                     </script>
                 </form>
             </li>
+            <% if (user) { %>
+            <li class="menu-item user-bar"><%= user.uin %></li>
+            <% } %>
 		</ul>
 	</div>
 </div>
