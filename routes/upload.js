@@ -20,12 +20,7 @@ router.get('/', function (req, res, next) {
 router.post('/', jsonParser, function (req, res, next) {
 	var file = req.files.file,
 		extname = path.extname(file.path);
-
-	console.log(file);
-	console.log(extname);
-	
 	var allowExts = ['.svg', '.zip'];
-	console.log(allowExts.indexOf(extname));
 	if(allowExts.indexOf(extname) == -1) {
 		console.log(path.join('./uploads', file.name));
 		fs.unlinkSync(path.join('./uploads', file.name));

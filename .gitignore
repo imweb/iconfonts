@@ -4,7 +4,6 @@ uploadSvg
 node_modules
 docs/ke.qq.com-svg.7z
 docs/webfont.zip
-store/ke.qq.com-svg
 demo
 start-db.bat
 error.log
