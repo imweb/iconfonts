@@ -13,6 +13,7 @@ var IconSchema = mongoose.Schema({
     className: String,
     //content: String, // content 根据 iconId生成，不需要存储
     business: String, // 业务相关，方便后续分类
+    author: String,
     path: String // 文件路径
 });
 
@@ -29,25 +30,34 @@ function generateType(name) {
 }        
 
 // insert icon by name and path
-IconSchema.statics.insertByOrder = function (icons) {
+IconSchema.statics.insertByOrder = function (icons, finishCb) {
+    var self = this;
     var toString = Object.prototype.toString;
     var current = 0;
+    var eventName = 'insert_success',
+        errMaps = {};
     if(toString.apply(icons) === '[object Array]') {
-        var eventName = 'insert_success';
-        emitter.on(eventName, function() {
+        emitter.on(eventName, function(err) {
+            errMaps[icons[current].name] = err;
             if (++current < icons.length) {
-                insertOne(icons[current]);
+                self.insertOne(icons[current]);
             } else {
                 emitter.off(eventName, arguments.callee);
+                // finish upload all svgs
+                typeof finishCb === 'function' && finishCb(errMaps);
             }
         });
-        if (icons.length) this.insertOne(icons[current]);
+        if (icons.length) self.insertOne(icons[current]);
     } else if(toString.apply(icons) === '[object Object]') {
-        this.insertOne(icons);
+        self.insertOne(icons);
+        emitter.on(eventName, function(err) {
+            errMaps[icons[current].name] = err;
+            typeof finishCb === 'function' && finishCb(errMaps);
+        });
     } else {
         ;
     }
-}
+};
 
 IconSchema.statics.insertOne = function (obj) {
     this.find({
@@ -61,11 +71,13 @@ IconSchema.statics.insertOne = function (obj) {
                 className: 'i-' + obj.name
             });
             icon.save(function (err, icon) {
-                emitter.emit('insert_success');
-            })
+                emitter.emit('insert_success', err);
+            });
+        } else {
+            emitter.emit('insert_success', '系统存在同名icon');
         }
     });
-}
+};
 
 var Icon = mongoose.model('Icon', IconSchema);
 

@@ -37,6 +37,24 @@
 	.upload-block .highlight{
 		color: red;
 	}
+	.u-info {
+		width: 960px;
+		margin: 20px auto;
+		display: none;
+		min-height: 500px;
+	}
+	.u-title {
+		height: 50px;
+		line-height: 50px;
+		font-size: 20px;
+	}
+	.info li {
+		height: 30px;
+		line-height: 30px;
+	}
+	.info .error {
+		color: red;
+	}
 	</style>
 </head>
 <body>
@@ -44,6 +62,12 @@
 	<div id="upload" class="upload-block">
 		<p>将svg文件拖拽至框中上传，<span class="highlight">SVG名以H-(h-), M-(m-)开头被认为是移动端icon，其他默认为pc端icon</span>。</p>
 		<p>可以将 svg 文件打包成 zip 压缩包批量上传。<span class="highlight">(目前只支持 zip 压缩包)</span></p>
+	</div>
+
+	<div id="js-upInfo" class="u-info">
+		<h1 class="u-title">上传结果：</h1>
+		<ul id="js-info" class="info">
+		</ul>
 	</div>
 	<%- include footer.html %>
 	<script src="lib/jquery-2.1.4.min.js"></script>
@@ -73,10 +97,6 @@
 	   for (var i = 0; i < files.length; i++){
 	        var fd = new FormData();
 	        fd.append('file', files[i]);
-	        // fd.append('platform', $('.form-control').val());
-	 
-	        //var status = new createStatusbar(obj); //Using this we can set progress.
-	        //status.setFileNameSize(files[i].name,files[i].size);
 	        sendFileToServer(fd,status);
 	   }
 	}
@@ -108,16 +128,28 @@
 	        cache: false,
 	        data: formData,
 	        success: function(data){
-	            //status.setProgress(100);
-	            //$("#status1").append("File upload Done<br>");
-	            console.log('succ');
-	            location.href = '/index';           
+	        	if(data.retcode == 0) {
+	        		data = data.result;
+	        		$('#upload').hide();
+	        		var succInfo = [],
+	        			errInfo = []
+	        		for(var i in data) {
+	        			if(data[i]) { 
+	        				errInfo.push('<li class="error">' + i + '  :  ' + data[i] + '</li>') 				
+	        			} else {
+	        				succInfo.push('<li>' + i + '  :  ' + '添加成功 </li>');
+	        			}
+	        			
+	        		}
+	        		$('#js-info').append(errInfo.concat(succInfo).join(''));
+	        		$('#js-upInfo').show();
+	        	}       
 	        },
 	        error: function(){
-	        	console.log('err');
+        		$('#js-info').append('<li class="error">服务错误！请联系管理员！</li>');
+        		$('#js-upInfo').show();
 	        }
 	    });  
-	    //status.setAbort(jqXHR);
 	}
 
 	</script>
