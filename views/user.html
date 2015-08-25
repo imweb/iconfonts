@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>个人中心</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/iconfont.css">
+    <link rel="stylesheet" href="css/platfont.css">
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="icon" href="images/icon.png" type="image/x-icon"/>
+    <style>
+        .empty {
+            width: 960px;
+            margin: 20px auto;
+            line-height: 300px;
+            text-align: center;
+            font-size: 50px;
+        }
+    </style>
+</head>
+<body>
+    <%- include header.html %>
+    <div class="layout">
+        <% if(all.length > 0) { %>
+        <div  class="content-block relative">
+            <h1 class="list-title">图标库 <span>| <%= all.length %></span></h1>
+            <ul class="icon-list clearfix js-pcList">
+            <% for(var i=0;i<all.length;i++){ %>
+                <li class="icon" data-id="<%= all[i].iconId %>">
+                    <i class="icon-font <%= all[i].className %>"></i>
+                    <span class="icon-content"><%= all[i].content %></span>
+                    <span class="icon-name"><%= all[i].className %></span>
+                </li>
+            <% } %>
+            </ul>
+        </div>
+        <% } else { %>
+        <h1 class="empty">暂无上传 icon ！</h1>
+        <% } %>
+    </div>
+    <%- include footer.html %>
+    <script src="lib/jquery-2.1.4.min.js"></script>
+</body>
+</html>
