@@ -2,24 +2,19 @@
  * @author helondeng, moxhe
  */
 var http = require('http'),
-	fs = require('fs');
+	fs = require('fs'),
+	_ = require('underscore');
 var authOptions = {
 	// host: 'imweb.io',
 	// path: '/webauth',
 	host: 'proxy.tencent.com',
-	path: 'http://imweb.io/webauth',
+	path: 'http://imweb.io/webauth?',
     port: '8080',
-	method: 'POST',
-	headers: {
-		'Content-Type': 'application/json'
-		// 'Content-Length': 0
-	}
+	method: 'GET',
+	// headers: {}
 };
 var express = require('express'),
 	router = express.Router();
-
-var bodyParser = require('body-parser'),
-	jsonParser = bodyParser.json();
 
 var conf = require('../conf.js'),
 	store = require('../utils/store.js');
@@ -30,7 +25,7 @@ router.get('/', function (req, res, next) {
     });
 });
 
-router.post('/', jsonParser, authCheck, function (req, res, next) {
+router.post('/', authCheck, function (req, res, next) {
 	var file = req.files.file,
 		extname = path.extname(file.path);
 
@@ -49,8 +44,13 @@ router.post('/', jsonParser, authCheck, function (req, res, next) {
 
 function authCheck(req, res, next) {
 	if (req.cookies.accessToken) {
-		var body = JSON.stringify(req.cookies);
-		authOptions.headers['Content-Length'] = body.length;
+		authOptions.path += _.pairs(req.cookies).map(function (item) {
+			return item.join('=');
+		}).join('&');
+		// authOptions.headers.Cookie = _.pairs(req.cookies).map(function (item) {
+		// 	return item.join('=');
+		// }).join('; ');
+		console.log(authOptions.path)
 		var authReq = http.request(authOptions, function (res) {
 			var data = '';
 			res.setEncoding('utf8');
@@ -66,7 +66,6 @@ function authCheck(req, res, next) {
 			console.error(err.message);
 			res.status(500).end();
 		});
-		authReq.write(body);
 		authReq.end();
 	}
 }
