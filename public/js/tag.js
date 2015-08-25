@@ -20,7 +20,6 @@
                     iconId: iconId
                 },
                 success: function(data) {
-                    console.log(data);
                     if(data.retcode === 0) {
                         data = data.result;
                         $tagList.append('\
@@ -34,7 +33,6 @@
                     }
                 },
                 error: function(data) {
-                    console.log(data);
                 }   
             });
         });
