@@ -6,7 +6,7 @@ var Icon = require('../models/icon.js');
 router.get('/', function(req, res, next) {
     var cookies = req.cookies,
         user = cookies.user;
-    user = 'hale';
+    // user = 'hale';
 
     // 鉴权
     Icon.find({
