@@ -27,7 +27,6 @@ router.post('/', jsonParser, function (req, res, next) {
 		var errMaps = {};
 		// path.basename(file.originalname, extname)
 		errMaps[file.originalname] = '文件后缀名必须是svg或zip';
-		console.log(errMaps);
 		res.status(200).send({
 			retcode: 0,
 			result: errMaps
@@ -36,6 +35,7 @@ router.post('/', jsonParser, function (req, res, next) {
 	}
 
 	upload(file, function(errMaps){
+		fs.unlinkSync('download/svgs.zip');
 		res.status(200).send({
 			retcode: 0,
 			result: errMaps

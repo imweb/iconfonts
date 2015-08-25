@@ -11,8 +11,9 @@ var conf = require('../conf.js'),
     svgPath = conf.svgPath;
 
 function packUpSvgs (downloadCb) {
-    var folderName = 'download/svgs'
-    var zipPath = folderName + '.zip';
+    var zipPath = conf.allSvgZipPath;
+    var folderName = path.basename(zipPath, '.zip');
+    
     if (!fs.existsSync('download')) fs.mkdirSync('download');
     if (fs.existsSync(zipPath)) {
         // 假设其存在的话，则未更改

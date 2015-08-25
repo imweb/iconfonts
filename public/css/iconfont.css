@@ -6,6 +6,4 @@ url("./fonts/iconfont.woff") format("woff"),
 url("./fonts/iconfont.ttf") format("truetype"),
 url("./fonts/iconfont.svg#iconfont") format("svg");}
 .icon-font{font-family:"iconfont";font-size:16px;font-style:normal;font-weight: normal;font-variant: normal;text-transform: none;line-height: 1;position: relative;vertical-align:-2px;-webkit-font-smoothing: antialiased;-moz-osx-font-smoothing: grayscale;}
-.i-arrow-bottom:before{content: "\f0b3";}
-.i-v-bottom:before{content: "\f0d9";}
-.i-v-double-bottom:before{content: "\f0da";}
+.i-close:before{content: "\f0b5";}
