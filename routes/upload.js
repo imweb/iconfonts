@@ -1,7 +1,10 @@
+'use strict';
 /*
  * @author helondeng, moxhe
  */
 var express = require('express'),
+	path = require('path'),
+	fs = require('fs'),
 	router = express.Router();
 
 var bodyParser = require('body-parser'),
@@ -18,15 +21,30 @@ router.post('/', jsonParser, function (req, res, next) {
 	var file = req.files.file,
 		extname = path.extname(file.path);
 
-	var allowExts = ['.svg', '.zip'/*, '.rar', '.7z', '.tar'*/];
+	console.log(file);
+	console.log(extname);
+	
+	var allowExts = ['.svg', '.zip'];
+	console.log(allowExts.indexOf(extname));
 	if(allowExts.indexOf(extname) == -1) {
-		res.redirect('index');
+		console.log(path.join('./uploads', file.name));
+		fs.unlinkSync(path.join('./uploads', file.name));
+		var errMaps = {};
+		// path.basename(file.originalname, extname)
+		errMaps[file.originalname] = '文件后缀名必须是svg或zip';
+		console.log(errMaps);
+		res.status(200).send({
+			retcode: 0,
+			result: errMaps
+		});
 		return;
 	}
 
-	upload(file, function(err){
-		if (err) return next(err);
-		res.redirect('index');
+	upload(file, function(errMaps){
+		res.status(200).send({
+			retcode: 0,
+			result: errMaps
+		});
 	});
 });
 
@@ -41,4 +59,4 @@ function upload(file, cb) {
 	}
 }
 
-module.exports = router
+module.exports = router;

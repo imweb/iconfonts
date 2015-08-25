@@ -20,10 +20,12 @@ function storeSvg (file, cb) {
             Icon.insertByOrder({
                 name: path.basename(fileName, '.svg'),
                 path: '/' + fileName
+            }, function(errMaps) {
+                // 删除临时文件
+                fs.unlinkSync(filePath);
+                typeof cb === 'function' && cb(errMaps);
             });
-            // 删除临时文件
-            fs.unlinkSync(filePath);
-            typeof cb === 'function' && cb();
+
         });
     }); 
 }
@@ -53,10 +55,12 @@ function storeZip (file, cb) {
                 });
             }
         }).on('close', function(){
-            Icon.insertByOrder(files);
-            // delete tmpl file
-            fs.unlinkSync(filePath);
-            typeof cb == 'function' && cb();
+            Icon.insertByOrder(files, function(errMaps) {
+                // delete tmpl file
+                fs.unlinkSync(filePath);
+                typeof cb == 'function' && cb(errMaps);
+            });
+
         }).on('finish', function(){
             // not fire
         });

@@ -8,6 +8,7 @@ var express = require('express'),
 var app = express();
 
 var bodyParser = require('body-parser');
+
 var jsonParser = bodyParser.json();
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
 
@@ -25,6 +26,10 @@ app.use(multer({ dest: './uploads/'}));
 app.use(jsonParser);
 // 缺少这个，会导致 req.body = {}
 app.use(urlencodedParser);
+
+// cookie
+var cookieParser = require('cookie-parser');
+app.use(cookieParser());
 app.use(require('./routes'));
 
 
