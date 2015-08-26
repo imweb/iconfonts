@@ -8,7 +8,8 @@ var Tag = require('../utils/tag.js'),
 	Icon = require('../models/icon.js');
 
 router.get('/', function (req, res, next) {
-	var id = req.query.id;
+	var id = req.query.id,
+		user = req.cookies.user;
 
 	Tag.findAllTagsByIconId(id, function(err, tags) {
 		if(tags.length > 0){
@@ -18,7 +19,8 @@ router.get('/', function (req, res, next) {
 					name: tags[0].iconName,
 					tags: tags,
 					className: 'i-' + tags[0].iconName
-				}
+				},
+				user: user
 			});
 		} else {
 			// no tags, find iconName and className
@@ -33,7 +35,10 @@ router.get('/', function (req, res, next) {
 					icons = icons[0];
 				}
 				icons.iconId = id;
-				res.render('tag', {icon: icons});
+				res.render('tag', {
+					icon: icons,
+					user: user
+				});
 			});
 		}
 

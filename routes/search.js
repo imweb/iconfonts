@@ -10,10 +10,10 @@ var Icon = require('../models/icon.js'),
 router.get('/', function (req, res, next) {
     search(req.query.q, function(err, arr) {
         if (err) return next(err);
-        if(arr.length > 0) {
-            svgParser.genarateFonts(arr);
-            svgParser.generateCss(arr);
-        }
+        // if(arr.length > 0) {
+        //     svgParser.genarateFonts(arr);
+        //     svgParser.generateCss(arr);
+        // }
         res.render('index', {all: arr || []});
     });
 });
