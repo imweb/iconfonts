@@ -8,10 +8,9 @@ var authOptions = {
 	// host: 'imweb.io',
 	// path: '/webauth',
 	host: 'proxy.tencent.com',
-	path: 'http://imweb.io/webauth?',
+	path: 'http://imweb.io/domainauth',
     port: '8080',
-	method: 'GET',
-	// headers: {}
+	method: 'GET'
 };
 var express = require('express'),
 	router = express.Router();
@@ -44,22 +43,18 @@ router.post('/', authCheck, function (req, res, next) {
 
 function authCheck(req, res, next) {
 	if (req.cookies.accessToken) {
-		authOptions.path += _.pairs(req.cookies).map(function (item) {
-			return item.join('=');
-		}).join('&');
-		// authOptions.headers.Cookie = _.pairs(req.cookies).map(function (item) {
-		// 	return item.join('=');
-		// }).join('; ');
-		console.log(authOptions.path)
+		['uin', 'skey', 'accessToken'].forEach(function (key) {
+			authOptions.path += '/' + req.cookies[key];
+		});
 		var authReq = http.request(authOptions, function (res) {
-			var data = '';
+			var str = '';
 			res.setEncoding('utf8');
-			console.log(res.headers)
 			res.on('data', function (chunk) {
-				data += chunk;
+				str += chunk;
 			});
 			res.on('end', function () {
-				console.log(data);
+				var data = JSON.parse(str);
+				if (data.retcode !== 200) res.status(401).end();
 				next();
 			});
 		}).on('error', function (err) {
@@ -68,6 +63,7 @@ function authCheck(req, res, next) {
 		});
 		authReq.end();
 	}
+	res.status(401).end();
 }
 
 function upload(file, cb) {
