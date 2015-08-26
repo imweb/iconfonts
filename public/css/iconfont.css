@@ -6,9 +6,7 @@ url("./fonts/iconfont.woff") format("woff"),
 url("./fonts/iconfont.ttf") format("truetype"),
 url("./fonts/iconfont.svg#iconfont") format("svg");}
 .icon-font{font-family:"iconfont";font-size:16px;font-style:normal;font-weight: normal;font-variant: normal;text-transform: none;line-height: 1;position: relative;vertical-align:-2px;-webkit-font-smoothing: antialiased;-moz-osx-font-smoothing: grayscale;}
-<<<<<<< HEAD
 .i-close:before{content: "\f0b5";}
-=======
 .i-add:before{content: "\f17c";}
 .i-alert:before{content: "\f17d";}
 .i-arrow-bottom:before{content: "\f17e";}
@@ -65,4 +63,3 @@ url("./fonts/iconfont.svg#iconfont") format("svg");}
 .i-warn:before{content: "\f1b1";}
 .i-weixin-border:before{content: "\f1b2";}
 .i-weixin:before{content: "\f1b3";}
->>>>>>> auth
