@@ -49,7 +49,7 @@ function packUpSvgs (downloadCb) {
 // 根据icons生成对应的字体文件和样式
 function packUpIconfonts (icons, downloadCb) {
     if(!fs.existsSync('download')) fs.mkdirSync('download');
-    var folderName = conf.downloadPath + 'iconfont-' + Date.now(),
+    var folderName = path.basename(conf.allSvgZipPath, '.zip');
         pngsFolder = path.join(folderName, 'pngs'), 
         svgsObj = {},
         svgFilePath,

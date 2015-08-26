@@ -6,11 +6,11 @@ var http = require('http'),
 	fs = require('fs'),
 	_ = require('underscore');
 var authOptions = {
-	// host: 'imweb.io',
-	// path: '/webauth',
-	host: 'proxy.tencent.com',
-	path: 'http://imweb.io/domainauth',
-    port: '8080',
+	host: 'imweb.io',
+	path: '/domainauth',
+	// host: 'proxy.tencent.com',
+	// path: 'http://imweb.io/domainauth',
+    // port: '8080',
 	method: 'GET'
 };
 var express = require('express'),
