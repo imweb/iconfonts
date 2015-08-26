@@ -54,6 +54,7 @@ IconSchema.statics.insertByOrder = function (icons, finishCb) {
             var _err = {};
             _err[obj.name] = err;
             typeof finishCb === 'function' && finishCb(_err);
+            emitter.off(eventName, arguments.callee);
         });
     } else {
         ;
@@ -67,7 +68,7 @@ IconSchema.statics.insertOne = function (obj) {
         if (!icons.length) {
             var icon = new Icon({
                 name: obj.name,
-                business: obj.business || generateType(obj.name),
+                // business: obj.business || generateType(obj.name),
                 path: obj.path,
                 className: 'i-' + obj.name
             });

@@ -34,23 +34,23 @@ function checkUserAuth(user, auth, cb) {
 	});
 }
 
-router.get('/', /*auth,*/ function (req, res, next) {
+router.get('/', auth, function (req, res, next) {
 
 	/*
 	* iconfont.imweb.io 鉴权
 	 */
 	
-/*	checkUserAuth(req.cookies.user, conf.auth.upload, function(hasAuth) {
-		if(hasAuth) {*/
-			return res.render('upload',{
+	checkUserAuth(req.cookies.user, conf.auth.upload, function(hasAuth) {
+		if(hasAuth) {
+			res.render('upload',{
 		        user: req.cookies.user
 		    });
-/*		} else {
+		} else {
 			res.render('404', {
 				info: '没有上传权限，请联系管理员'
 			});
 		}
-	});*/
+	});
 
 });
 
@@ -91,8 +91,7 @@ router.post('/', jsonParser, function (req, res, next) {
     	res.status(200).send({
 			retcode: 0,
 			result: errMaps
-		}).end();	
-
+		});	
 	});
 });
 
