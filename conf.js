@@ -5,7 +5,7 @@
 
 module.exports = {
 	// 监听端口
-	port: 80,
+	port: 4001,
 	// svg path
 	svgPath: './store/ke.qq.com-svg',
 	allSvgZipPath: 'download/svgs.zip',
