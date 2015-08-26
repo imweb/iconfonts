@@ -35,10 +35,12 @@ app.use(cookieParser());
 app.use(require('./routes'));
 
 
-/*app.use(function(err, req, res, next) {
-	var meta = '[' + new Date() + '] ' + req.url + '\r\n';
-	errorLogfile.write(meta + err.stack + '\r\n');
-	res.status(500).send({error: 'something blew up!'});
-});*/
+// app.use(function(err, req, res, next) {
+// 	var meta = '[' + new Date() + '] ' + req.url + '\r\n';
+// 	errorLogfile.write(meta + err.stack + '\r\n');
+
+// 	res.status(500).send({error: 'something blew up!'});
+//     // req.end();
+// });
 
 app.listen(conf.port);

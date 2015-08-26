@@ -11,6 +11,7 @@ var bodyParser = require('body-parser'),
 	jsonParser = bodyParser.json();
 
 var conf = require('../conf.js'),
+	Icon = require('../models/icon.js'),
 	auth = require('../midware/auth.js'),
 	svgParser = require('../utils/svg_parser.js'),
 	store = require('../utils/store.js');
@@ -33,24 +34,23 @@ function checkUserAuth(user, auth, cb) {
 	});
 }
 
-router.get('/', auth, function (req, res, next) {
+router.get('/', /*auth,*/ function (req, res, next) {
 
 	/*
 	* iconfont.imweb.io 鉴权
 	 */
 	
-	checkUserAuth(req.cookies.user, conf.auth.upload, function(hasAuth) {
-		if(hasAuth) {
-			res.render('upload',{
+/*	checkUserAuth(req.cookies.user, conf.auth.upload, function(hasAuth) {
+		if(hasAuth) {*/
+			return res.render('upload',{
 		        user: req.cookies.user
 		    });
-		} else {
+/*		} else {
 			res.render('404', {
 				info: '没有上传权限，请联系管理员'
 			});
 		}
-	});
-
+	});*/
 
 });
 
@@ -62,29 +62,37 @@ router.post('/', jsonParser, function (req, res, next) {
 		extname = path.extname(file.path);
 	var allowExts = ['.svg', '.zip'];
 	if(allowExts.indexOf(extname) == -1) {
-		console.log(path.join('./uploads', file.name));
 		fs.unlinkSync(path.join('./uploads', file.name));
-		var errMaps = {};
-		// path.basename(file.originalname, extname)
-		errMaps[file.originalname] = '文件后缀名必须是svg或zip';
+		var errInfo = {};
+		errInfo[file.originalname] = '文件后缀名必须是svg或zip';
 		res.status(200).send({
 			retcode: 0,
-			result: errMaps
+			result: errInfo
 		});
 		return;
 	}
 
 	upload(file, function(errMaps){
 		
-		fs.unlinkSync('download/svgs.zip');
+		if(fs.existsSync('download/svgs.zip')) {
+			fs.unlinkSync('download/svgs.zip');
+		}
+		
 		// 重新生成字体
-        svgParser.genarateFonts(icons);
-        svgParser.generateCss(icons);
-
-		res.status(200).send({
+		Icon.find()
+        .exec(function(err, icons) {
+        	icons.forEach(function(icon) {
+                icon.content = svgParser.generateHtmlIconContent(icon.iconId);
+            }); 
+	        svgParser.genarateFonts(icons);
+	        svgParser.generateCss(icons);        
+	        
+	    });
+    	res.status(200).send({
 			retcode: 0,
 			result: errMaps
-		});
+		}).end();	
+
 	});
 });
 

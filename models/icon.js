@@ -50,9 +50,10 @@ IconSchema.statics.insertByOrder = function (icons, finishCb) {
         if (icons.length) self.insertOne(icons[current]);
     } else if(toString.apply(icons) === '[object Object]') {
         self.insertOne(icons);
-        emitter.on(eventName, function(err) {
-            errMaps[icons[current].name] = err;
-            typeof finishCb === 'function' && finishCb(errMaps);
+        emitter.on(eventName, function(err, obj) {
+            var _err = {};
+            _err[obj.name] = err;
+            typeof finishCb === 'function' && finishCb(_err);
         });
     } else {
         ;
@@ -71,10 +72,10 @@ IconSchema.statics.insertOne = function (obj) {
                 className: 'i-' + obj.name
             });
             icon.save(function (err, icon) {
-                emitter.emit('insert_success', err);
+                emitter.emit('insert_success', err, obj);
             });
         } else {
-            emitter.emit('insert_success', '系统存在同名icon');
+            emitter.emit('insert_success', '系统存在同名icon', obj);
         }
     });
 };

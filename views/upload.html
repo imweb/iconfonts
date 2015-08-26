@@ -28,12 +28,14 @@
 		height: 350px;
 		padding-top: 200px;
 		border: 1px solid #ddd;
+		position: relative;
 	}
 	.upload-block p{
 		color: #666;
 		font-size: 14px;
 		line-height: 30px;
 		text-align: center;
+		
 	}
 	.upload-block .highlight{
 		color: red;
@@ -56,6 +58,29 @@
 	.info .error {
 		color: red;
 	}
+	.mask {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background: #999;
+		z-index: 10;
+		display: none;
+	}
+
+	.mask p {
+		display: block;
+		height: 32px;
+		line-height: 32px;
+		font-size: 20px;
+		position: absolute;
+		width: 100%;
+		top: 50%;
+		text-align: center;
+		margin-top: -16px;
+		color: #fff;
+	}
 	</style>
 </head>
 <body>
@@ -63,6 +88,9 @@
 	<div id="upload" class="upload-block">
 		<p>将svg文件拖拽至框中上传，<span class="highlight">SVG名以H-(h-), M-(m-)开头被认为是移动端icon，其他默认为pc端icon</span>。</p>
 		<p>可以将 svg 文件打包成 zip 压缩包批量上传。<span class="highlight">(目前只支持 zip 压缩包)</span></p>
+		<div class="js-mask mask">
+			<p>上传中...</p>
+		</div>
 	</div>
 
 	<div id="js-upInfo" class="u-info">
@@ -103,6 +131,7 @@
 	}
 
 	function sendFileToServer(formData,status){
+		$('.js-mask').show();
 	    var uploadURL ="/upload"; //Upload URL
 	    var extraData ={}; //Extra Data.
 	    var jqXHR = $.ajax({
@@ -129,6 +158,7 @@
 	        cache: false,
 	        data: formData,
 	        success: function(data){
+	        	console.log(data);
 	        	if(data.retcode == 0) {
 	        		data = data.result;
 	        		$('#upload').hide();

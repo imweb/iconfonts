@@ -22,7 +22,10 @@ function storeSvg (file, cb) {
                 path: '/' + fileName
             }, function(errMaps) {
                 // 删除临时文件
-                fs.unlinkSync(filePath);
+                if(fs.existsSync(filePath)) {
+                    fs.unlinkSync(filePath);
+                }
+                
                 typeof cb === 'function' && cb(errMaps);
             });
 
@@ -57,7 +60,9 @@ function storeZip (file, cb) {
         }).on('close', function(){
             Icon.insertByOrder(files, function(errMaps) {
                 // delete tmpl file
-                fs.unlinkSync(filePath);
+                if(fs.existsSync(filePath)) {
+                    fs.unlinkSync(filePath);
+                }
                 typeof cb == 'function' && cb(errMaps);
             });
 
