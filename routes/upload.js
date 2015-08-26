@@ -2,22 +2,32 @@
 /*
  * @author helondeng, moxhe
  */
+var http = require('http'),
+	fs = require('fs'),
+	_ = require('underscore');
+var authOptions = {
+	// host: 'imweb.io',
+	// path: '/webauth',
+	host: 'proxy.tencent.com',
+	path: 'http://imweb.io/domainauth',
+    port: '8080',
+	method: 'GET'
+};
 var express = require('express'),
 	path = require('path'),
 	fs = require('fs'),
 	router = express.Router();
 
-var bodyParser = require('body-parser'),
-	jsonParser = bodyParser.json();
-
 var conf = require('../conf.js'),
 	store = require('../utils/store.js');
 
 router.get('/', function (req, res, next) {
-    res.render('upload');
+    res.render('upload', {
+        user: req.user
+    });
 });
 
-router.post('/', jsonParser, function (req, res, next) {
+router.post('/', authCheck, function (req, res, next) {
 	var file = req.files.file,
 		extname = path.extname(file.path);
 	var allowExts = ['.svg', '.zip'];
@@ -35,7 +45,7 @@ router.post('/', jsonParser, function (req, res, next) {
 	}
 
 	upload(file, function(errMaps){
-		fs.unlinkSync('download/svgs.zip');
+		fs.unlinkSync(conf.allSvgZipPath);
 		res.status(200).send({
 			retcode: 0,
 			result: errMaps
@@ -43,6 +53,30 @@ router.post('/', jsonParser, function (req, res, next) {
 	});
 });
 
+function authCheck(req, res, next) {
+	if (req.cookies.accessToken) {
+		['uin', 'skey', 'accessToken'].forEach(function (key) {
+			authOptions.path += '/' + req.cookies[key];
+		});
+		var authReq = http.request(authOptions, function (res) {
+			var str = '';
+			res.setEncoding('utf8');
+			res.on('data', function (chunk) {
+				str += chunk;
+			});
+			res.on('end', function () {
+				var data = JSON.parse(str);
+				if (data.retcode !== 200) res.status(401).end();
+				next();
+			});
+		}).on('error', function (err) {
+			console.error(err.message);
+			res.status(500).end();
+		});
+		authReq.end();
+	}
+	res.status(401).end();
+}
 
 function upload(file, cb) {
 	var ext = path.extname(file.path);

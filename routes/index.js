@@ -17,11 +17,15 @@ router.use('/tag', tag);
 router.use('/user', user);
 
 router.get('/rule', function(req, res){
-    res.render('rule');
+    res.render('rule', {
+        user: req.user
+    });
 });
 
 router.get('/intro', function(req, res){
-    res.render('intro');
+    res.render('intro', {
+        user: req.user
+    });
 });
 
 module.exports = router;

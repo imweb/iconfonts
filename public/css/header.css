@@ -24,6 +24,13 @@
 	color: #fff;
 }
 
+.user-bar {
+	float: right;
+	padding: 0 10px;
+	color: #ddd;
+	font-size: 16px;
+}
+
 .search-panel {
 	float: right;
 	padding-right: 0;

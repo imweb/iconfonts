@@ -14,7 +14,10 @@ router.get('/', function (req, res, next) {
             svgParser.genarateFonts(arr);
             svgParser.generateCss(arr);
         }
-        res.render('index', {all: arr || []});
+        res.render('index', {
+            user: req.user,
+            all: arr || []
+        });
     });
 });
 
