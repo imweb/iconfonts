@@ -6,9 +6,15 @@
 			<li class="menu-item"><a href="/rule">规范</a></li>
 			<li class="menu-item"><a href="/upload">上传</a></li>
             <li class="menu-item"><a href="http://imweb.io">IMWEB社区</a></li>
+            <% if(typeof user !== 'undefined') { %>
+            <li class="menu-item user-name">
+                <a href="/user"><%=user%></a>
+            </li>
+            <% } %>
             <li class="menu-item search-panel">
                 <form class="search-form" id="search_form" action="/search">
                     <input type="text" name="q" placeholder="搜索图标">
+                    <a href="javascript:$('#search_form').submit();" class="icon-font i-search search-btn"> </a>
                     <script src="lib/jquery-2.1.4.min.js"></script>
                     <script type="text/javascript">
                     var $searchForm = $('#search_form');

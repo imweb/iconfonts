@@ -6,7 +6,6 @@
 	<link rel="stylesheet" href="css/reset.css">
 	<link rel="stylesheet" href="css/header.css">
 	<link rel="stylesheet" href="css/iconfont.css">
-	<link rel="stylesheet" href="css/platfont.css">
 	<link rel="stylesheet" href="css/index.css">
 	<link rel="stylesheet" href="css/footer.css">
 	<link rel="icon" href="images/icon.png" type="image/x-icon"/>
@@ -19,7 +18,7 @@
 			<a class="rightBtn" id="js-download-btn" href="javascript:;">下载</a>
 			<ul class="icon-list clearfix js-pcList">
 			<% for(var i=0;i<all.length;i++){ %>
-				<li class="icon" data-id="<%= all[i].iconId %>">
+				<li class="icon icon-font" data-id="<%= all[i].iconId %>">
 					<i class="icon-font <%= all[i].className %>"></i>
 					<span class="icon-content"><%= all[i].content %></span>
 					<span class="icon-name"><%= all[i].className %></span>
@@ -28,7 +27,7 @@
 			</ul>
 		</div>
 	</div>
-	<section id="js-back2top" class="back2top">	
+	<section id="js-back2top" class="back2top icon-font i-to-top">	
 	</section>
 	<%- include footer.html %>
 	<script src="lib/jquery-2.1.4.min.js"></script>
