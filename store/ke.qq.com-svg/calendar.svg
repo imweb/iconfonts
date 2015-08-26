@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 17.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1 Tiny//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11-tiny.dtd">
+<svg version="1.1" baseProfile="tiny" id="图层_1"
+	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="480px" height="480px"
+	 viewBox="0 0 480 480" xml:space="preserve">
+<g>
+	<path d="M45,90v300h390V90H45z M405,120v60H75v-60H405z M75,360V210h330v150H75z"/>
+	<rect x="105" y="240" width="60" height="30"/>
+	<rect x="105" y="300" width="60" height="30"/>
+	<rect x="195" y="240" width="90" height="30"/>
+	<rect x="195" y="300" width="90" height="30"/>
+	<rect x="315" y="240" width="60" height="30"/>
+	<rect x="315" y="300" width="60" height="30"/>
+</g>
+</svg>
