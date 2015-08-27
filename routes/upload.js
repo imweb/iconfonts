@@ -13,6 +13,7 @@ var bodyParser = require('body-parser'),
 var conf = require('../conf.js'),
 	Icon = require('../models/icon.js'),
 	auth = require('../midware/auth.js'),
+	Business = require('../models/business.js'),
 	svgParser = require('../utils/svg_parser.js'),
 	store = require('../utils/store.js');
 
@@ -34,23 +35,34 @@ function checkUserAuth(user, auth, cb) {
 	});
 }
 
-router.get('/', auth, function (req, res, next) {
+router.get('/', /*auth, */function (req, res, next) {
+
 
 	/*
 	* iconfont.imweb.io 鉴权
 	 */
 	
-	checkUserAuth(req.cookies.user, conf.auth.upload, function(hasAuth) {
-		if(hasAuth) {
+	// checkUserAuth(req.cookies.user, conf.auth.upload, function(hasAuth) {
+	// 	if(hasAuth) {
+	// 		
+		Business.find({}).exec(function(err, bids) {
+			if(err) {
+				console.error(err);
+				next(err);
+				return;
+			}
 			res.render('upload',{
-		        user: req.cookies.user
+		        user: req.cookies.user,
+		        bids: bids
 		    });
-		} else {
-			res.render('404', {
-				info: '没有上传权限，请联系管理员'
-			});
-		}
-	});
+		});
+
+	// 	} else {
+	// 		res.render('404', {
+	// 			info: '没有上传权限，请联系管理员'
+	// 		});
+	// 	}
+	// });
 
 });
 
@@ -60,6 +72,11 @@ router.get('/', auth, function (req, res, next) {
 router.post('/', jsonParser, function (req, res, next) {
 	var file = req.files.file,
 		extname = path.extname(file.path);
+
+	file.author = req.cookies.user;
+	file.business = req.body.business;
+
+	console.log(req.body);
 	var allowExts = ['.svg', '.zip'];
 	if(allowExts.indexOf(extname) == -1) {
 		fs.unlinkSync(path.join('./uploads', file.name));

@@ -19,7 +19,9 @@ function storeSvg (file, cb) {
             }
             Icon.insertByOrder({
                 name: path.basename(fileName, '.svg'),
-                path: '/' + fileName
+                author: file.author,
+                path: '/' + fileName,
+                business: file.business
             }, function(errMaps) {
                 // 删除临时文件
                 if(fs.existsSync(filePath)) {
@@ -54,7 +56,9 @@ function storeZip (file, cb) {
             if(fileInfo.type == 'File' && path.extname(fileInfo.name) == '.svg'){
                 files.push({
                     name: path.basename(fileInfo.name, '.svg'),
-                    path: fileInfo.path
+                    path: fileInfo.path,
+                    author: file.author,
+                    business: file.business
                 });
             }
         }).on('close', function(){

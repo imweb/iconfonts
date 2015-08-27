@@ -5,9 +5,10 @@ var bodyParser = require('body-parser'),
 	jsonParser = bodyParser.json();
 
 var Tag = require('../utils/tag.js'),
+	auth = require('../midware/auth.js'),
 	Icon = require('../models/icon.js');
 
-router.get('/', function (req, res, next) {
+router.get('/', auth, function (req, res, next) {
 	var id = req.query.id,
 		user = req.cookies.user;
 

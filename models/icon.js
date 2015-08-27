@@ -68,8 +68,9 @@ IconSchema.statics.insertOne = function (obj) {
         if (!icons.length) {
             var icon = new Icon({
                 name: obj.name,
-                // business: obj.business || generateType(obj.name),
+                business: obj.business,
                 path: obj.path,
+                author: obj.author,
                 className: 'i-' + obj.name
             });
             icon.save(function (err, icon) {
