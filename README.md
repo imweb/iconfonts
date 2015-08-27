@@ -12,7 +12,7 @@ icon 相关文件存储到docs中，db/insert.js 会负责解析docs中的style.
 ### 显示icon
 
 ```
-node index.js
+node app.js
 ```
 浏览器输入
 
@@ -29,8 +29,6 @@ localhost:4001
 ### 上传 SVG
 点击导航上的上传，将 SVG 拖拽到框内，系统会插入新的 SVG icon，同时生成字体文件，首页可以看到最新的 icon，这里平台和移动端的图标是以 SVG 名字来的，以mMhH-开发的，默认时移动端的 icon。
 
-### 后续计划
-希望将整个流程打通，设计同学给到 svg 后（这里要制定一套 icon 的命名规则），系统可以将上面流程的后面部分全部完成。
 
 
 ### 更新
