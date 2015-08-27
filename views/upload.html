@@ -121,7 +121,19 @@
 	<%- include footer.html %>
 	<script src="lib/jquery-2.1.4.min.js"></script>
 	<script>
-	var obj = $("#upload");
+	var obj = $("#upload"),
+		$mask = $('.js-mask'),
+		$select = $('#js-business'),
+		select = $select[0];
+
+	$select.on('change', function() {
+		if(select.value == -1) {
+	    	$mask.find('p').text('请选择项目！');
+	    	$mask.show();
+		} else {
+			$mask.hide();
+		}
+	});
 	obj.on('dragenter', function (e){
 	    e.stopPropagation();
 	    e.preventDefault();
@@ -133,26 +145,35 @@
 	});
 	obj.on('drop', function (e) {
 	 
-	     $(this).css('border', '2px dotted #0B85A1');
+	    $(this).css('border', '2px dotted #0B85A1');
 	    e.preventDefault();
 	    var files = e.originalEvent.dataTransfer.files;
 	 
 	     //We need to send dropped files to Server
 	     //console.log(files)
-	    handleFileUpload(files,obj);
+	     //
+	    if(select.value == -1) {
+	    	$mask.find('p').text('请选择项目！');
+	    	$mask.show();
+	    } else {
+	    	$mask.find('p').text('上传中...');
+	    	$mask.show();
+	    	handleFileUpload(files,obj);
+	    }
+	    
 	});
 
 	function handleFileUpload(files,obj){
-	   for (var i = 0; i < files.length; i++){
+	    for (var i = 0; i < files.length; i++){
 	        var fd = new FormData();
 	        fd.append('file', files[i]);
-	        fd.append('business', document.getElementById('js-business').value);
+	        fd.append('business', select.value);
 	        sendFileToServer(fd,status);
-	   }
+	    }
 	}
 
 	function sendFileToServer(formData,status){
-		$('.js-mask').show();
+		
 	    var uploadURL ="/upload"; //Upload URL
 	    var extraData ={}; //Extra Data.
 	    var jqXHR = $.ajax({
@@ -179,7 +200,6 @@
 	        cache: false,
 	        data: formData,
 	        success: function(data){
-	        	console.log(data);
 	        	if(data.retcode == 0) {
 	        		data = data.result;
 	        		$('#upload').hide();
