@@ -6,12 +6,12 @@
 
 		$('body').on('click', '.js-pcList li', function(){
 			var $this = $(this);
-			$this.toggleClass('icon-checked');
-			$('#js-download-btn')[$('.icon-checked').length > 0 ? 'show' : 'hide']();
+			$this.toggleClass('i-right');
+			$('#js-download-btn')[$('.i-right').length > 0 ? 'show' : 'hide']();
 		});
 		$('#js-download-btn').on('click', function(){
 			var ids = [];
-			$('.icon-checked').each(function(index, item){
+			$('.js-pcList li.i-right').each(function(index, item){
 				ids.push($(item).data('id'));
 			});
 			location.href = '/download/' + ids.join('-');

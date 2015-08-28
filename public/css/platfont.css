@@ -1,8 +1,0 @@
-@font-face { 
-font-family: "platfont";src: url("./fonts/platfont.eot");
-src: url("./fonts/platfont.eot?#iefix") format("embedded-opentype"),
-url("./fonts/platfont.woff") format("woff"),
-url("./fonts/platfont.ttf") format("truetype"),
-url("./fonts/platfont.svg#platfont") format("svg");}
-/* .i-right:after{content: "\ffff";}
-.i-to-top:after{content: "\fffe";} */

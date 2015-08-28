@@ -19,37 +19,103 @@ var express = require('express'),
 	router = express.Router();
 
 var conf = require('../conf.js'),
+	Icon = require('../models/icon.js'),
+	auth = require('../midware/auth.js'),
+	Business = require('../models/business.js'),
+	svgParser = require('../utils/svg_parser.js'),
 	store = require('../utils/store.js');
 
-router.get('/', function (req, res, next) {
-    res.render('upload', {
-        user: req.user
-    });
+/*
+* 二进制权限验证方式
+ */
+function checkUserAuth(user, auth, cb) {
+	var User = require('../models/user.js');
+	User.find({
+		user: user
+	}).exec(function(err, users) {
+		var hasAuth;
+		if(users.length == 0) {
+			hasAuth = false;
+		} else {
+			hasAuth = (users[0].auth & auth) != 0;
+		}	
+		typeof cb === 'function' && cb(hasAuth);
+	});
+}
+
+router.get('/', /*auth, */function (req, res, next) {
+
+
+	/*
+	* iconfont.imweb.io 鉴权
+	 */
+	
+	// checkUserAuth(req.cookies.user, conf.auth.upload, function(hasAuth) {
+	// 	if(hasAuth) {
+	// 		
+		Business.find({}).exec(function(err, bids) {
+			if(err) {
+				console.error(err);
+				next(err);
+				return;
+			}
+			res.render('upload',{
+		        user: req.cookies.user,
+		        bids: bids
+		    });
+		});
+
+	// 	} else {
+	// 		res.render('404', {
+	// 			info: '没有上传权限，请联系管理员'
+	// 		});
+	// 	}
+	// });
+
 });
 
-router.post('/', authCheck, function (req, res, next) {
+/*
+* upload 成功后，重新生成字体和css
+ */
+router.post('/', jsonParser, function (req, res, next) {
 	var file = req.files.file,
 		extname = path.extname(file.path);
+
+	file.author = req.cookies.user;
+	file.business = req.body.business;
+
+	console.log(req.body);
 	var allowExts = ['.svg', '.zip'];
 	if(allowExts.indexOf(extname) == -1) {
-		console.log(path.join('./uploads', file.name));
 		fs.unlinkSync(path.join('./uploads', file.name));
-		var errMaps = {};
-		// path.basename(file.originalname, extname)
-		errMaps[file.originalname] = '文件后缀名必须是svg或zip';
+		var errInfo = {};
+		errInfo[file.originalname] = '文件后缀名必须是svg或zip';
 		res.status(200).send({
 			retcode: 0,
-			result: errMaps
+			result: errInfo
 		});
 		return;
 	}
 
 	upload(file, function(errMaps){
-		fs.unlinkSync(conf.allSvgZipPath);
-		res.status(200).send({
+		if(fs.existsSync('download/svgs.zip')) {
+			fs.unlinkSync('download/svgs.zip');
+		}
+		
+		// 重新生成字体
+		Icon.find()
+        .exec(function(err, icons) {
+        	icons.forEach(function(icon) {
+                icon.content = svgParser.generateHtmlIconContent(icon.iconId);
+            }); 
+	        svgParser.genarateFonts(icons);
+	        svgParser.generateCss(icons);        
+	        
+	    });
+    	res.status(200).send({
 			retcode: 0,
 			result: errMaps
-		});
+		});	
 	});
 });
 

@@ -6,7 +6,6 @@
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/iconfont.css">
-    <link rel="stylesheet" href="css/platfont.css">
     <link rel="stylesheet" href="css/index.css">
     <link rel="stylesheet" href="css/footer.css">
     <link rel="icon" href="images/icon.png" type="image/x-icon"/>
@@ -25,7 +24,7 @@
     <div class="layout">
         <% if(all.length > 0) { %>
         <div  class="content-block relative">
-            <h1 class="list-title">图标库 <span>| <%= all.length %></span></h1>
+            <h1 class="list-title">您上传的图标库 <span>| <%= all.length %>，点击图标可进入页面给图标添加标签</span></h1>
             <ul class="icon-list clearfix js-pcList">
             <% for(var i=0;i<all.length;i++){ %>
                 <li class="icon" data-id="<%= all[i].iconId %>">

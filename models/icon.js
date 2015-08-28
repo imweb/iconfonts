@@ -50,9 +50,11 @@ IconSchema.statics.insertByOrder = function (icons, finishCb) {
         if (icons.length) self.insertOne(icons[current]);
     } else if(toString.apply(icons) === '[object Object]') {
         self.insertOne(icons);
-        emitter.on(eventName, function(err) {
-            errMaps[icons[current].name] = err;
-            typeof finishCb === 'function' && finishCb(errMaps);
+        emitter.on(eventName, function(err, obj) {
+            var _err = {};
+            _err[obj.name] = err;
+            typeof finishCb === 'function' && finishCb(_err);
+            emitter.off(eventName, arguments.callee);
         });
     } else {
         ;
@@ -66,15 +68,16 @@ IconSchema.statics.insertOne = function (obj) {
         if (!icons.length) {
             var icon = new Icon({
                 name: obj.name,
-                business: obj.business || generateType(obj.name),
+                business: obj.business,
                 path: obj.path,
+                author: obj.author,
                 className: 'i-' + obj.name
             });
             icon.save(function (err, icon) {
-                emitter.emit('insert_success', err);
+                emitter.emit('insert_success', err, obj);
             });
         } else {
-            emitter.emit('insert_success', '系统存在同名icon');
+            emitter.emit('insert_success', '系统存在同名icon', obj);
         }
     });
 };

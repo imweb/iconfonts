@@ -5276,7 +5276,7 @@ button.close {
     font-style: normal
 }
 
-[class^="icon-"]:before,[class*=" icon-"]:before {
+/*[class^="icon-"]:before,[class*=" icon-"]:before {
     font-family: "fontello";
     font-style: normal;
     font-weight: normal;
@@ -5293,7 +5293,7 @@ button.close {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale
 }
-
+*/
 .icon-glass:before {
     content: '\e800'
 }
@@ -6124,10 +6124,6 @@ button.close {
 
 .icon-leaf:before {
     content: '\e8cf'
-}
-
-.icon-font:before {
-    content: '\e8d0'
 }
 
 .icon-bold:before {

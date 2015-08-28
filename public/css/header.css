@@ -8,6 +8,10 @@
 	height: 70px;
 	
 }
+
+.menu ul {
+	position: relative;
+}
 .menu-item{
 	float: left;
 	height: 70px;
@@ -24,16 +28,16 @@
 	color: #fff;
 }
 
-.user-bar {
-	float: right;
-	padding: 0 10px;
-	color: #ddd;
-	font-size: 16px;
+.user-name {
+	position: absolute;
+	right: 200px;
 }
-
 .search-panel {
 	float: right;
 	padding-right: 0;
+}
+.search-form {
+	position: relative;
 }
 .search-form input {
 	border: none;
@@ -43,4 +47,13 @@
 	font-size: 14px;
 	color: #999;
 	line-height: 20px;
+}
+
+.search-form .search-btn{
+	color: #000; 
+	padding: 0;
+    position: absolute;
+    right: 5px;
+    font-size: 20px;
+    top: 26px;
 }
