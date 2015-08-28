@@ -2,6 +2,7 @@ var express = require('express'),
     router = express.Router();
 
 var Icon = require('../models/icon.js'),
+    auth = require('../midware/auth.js'),
     User = require('../models/user.js');
 
 router.get('/', function(req, res, next) {

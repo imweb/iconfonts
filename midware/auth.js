@@ -1,6 +1,7 @@
 var http = require('http'),
     fs = require('fs');
 
+// var AUTH_URL = '/domainauth';
 var AUTH_URL = 'http://imweb.io/domainauth';
 var authOptions = {
     // host: 'imweb.io',

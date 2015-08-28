@@ -11,7 +11,7 @@
 		});
 		$('#js-download-btn').on('click', function(){
 			var ids = [];
-			$('.js-pcList li.icon-checked').each(function(index, item){
+			$('.js-pcList li.i-right').each(function(index, item){
 				ids.push($(item).data('id'));
 			});
 			location.href = '/download/' + ids.join('-');

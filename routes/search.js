@@ -3,6 +3,7 @@ var express = require('express'),
 
 var Icon = require('../models/icon.js'),
     Tag = require('../models/tag.js'),
+    Business = require('../models/business.js'),
     EventEmitter = require('eventemitter2').EventEmitter2,
     emitter = new EventEmitter();
     svgParser = require('../utils/svg_parser.js');
@@ -10,11 +11,18 @@ var Icon = require('../models/icon.js'),
 router.get('/', function (req, res, next) {
     search(req.query.q, function(err, arr) {
         if (err) return next(err);
-        // if(arr.length > 0) {
-        //     svgParser.genarateFonts(arr);
-        //     svgParser.generateCss(arr);
-        // }
-        res.render('index', {all: arr || []});
+
+        Business.find().exec(function(err, bids) {
+            var bMaps = {};
+            bids.forEach(function(b) {
+                bMaps[b.bid] = b.name;
+            });
+            res.render('index', {
+                all: arr,
+                user: req.cookies.user,
+                bMaps: bMaps
+            });
+        });
     });
 });
 
@@ -56,11 +64,17 @@ function search(q, cb) {
                 iconId: {
                     $in: ids
                 }
-            }).exec(function(err, results) {
-                results.forEach(function(icon) {
+            }).exec(function(err, icons) {
+
+                var rets = {};
+                icons.forEach(function(icon) {
                     icon.content = svgParser.generateHtmlIconContent(icon.iconId);
-                }); 
-                typeof cb === 'function' && cb(err, results);
+                    if(!rets[icon.business]) {
+                        rets[icon.business] = [];
+                    } 
+                    rets[icon.business].push(icon);
+                });
+                typeof cb === 'function' && cb(err, rets);
             });
         }
 

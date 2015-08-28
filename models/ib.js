@@ -1,6 +1,5 @@
-
 /*
-* insert business
+ * insert business
  */
 var B = require('./business');
 
@@ -9,8 +8,8 @@ var b = new B({
     pm: 'lqlong'
 });
 
- b.save(function (err, bid) {
-    if(err) {
+b.save(function(err) {
+    if (err) {
         console.log(err);
     }
 });
