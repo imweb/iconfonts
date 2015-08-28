@@ -7,11 +7,11 @@
 
 var path = require('path'),
     fs = require('fs'),
-var Icon = require('../models/icon.js'),
+    Icon = require('../models/icon.js'),
     conf = require('../conf.js');
 
 
-var svgPath = path.join('../' + conf.svg_path);
+var svgPath = path.join('../' + conf.svgPath);
 
 function getAllIconFromSvg(){
     var allIcons = [];  

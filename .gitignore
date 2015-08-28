@@ -7,5 +7,6 @@ docs/webfont.zip
 demo
 start-db.bat
 error.log
-public/css/fonts
+public/css/fonts/
+public/css/iconfont.css
 store/ke.qq.com-svg/

@@ -13,19 +13,28 @@
 <body>
 	<%- include header.html %>
 	<div class="layout">
+		<% 
+		var item;
+		for(var k in all) { 
+			if(all.hasOwnProperty(k)) {
+				item = all[k];
+		%>
 		<div  class="content-block relative">
-			<h1 class="list-title">图标库 <span>| <%= all.length %></span></h1>
+			<h1 class="list-title"><%=bMaps[k] %> - 图标库<span>| <%= item.length %></span></h1>
 			<a class="rightBtn" id="js-download-btn" href="javascript:;">下载</a>
 			<ul class="icon-list clearfix js-pcList">
-			<% for(var i=0;i<all.length;i++){ %>
-				<li class="icon icon-font" data-id="<%= all[i].iconId %>">
-					<i class="icon-font <%= all[i].className %>"></i>
-					<span class="icon-content"><%= all[i].content %></span>
-					<span class="icon-name"><%= all[i].className %></span>
+			<% for(var i=0;i<item.length;i++){ %>
+				<li class="icon icon-font" data-id="<%= item[i].iconId %>">
+					<i class="icon-font <%= item[i].className %>"></i>
+					<span class="icon-content"><%= item[i].content %></span>
+					<span class="icon-name"><%= item[i].className %></span>
 				</li>
 			<% } %>
 			</ul>
 		</div>
+		<% }
+		}
+		 %>
 	</div>
 	<section id="js-back2top" class="back2top icon-font i-to-top">	
 	</section>
