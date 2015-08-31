@@ -35,16 +35,16 @@ function checkUserAuth(user, auth, cb) {
 	});
 }
 
-router.get('/', /*auth, */function (req, res, next) {
+router.get('/', auth, function (req, res, next) {
 
 
 	/*
 	* iconfont.imweb.io 鉴权
 	 */
 	
-	// checkUserAuth(req.cookies.user, conf.auth.upload, function(hasAuth) {
-	// 	if(hasAuth) {
-	// 		
+	checkUserAuth(req.cookies.user, conf.auth.upload, function(hasAuth) {
+		if(hasAuth) {
+			
 		Business.find({}).exec(function(err, bids) {
 			if(err) {
 				console.error(err);
@@ -57,12 +57,12 @@ router.get('/', /*auth, */function (req, res, next) {
 		    });
 		});
 
-	// 	} else {
-	// 		res.render('404', {
-	// 			info: '没有上传权限，请联系管理员'
-	// 		});
-	// 	}
-	// });
+		} else {
+			res.render('404', {
+				info: '没有上传权限，请联系管理员'
+			});
+		}
+	});
 
 });
 
@@ -76,12 +76,11 @@ router.post('/', jsonParser, function (req, res, next) {
 	file.author = req.cookies.user;
 	file.business = req.body.business;
 
-	console.log(req.body);
 	var allowExts = ['.svg', '.zip'];
 	if(allowExts.indexOf(extname) == -1) {
 		fs.unlinkSync(path.join('./uploads', file.name));
 		var errInfo = {};
-		errInfo[file.originalname] = '文件后缀名必须是svg或zip';
+		errInfo[file.originalname] = '文件后缀名必须是svg或zip！';
 		res.status(200).send({
 			retcode: 0,
 			result: errInfo
@@ -89,8 +88,21 @@ router.post('/', jsonParser, function (req, res, next) {
 		return;
 	}
 
-	upload(file, function(errMaps){
-		
+	// 文件大小校验
+	if(file.size > conf.maxUploadFileSize) {
+		var errInfo = {};
+		errInfo[file.originalname] = 'SVG文件太大（' + (file.size/1024).toFixed(2) + 'kb）！';
+		fs.unlinkSync(path.join('./uploads', file.name));
+		res.status(200).send({
+			retcode: 0,
+			result: errInfo
+		});
+
+		return;
+	}
+
+
+	upload(file, function(errMaps){	
 		if(fs.existsSync('download/svgs.zip')) {
 			fs.unlinkSync('download/svgs.zip');
 		}
