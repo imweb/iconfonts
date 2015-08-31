@@ -77,7 +77,7 @@ router.get('/', /*auth, */function (req, res, next) {
 /*
 * upload 成功后，重新生成字体和css
  */
-router.post('/', jsonParser, function (req, res, next) {
+router.post('/', function (req, res, next) {
 	var file = req.files.file,
 		extname = path.extname(file.path);
 
