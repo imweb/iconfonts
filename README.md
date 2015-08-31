@@ -84,3 +84,9 @@ localhost:4001
 + 控制上传 SVG 大小
 + 本地更新 SVG 时，增量更新
 + icon 按项目分类
+
+
+class-data 改成 course-data
+i-delete 删掉
+i-close-16 改成 i-delete
+i-ke-share 改成 i-share
