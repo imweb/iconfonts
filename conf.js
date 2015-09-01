@@ -16,7 +16,9 @@ module.exports = {
 		dbName: 'iconfonts'
 	},
 	auth: {
-		upload: 1
+		upload: 1,
+		business: 2,
+		updateIcon: 4
 	},
 	maxUploadFileSize: 5*1024
 };

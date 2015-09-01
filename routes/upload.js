@@ -15,25 +15,8 @@ var conf = require('../conf.js'),
 	auth = require('../midware/auth.js'),
 	Business = require('../models/business.js'),
 	svgParser = require('../utils/svg_parser.js'),
+	checkUserAuth = require('../utils/checkAuth.js'),
 	store = require('../utils/store.js');
-
-/*
-* 二进制权限验证方式
- */
-function checkUserAuth(user, auth, cb) {
-	var User = require('../models/user.js');
-	User.find({
-		user: user
-	}).exec(function(err, users) {
-		var hasAuth;
-		if(users.length == 0) {
-			hasAuth = false;
-		} else {
-			hasAuth = (users[0].auth & auth) != 0;
-		}	
-		typeof cb === 'function' && cb(hasAuth);
-	});
-}
 
 router.get('/', auth, function (req, res, next) {
 

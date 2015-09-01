@@ -6,6 +6,7 @@ var main = require('./main.js'),
     download = require('./download'),
     search = require('./search'),
     user = require('./user'),
+    business = require('./business'),
     tag = require('./tag');
 
 
@@ -16,6 +17,8 @@ router.use('/search', search);
 router.use('/tag', tag);
 
 router.use('/user', user);
+
+router.use('/business', business);
 
 router.get('/rule', function(req, res){
     res.render('rule',{
@@ -28,6 +31,8 @@ router.get('/intro', function(req, res){
         user: req.cookies.user
     });
 });
+
+router.use('/update', require('./updateIcon'));
 
 
 router.get('/404', function(req, res) {

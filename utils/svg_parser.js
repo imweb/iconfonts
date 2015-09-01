@@ -2,6 +2,7 @@
 var conf = require('../conf.js'),
 	path = require('path'),
 	fontCarrier = require('font-carrier'),
+	Icon = require('../models/icon.js'),
 	fs = require('fs');
 
 var font = fontCarrier.create(),
@@ -111,6 +112,23 @@ function generateBase64Css(icons, cssPath, fontFileName){
 	fs.writeFileSync(cssPath? cssPath : outputCss, content.join('\r\n'));
 }
 
+
+function refreshFonts() {
+	Icon.find()
+        .sort({
+            iconId: 1
+        }).exec(function(err, icons) {
+            if (err) {
+                console.error(err);
+            }
+            icons.forEach(function(icon) {
+                icon.content = svgParser.generateHtmlIconContent(icon.iconId);
+            });
+            genarateFonts(icons);
+            generateCss(icons);
+        });
+}
+
 module.exports = {
 	generateCss: generateCss,
 	generateHtml: generateHtml,
@@ -118,6 +136,7 @@ module.exports = {
 	genarateFonts: genarateFonts,
 	file2Base64: file2Base64,
 	generateBase64Css: generateBase64Css,
-	generateHtmlIconContent: generateHtmlIconContent
+	generateHtmlIconContent: generateHtmlIconContent,
+	refreshFonts: refreshFonts
 };
 
