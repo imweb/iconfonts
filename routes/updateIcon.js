@@ -8,6 +8,7 @@ var bodyParser = require('body-parser'),
 var Tag = require('../utils/tag.js'),
     auth = require('../midware/auth.js'),
     userAuthCheck = require('../utils/checkAuth.js'),
+    Business = require('../models/business.js'),
     svgParser = require('../utils/svg_parser.js'),
     Icon = require('../models/icon.js');
 
@@ -36,9 +37,19 @@ router.get('/',/* auth,*/ function (req, res, next) {
                     return;
                 }
                 currentPath = icons[0].path || '';
-                res.render('updateIcon', {
-                    icon: icons[0]
+                Business.find({}).exec(function(err, bids) {
+                    if(err) {
+                        console.error(err);
+                        next(err);
+                        return;
+                    }
+                    res.render('updateIcon', {
+                        icon: icons[0],
+                        bids: bids
+                    });
                 });
+               
+
             });
         } else {
             res.render('404', {
@@ -53,7 +64,6 @@ router.get('/',/* auth,*/ function (req, res, next) {
 router.post('/',/* auth,*/ function (req, res, next) {
     var user = req.cookies.user,
         params = req.body;
-    console.log(params);
     // update
     userAuthCheck(user, conf.auth.updateIcon, function(hasAuth) {
         if(hasAuth && currentPath) {             
@@ -64,6 +74,7 @@ router.post('/',/* auth,*/ function (req, res, next) {
                 $set: {
                     name: params.name,
                     className: 'i-' + params.name,
+                    business: params.business,
                     path: '' + path.dirname(currentPath) + '/' + params.name + '.svg'
                 }
             }, function(err) {

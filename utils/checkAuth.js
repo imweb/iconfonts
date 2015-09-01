@@ -10,7 +10,6 @@ function checkUserAuth(user, auth, cb) {
     User.find({
         user: user
     }).exec(function(err, users) {
-        console.log(users, users[0].auth & auth, auth);
         var hasAuth;
         if(users.length == 0 || err) {
             hasAuth = false;
