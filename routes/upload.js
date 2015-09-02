@@ -16,6 +16,7 @@ var conf = require('../conf.js'),
 	Business = require('../models/business.js'),
 	svgParser = require('../utils/svg_parser.js'),
 	checkUserAuth = require('../utils/checkAuth.js'),
+	User = require('../models/user.js'),
 	store = require('../utils/store.js');
 
 router.get('/', auth, function (req, res, next) {
