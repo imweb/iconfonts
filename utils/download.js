@@ -22,6 +22,7 @@ function packUpSvgs (downloadCb, bid) {
         folderName = folderName + '-' + bid;
         zipPath = path.join(path.dirname(conf.allSvgZipPath), folderName + '.zip');
     }
+    folderName = path.join(path.dirname(conf.allSvgZipPath), folderName);
     if (!fs.existsSync('download')) fs.mkdirSync('download');
     if (fs.existsSync(zipPath)) {
         // 假设其存在的话，则未更改
@@ -32,10 +33,8 @@ function packUpSvgs (downloadCb, bid) {
         var svgName;
         Icon.find(param)
         .exec(function(err, icons) {
-            // console.log(icons.length);
             icons.forEach(function (icon) {
                 svgName = icon.path;
-                console.log(svgName);
                 var svgSrc = path.join(svgPath, svgName);
                     svgDest = path.join(folderName, svgName);
                 if (!fs.statSync(svgSrc).isFile()) return;
