@@ -20,10 +20,8 @@ function packUpSvgs (downloadCb, bid) {
     if(bid) {
         param.business = bid + '';
         folderName = folderName + '-' + bid;
-        zipPath = folderName + '.zip';
+        zipPath = path.join(path.dirname(conf.allSvgZipPath), folderName + '.zip');
     }
-    console.log(folderName);
-    console.log(param);
     if (!fs.existsSync('download')) fs.mkdirSync('download');
     if (fs.existsSync(zipPath)) {
         // 假设其存在的话，则未更改
