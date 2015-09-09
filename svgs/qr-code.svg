@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 17.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="图层_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="480px" height="480px" viewBox="0 0 480 480" enable-background="new 0 0 480 480" xml:space="preserve">
+<g>
+	<path d="M195,45H45v150h150V45z M165,165H75V75h90V165z"/>
+	<path d="M285,45v150h150V45H285z M405,165h-90V75h90V165z"/>
+	<rect x="225" y="45" width="30" height="90"/>
+	<polygon points="165,255 225,255 255,255 255,225 255,165 225,165 225,225 165,225 	"/>
+	<rect x="45" y="225" width="90" height="30"/>
+	<path d="M45,435h150V285H45V435z M75,315h90v90H75V315z"/>
+	<polygon points="405,405 285,405 285,435 405,435 435,435 435,405 435,285 405,285 	"/>
+	<polygon points="375,285 255,285 225,285 225,435 255,435 255,315 375,315 	"/>
+	<rect x="285" y="225" width="147" height="30"/>
+</g>
+</svg>

@@ -16,8 +16,9 @@ var bodyParser = require('body-parser'),
 
 // get all business
 router.get('/',/* auth, */function(req, res, next) {
+    var user = req.cookies.user;
     // check auth
-    userAuthCheck(req.cookies.user, conf.auth.business, function(hasAuth) {
+    userAuthCheck(user, conf.auth.business, function(hasAuth) {
         if(hasAuth) {
             Business.find()
             .exec(function(err, business) {
@@ -26,7 +27,8 @@ router.get('/',/* auth, */function(req, res, next) {
                     return;
                 }
                 res.render('business', {
-                    business: business
+                    business: business,
+                    user: user
                 });
             });
         } else {
