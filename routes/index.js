@@ -26,6 +26,12 @@ router.get('/rule', function(req, res){
     });
 });
 
+router.get('/checkin', function(req, res){
+    res.render('checkin',{
+        user: req.cookies.user
+    });
+});
+
 router.get('/intro', function(req, res){
     res.render('intro', {
         user: req.cookies.user

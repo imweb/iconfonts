@@ -16,6 +16,7 @@ var conf = require('../conf.js'),
     Business = require('../models/business.js'),
     svgParser = require('../utils/svg_parser.js'),
     checkUserAuth = require('../utils/checkAuth.js'),
+    clean = require('../utils/file.js'),
     User = require('../models/user.js'),
     store = require('../utils/store.js');
 
@@ -26,8 +27,8 @@ router.get('/', auth, function(req, res, next) {
      * iconfont.imweb.io 鉴权
      */
 
-    checkUserAuth(req.cookies.user, conf.auth.upload, function(hasAuth) {
-        if (hasAuth) {
+    // checkUserAuth(req.cookies.user, conf.auth.upload, function(hasAuth) {
+    //     if (hasAuth) {
 
             Business.find({}).exec(function(err, bids) {
                 if (err) {
@@ -41,14 +42,18 @@ router.get('/', auth, function(req, res, next) {
                 });
             });
 
-        } else {
-            res.render('404', {
-                info: '没有上传权限，请联系管理员'
-            });
-        }
-    });
+    //     } else {
+    //         res.render('404', {
+    //             info: '没有上传权限，请联系管理员'
+    //         });
+    //     }
+    // });
 
 });
+
+/*
+* 删除uploads/download中的临时文件
+ */
 
 /*
  * upload 成功后，重新生成字体和css
@@ -73,17 +78,17 @@ router.post('/', jsonParser, function(req, res, next) {
     }
 
     // 文件大小校验
-    if (file.size > conf.maxUploadFileSize) {
-        var errInfo = {};
-        errInfo[file.originalname] = 'SVG文件太大（' + (file.size / 1024).toFixed(2) + 'kb）！';
-        fs.unlinkSync(path.join('./uploads', file.name));
-        res.status(200).send({
-            retcode: 0,
-            result: errInfo
-        });
+    // if (file.size > conf.maxUploadFileSize) {
+    //     var errInfo = {};
+    //     errInfo[file.originalname] = 'SVG文件太大（' + (file.size / 1024).toFixed(2) + 'kb）！';
+    //     fs.unlinkSync(path.join('./uploads', file.name));
+    //     res.status(200).send({
+    //         retcode: 0,
+    //         result: errInfo
+    //     });
 
-        return;
-    }
+    //     return;
+    // }
 
 
     upload(file, function(errMaps) {
@@ -91,11 +96,19 @@ router.post('/', jsonParser, function(req, res, next) {
         // 	fs.unlinkSync('download/svgs.zip');
         // }
 
-        var zips = fs.readdirSync('download');
+        var zips = fs.readdirSync('download'),
+            zipPath;
         zips.forEach(function(zip) {
-            fs.unlinkSync(zip);
+            // console.log(zip);
+            zipPath = path.join('download', zip);
+            if(fs.statSync(zipPath).isFile()) {
+                fs.unlinkSync(path.join('download', zip));
+            } else {
+                clean.cleanDir(path.join('download', zip));
+            }
+            
         });
-            // 重新生成字体
+        // 重新生成字体
         Icon.find()
             .exec(function(err, icons) {
                 icons.forEach(function(icon) {
@@ -104,6 +117,7 @@ router.post('/', jsonParser, function(req, res, next) {
                 svgParser.genarateFonts(icons);
                 svgParser.generateCss(icons);
             });
+
         res.status(200).send({
             retcode: 0,
             result: errMaps
@@ -116,7 +130,7 @@ function upload(file, cb) {
     var ext = path.extname(file.path);
     if (ext == '.svg') {
         store.storeSvg(file, cb);
-    } else if (['.zip'].indexOf(ext) > -1) {
+    } else if (~['.zip'].indexOf(ext)) {
         // just support zip
         store.storeZip(file, cb);
     }

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>构建接入</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/marxico.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="icon" href="images/icon.png" type="image/x-icon"/>
+    <style>
+    .content{
+        width: 960px;
+        margin: 0 auto;
+    }
+    </style>
+</head>
+<body>
+    <%- include header.html %>
+    <section class="content">
+<div id="wmd-preview-section-9" class="wmd-preview-section preview-content">
+
+<h3 id="svg-同步">安装</h3>
+
+</div><div id="wmd-preview-section-494" class="wmd-preview-section preview-content">
+
+<pre class="prettyprint hljs-dark"><code class="hljs cmake">npm <span class="hljs-keyword">install</span> fis-postpackager-iconfont -g</code></pre>
+
+<p>最新的 fis-postpackager-iconfont 在 npm install 时，已经调用脚本去拉取iconfont平台的svg文件，并同步到安装目录下。</p>
+
+<p>如果上面的步骤失败，请手动同步svg到项目目录下，<a href="http://iconfont.imweb.io/download/%24svgs" target="_blank">点此下载</a>，解压到src同级目录svgs下，同时配置插件的svgPath路径（默认会去 fis-postpackager-iconfont插件的安装目录下找svg）。</p></div><div id="wmd-preview-section-11" class="wmd-preview-section preview-content">
+
+<h3 id="构建配置">构建配置</h3>
+
+</div><div id="wmd-preview-section-12" class="wmd-preview-section preview-content">
+
+<h5 id="fis3配置">fis3配置</h5>
+
+</div><div id="wmd-preview-section-13" class="wmd-preview-section preview-content">
+
+<pre class="prettyprint hljs-dark"><code class="hljs groovy"><span class="hljs-comment">// settings</span>
+<span class="hljs-string">postpackager:</span> fis.plugin(<span class="hljs-string">'iconfont'</span>, {
+    <span class="hljs-comment">//可选，遍历js时，可以忽略的基础库</span>
+<span class="hljs-label">    ignore:</span> [<span class="hljs-string">'zepto'</span>, <span class="hljs-string">'badjs'</span>, <span class="hljs-string">'mod'</span>, <span class="hljs-string">'bj-report'</span>, <span class="hljs-string">'tools'</span>, <span class="hljs-string">'db.js'</span>],
+    <span class="hljs-comment">//可选，匹配的icon前缀，即类名是i-<span class="hljs-label">xxx, optional, 默认是 i-</span></span>
+<span class="hljs-label">    classPrefix:</span> <span class="hljs-string">'i-'</span>,
+    <span class="hljs-comment">// 本地svg路径，方便生成字体文件，这里可以使用脚本同步iconfont平台上的svg</span>
+    <span class="hljs-comment">// 默认指向 fis3-postpackager-iconfont 安装目录下的svgs文件夹（安装插件是，自动执行脚本，同步iconfont.imweb.io平台上的svg文件）,若fis3-postpackager-iconfont安装目录下的svgs目录中有svg，这里可以不需要配置；否者，需要手动同步svg到项目目录，然后配置svgPath</span>
+<span class="hljs-label">    svgPath:</span> <span class="hljs-string">'../svgs'</span>,
+    <span class="hljs-comment">// 必须，字体的产出路径</span>
+<span class="hljs-label">    output:</span> <span class="hljs-string">'modules/common/fonts'</span>,
+    <span class="hljs-comment">//可选， css 是否inline到页面, 默认已link方式引入</span>
+<span class="hljs-label">    cssInline:</span> <span class="hljs-literal">true</span>,
+    <span class="hljs-comment">//可选， 字体content使用的伪类，只能填after或者before，默认为after</span>
+<span class="hljs-label">    pseClass:</span> <span class="hljs-string">'before'</span> <span class="hljs-comment">// 伪类名</span>
+})
+
+<span class="hljs-comment">// 最简配置</span>
+<span class="hljs-string">postpackager:</span> fis.plugin(<span class="hljs-string">'iconfont'</span>, {
+<span class="hljs-label">    output:</span> <span class="hljs-string">'modules/common/fonts'</span>
+})
+</code></pre>
+
+</div><div id="wmd-preview-section-14" class="wmd-preview-section preview-content">
+
+<h5 id="fis2-配置">fis2 配置</h5>
+
+</div><div id="wmd-preview-section-274" class="wmd-preview-section preview-content">
+
+<pre class="prettyprint hljs-dark"><code class="hljs css"><span class="hljs-tag">fis</span><span class="hljs-class">.config</span><span class="hljs-class">.merge</span>(<span class="hljs-rules">{
+    <span class="hljs-rule"><span class="hljs-attribute">modules</span>:<span class="hljs-value"> {
+        postpackager: [<span class="hljs-string">'iconfont'</span>]
+    </span></span></span>}
+});
+<span class="hljs-tag">fis</span><span class="hljs-class">.config</span><span class="hljs-class">.merge</span>(<span class="hljs-rules">{
+    <span class="hljs-rule"><span class="hljs-attribute">settings</span>:<span class="hljs-value"> {
+        postpackager: {
+            iconfont: {
+                // 配置同上
+               output: <span class="hljs-string">'modules/common/fonts'</span> 
+            </span></span></span>}
+        }
+    }
+});</code></pre>
+
+<p>字体和响应的css文件会产出到对应目录的（dev或者dist目录）modules/common/fonts下，配置cssInline:true，最终css会内联到html中</p></div><div id="wmd-preview-section-footnotes" class="preview-content"></div></div>
+    </section>
+
+
+    <%- include footer.html %>
+</body>
+</html>

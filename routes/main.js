@@ -2,6 +2,7 @@ var express = require('express'),
     router = express.Router(),
     Icon = require('../models/icon.js'),
     Business = require('../models/business.js'),
+    clean = require('../utils/file.js'),
     svgParser = require('../utils/svg_parser.js');
 
 function getAllIcons(cb) {
@@ -27,6 +28,10 @@ function getAllIcons(cb) {
 }
 
 router.get(['/', '/index'], function(req, res, next) {
+    
+    // 清理download目录
+    clean.clearPreviousFiles(conf.downloadPath, 24*3600*1000);
+
     getAllIcons(function(err, icons, ret){
         if (err) {
             return next(err);
