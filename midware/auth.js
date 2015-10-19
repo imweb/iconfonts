@@ -27,11 +27,12 @@ function authCheck(req, res, next) {
                 data += chunk;
             });
             res.on('end', function () {
-                var d = JSON.parse(data);
-                if(d.retcode !== 200) {
-                    return res.redirect('http://imweb.io');
-                }
-                next();
+                console.log(data);
+                // var d = JSON.parse(data);
+                // if(d.retcode !== 200) {
+                //     return res.redirect('http://imweb.io');
+                // }
+                // next();
             });
         }).on('error', function (err) {
             console.error(err.message);
@@ -43,4 +44,7 @@ function authCheck(req, res, next) {
 }
 
 
-module.exports = authCheck;
+// module.exports = authCheck;
+module.exports = function(req, res, next) {
+    next();
+};

@@ -12,10 +12,28 @@ router.get('/', function(req, res, next) {
     Icon.find({
         // author: user
     }).exec(function(err, icons) {
-        res.render('user', {
-            all: icons,
+
+        User.find({
             user: user
+        }).exec(function(err, users) {
+            var params = {
+                all: icons,
+                user: user
+            }
+            if(err || users.length == 0) {
+                res.render('user', params);
+                return;
+            }
+            // 有更新权限
+            if((users[0].auth & conf.auth.updateIcon) != 0) {
+                params.update = 1;
+            }
+            if((users[0].auth & conf.auth.business) != 0) {
+                params.business = 1;
+            }
+            res.render('user', params);
         });
+
     });
 
 });

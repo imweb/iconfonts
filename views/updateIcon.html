@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>修改Icon</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/iconfont.css">
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="icon" href="images/icon.png" type="image/x-icon"/>
+    <style>
+        .container {
+            width: 960px;
+            margin: 50px auto 0;
+            height: 500px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .side-left {
+            width: 340px;
+            float: left;
+            padding: 30px;
+            height: 100%;
+        }
+
+        .s-name {
+            margin-top: 50px;
+            display: block;
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+
+        .icon-font {
+            display: block;
+            font-size: 200px;
+        }
+        .side-right {
+            float: left;
+            padding: 30px;
+            width: 500px;
+        }
+
+        .add-form input {
+            margin-top: 20px; 
+            height: 40px;
+            line-height: 40px;
+            outline: none;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            padding: 0 10px;
+        }
+        .btn {
+            display: block;
+            height: 40px;
+            line-height: 40px;
+            width: 140px;
+            text-align: center;
+            background: #38b7ea;
+            color: #fff;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        .add-form select{
+            width: 208px;
+            display: block;
+            margin-top: 20px;
+            height: 42px;
+            padding: 6px 12px;
+            font-size: 16px;
+            line-height: 20px;
+            color: #555;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <%- include header.html %>
+    <div class="container">
+        <div class="side-left">
+            <span class="s-name"><%=icon.className%></span>
+            <i class="icon-font <%=icon.className%>"></i>
+        </div>
+        <div class="side-right">
+            <div id="js-form" class="add-form">
+                <input type="text" name="newname" value="<%=icon.name %>" placeHolder="请输入修改后的icon名"/><span>（不用i-开头）</span>
+                <select id="js-business" name="business"> 
+                    <option value="-1">-- 请选择项目 --</option>  
+                    <% for(var i=0;i<bids.length;i++){ %>
+                    <option value="<%=bids[i].bid %>" <%=icon.business == bids[i].bid ? 'selected' : '' %>><%=bids[i].name %></option>
+                    <% } %>
+                </select>
+                <a id="js-update" href="javascript:;" class="btn add-btn">修改</a>
+                <a id="js-del" href="javascript:;" class="btn del-btn">删除 ICON</a>
+            </div>
+        </div>
+    </div>
+    <%- include footer.html %>
+    <script src="lib/jquery-2.1.4.min.js"></script>
+    <script>
+    (function(exports){
+        var query = function (n) {
+            var m = window.location.search.match(new RegExp("(\\?|&)" + n + "=([^&]*)(&|$)"));
+            return !m ? "" : decodeURIComponent(m[2]);
+        };
+
+
+        var id = query('id'),
+            $updateBtn = $('#js-update'),
+            $form = $('#js-form'),
+            $input = $form.find('input[name="newname"]'),
+            $delBtn = $('#js-del');
+
+        exports.bindEvents = function() {
+            $updateBtn.on('click', function() {
+                var val = $input.val();
+                $.ajax({
+                    url: '/update',
+                    type: 'post', 
+                    dataType: 'json',
+                    data: {
+                        id: id,
+                        name: val,
+                        business: $('#js-business').val()
+                    },
+                    success: function(data) {
+                        console.log(data);
+                        if(data.retcode === 0) {
+                            alert('更新成功');
+                        }
+                    },
+                    error: function(data) {
+                    }   
+                });
+            });
+
+            $delBtn.on('click', function() {
+                $.ajax({
+                    url: '/update/del',
+                    type: 'post', 
+                    dataType: 'json',
+                    data: {
+                        id: id,
+                    },
+                    success: function(data) {
+                        if(data.retcode === 0) {
+                            alert('删除成功');
+                        }
+                    },
+                    error: function(data) {
+                    }   
+                });
+            });
+        };
+
+
+    })(this)
+
+    this.bindEvents();
+    </script>
+</body>
+</html>

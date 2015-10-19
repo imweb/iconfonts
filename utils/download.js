@@ -4,44 +4,58 @@ var path = require('path'),
 
 var Q = require('q'),
     fontCarrier = require('font-carrier'),
+    Icon = require('../models/icon.js'),
     font = fontCarrier.create();
 
 var conf = require('../conf.js'),
     svgParser = require('../utils/svg_parser.js'),
     svgPath = conf.svgPath;
 
-function packUpSvgs (downloadCb) {
+function packUpSvgs (downloadCb, bid) {
     var zipPath = conf.allSvgZipPath;
     var folderName = path.basename(zipPath, '.zip');
+
+    var param = {};
+    if(bid) {
+        param.business = bid + '';
+        folderName = folderName + '-' + bid;
+        zipPath = path.join(path.dirname(conf.allSvgZipPath), folderName + '.zip');
+    }
+    folderName = path.join(path.dirname(conf.allSvgZipPath), folderName);
+
     if (!fs.existsSync('download')) fs.mkdirSync('download');
     if (fs.existsSync(zipPath)) {
         // 假设其存在的话，则未更改
         // 当撒上传svg时，在upload逻辑中update或remove这个文件
         typeof downloadCb === 'function' && downloadCb(undefined, zipPath);
     } else {
-        var svgNames = fs.readdirSync(svgPath);
         if (!fs.existsSync(folderName)) fs.mkdirSync(folderName);
-        svgNames.forEach(function (svgName) {
-            var svgSrc = path.join(svgPath, svgName);
-                svgDest = path.join(folderName, svgName);
-            if (!fs.statSync(svgSrc).isFile()) return;
-            var content = fs.readFileSync(svgSrc).toString();
-            fs.writeFileSync(svgDest, content);
-        });
-        var output = fs.createWriteStream(zipPath);
-        var archive = archiver('zip');
-        archive.on('error', function (err) {
-            console.error(err);
-            typeof downloadCb === 'function' && downloadCb(err);
-        });
-        archive.pipe(output);
-        archive.bulk([
-            {expand: true, cwd: folderName, src: ['**']}
-        ]);
-        archive.finalize();
+        var svgName;
+        Icon.find(param)
+        .exec(function(err, icons) {
+            icons.forEach(function (icon) {
+                svgName = icon.path;
+                var svgSrc = path.join(svgPath, svgName);
+                    svgDest = path.join(folderName, svgName);
+                if (!fs.statSync(svgSrc).isFile()) return;
+                var content = fs.readFileSync(svgSrc).toString();
+                fs.writeFileSync(svgDest, content);
+            });
+            var output = fs.createWriteStream(zipPath);
+            var archive = archiver('zip');
+            archive.on('error', function (err) {
+                console.error(err);
+                typeof downloadCb === 'function' && downloadCb(err);
+            });
+            archive.pipe(output);
+            archive.bulk([
+                {expand: true, cwd: folderName, src: ['**']}
+            ]);
+            archive.finalize();
 
-        output.on('close', function () {
-            typeof downloadCb === 'function' && downloadCb(undefined, zipPath);
+            output.on('close', function () {
+                typeof downloadCb === 'function' && downloadCb(undefined, zipPath);
+            });
         });
     }
 }

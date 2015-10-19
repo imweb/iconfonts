@@ -17,6 +17,26 @@
             text-align: center;
             font-size: 50px;
         }
+        .icon {
+            /*height: 120px;*/
+        }
+        .icon:hover {
+            background: none;
+        }
+        .icon:hover .add {
+            display: block;
+        }
+        .icon .add {
+            display: none;
+            color: #c7254e;
+        }
+        .icon-name {
+            height: 34px;
+        }
+        .link {
+            color:#c7254e;
+            margin-left: 20px;
+        }
     </style>
 </head>
 <body>
@@ -24,14 +44,24 @@
     <div class="layout">
         <% if(all.length > 0) { %>
         <div  class="content-block relative">
-            <h1 class="list-title">您上传的图标库 <span>| <%= all.length %>，点击图标可进入页面给图标添加标签</span></h1>
+            <h1 class="list-title">您上传的图标库 <span>| <%= all.length %>，点击图标可进入页面给图标添加标签</span>
+            <% if(typeof business != 'undefined') { %>
+                <a href="/business" class="link">添加业务</a>
+            <% } %>
+            </h1>
             <ul class="icon-list clearfix js-pcList">
             <% for(var i=0;i<all.length;i++){ %>
                 <li class="icon" data-id="<%= all[i].iconId %>">
-                <a href="/tag?id=<%= all[i].iconId %>">
-                    <i class="icon-font <%= all[i].className %>"></i>
-                    <span class="icon-name"><%= all[i].className %></span>
-                </a>
+                    <div href="/tag?id=<%= all[i].iconId %>">
+                        <% if(typeof update != 'undefined') { %>
+                        <a href="/update?id=<%= all[i].iconId %>" class="icon-font <%= all[i].className %>"></a>
+                        <% } else { %>
+                        <i class="icon-font <%= all[i].className %>"></i>
+                        <% } %>
+                        <span class="icon-name"><%= all[i].className %></span>
+                        <a class="add" href="/tag?id=<%= all[i].iconId %>">加标签</a>
+                       
+                    </div>
                 </li>
             <% } %>
             </ul>
