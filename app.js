@@ -3,6 +3,7 @@ var express = require('express'),
 	path = require('path'),
 	conf = require('./conf.js'),
 	multer  = require('multer'),
+    cookieParser = require('cookie-parser'),
 	ejs = require('ejs');
 
 var app = express();
@@ -24,6 +25,14 @@ app.use(express.static(path.join(__dirname, '/public')));
 app.use(express.static(path.join(__dirname, '/download')));
 
 app.use(multer({ dest: './uploads/'}));
+app.use(cookieParser());
+
+// middleware for auth
+// {uin, skey, accessToken}
+app.use(function (req, res, next) {
+    req.user = req.cookies.accessToken ? req.cookies.user : ''
+    next();
+});
 
 app.use(jsonParser);
 // 缺少这个，会导致 req.body = {}
@@ -33,7 +42,6 @@ app.use(urlencodedParser);
 var cookieParser = require('cookie-parser');
 app.use(cookieParser());
 app.use(require('./routes'));
-
 
 // app.use(function(err, req, res, next) {
 // 	var meta = '[' + new Date() + '] ' + req.url + '\r\n';

@@ -11,7 +11,6 @@ var Icon = require('../models/icon.js'),
 router.get('/', function (req, res, next) {
     search(req.query.q, function(err, arr) {
         if (err) return next(err);
-
         Business.find().exec(function(err, bids) {
             var bMaps = {};
             bids.forEach(function(b) {

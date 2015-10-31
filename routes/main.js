@@ -53,7 +53,6 @@ router.get(['/', '/index'], function(req, res, next) {
                 bMaps: bMaps
             });
         });
-
     });
 });
 

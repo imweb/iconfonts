@@ -2,6 +2,17 @@
 /*
  * @author helondeng, moxhe
  */
+var http = require('http'),
+	fs = require('fs'),
+	_ = require('underscore');
+var authOptions = {
+	host: 'imweb.io',
+	path: '/domainauth',
+	// host: 'proxy.tencent.com',
+	// path: 'http://imweb.io/domainauth',
+    // port: '8080',
+	method: 'GET'
+};
 var express = require('express'),
     path = require('path'),
     fs = require('fs'),
@@ -125,6 +136,30 @@ router.post('/', jsonParser, function(req, res, next) {
     });
 });
 
+function authCheck(req, res, next) {
+	if (req.cookies.accessToken) {
+		['uin', 'skey', 'accessToken'].forEach(function (key) {
+			authOptions.path += '/' + req.cookies[key];
+		});
+		var authReq = http.request(authOptions, function (res) {
+			var str = '';
+			res.setEncoding('utf8');
+			res.on('data', function (chunk) {
+				str += chunk;
+			});
+			res.on('end', function () {
+				var data = JSON.parse(str);
+				if (data.retcode !== 200) res.status(401).end();
+				next();
+			});
+		}).on('error', function (err) {
+			console.error(err.message);
+			res.status(500).end();
+		});
+		authReq.end();
+	}
+	res.status(401).end();
+}
 
 function upload(file, cb) {
     var ext = path.extname(file.path);
