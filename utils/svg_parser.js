@@ -31,7 +31,7 @@ function generateCss(icons, cssPath, isExtended){
 		extendContents = [];
 	content.push('@font-face { ');
 	content.push('font-family: "iconfont";'); 
-	content.push('src: url("iconfont.eot");');
+	content.push('src: url("./fonts/iconfont.eot");');
 	content.push('src: url("./fonts/iconfont.eot?#iefix") format("embedded-opentype"),');
 	content.push('url("./fonts/iconfont.woff") format("woff"),');
 	content.push('url("./fonts/iconfont.ttf") format("truetype"),');
@@ -73,8 +73,6 @@ function genarateFonts(icons, csspath){
 		iconContent;
 	icons.forEach(function (icon) {
 	    iconContent = generateIconContent(icon.iconId + DIFF);
-        // console.log(iconContent);
-        //iconContent = icon.content;
 		realPath = path.join(svgPath, icon.path);
 		if(fs.existsSync(realPath)) {
 			svgsObj[iconContent] = fs.readFileSync(realPath).toString();

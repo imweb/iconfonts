@@ -1,6 +1,6 @@
 @font-face { 
 font-family: "iconfont";
-src: url("iconfont.eot");
+src: url("./fonts/iconfont.eot");
 src: url("./fonts/iconfont.eot?#iefix") format("embedded-opentype"),
 url("./fonts/iconfont.woff") format("woff"),
 url("./fonts/iconfont.ttf") format("truetype"),
@@ -23,11 +23,9 @@ url("./fonts/iconfont.svg#iconfont") format("svg");}
 .i-weixin:before{content: "\f034";}
 .i-lu:before{content: "\f035";}
 .i-qq:before{content: "\f036";}
-.i-camera:before{content: "\f037";}
 .i-empty:before{content: "\f038";}
 .i-info:before{content: "\f039";}
 .i-question:before{content: "\f03b";}
-.i-arrow-bottom:before{content: "\f03c";}
 .i-star:before{content: "\f03d";}
 .i-career:before{content: "\f03e";}
 .i-feeder:before{content: "\f03f";}
@@ -40,22 +38,18 @@ url("./fonts/iconfont.svg#iconfont") format("svg");}
 .i-user-group-border:before{content: "\f047";}
 .i-time:before{content: "\f049";}
 .i-pen:before{content: "\f04a";}
-.i-qr-code:before{content: "\f04b";}
 .i-star-border:before{content: "\f04c";}
 .i-close:before{content: "\f04d";}
 .i-user-group:before{content: "\f04e";}
 .i-v-right:before{content: "\f04f";}
 .i-computor:before{content: "\f050";}
-.i-arrow-top:before{content: "\f051";}
 .i-user:before{content: "\f053";}
 .i-warn:before{content: "\f055";}
 .i-course-data:before{content: "\f056";}
 .i-course-live:before{content: "\f057";}
 .i-course-q-a:before{content: "\f058";}
 .i-course-record:before{content: "\f059";}
-.i-insert:before{content: "\f05c";}
 .i-list-dot:before{content: "\f05d";}
-.i-progress-now:before{content: "\f05e";}
 .i-tel-border:before{content: "\f061";}
 .i-group-border:before{content: "\f062";}
 .i-heart-border:before{content: "\f063";}
@@ -67,7 +61,6 @@ url("./fonts/iconfont.svg#iconfont") format("svg");}
 .i-arrow-down:before{content: "\f076";}
 .i-course-record-border:before{content: "\f07c";}
 .i-list:before{content: "\f07d";}
-.i-ke-comment:before{content: "\f07e";}
 .i-download:before{content: "\f080";}
 .i-class:before{content: "\f081";}
 .i-management:before{content: "\f082";}
@@ -124,5 +117,12 @@ url("./fonts/iconfont.svg#iconfont") format("svg");}
 .i-feedback:before{content: "\f0c7";}
 .i-vip-v:before{content: "\f0c9";}
 .i-image-pc:before{content: "\f0ca";}
-.i-right:before{content: "\f0cc";}
-.i-add:before{content: "\f0cd";}
+.i-right:before{content: "\f0d1";}
+.i-add:before{content: "\f0d2";}
+.i-arrow-top:before{content: "\f0d3";}
+.i-arrow-bottom:before{content: "\f0d4";}
+.i-qr-code:before{content: "\f0d5";}
+.i-camera:before{content: "\f0d6";}
+.i-insert:before{content: "\f0d7";}
+.i-progress-now:before{content: "\f0d8";}
+.i-ke-comment:before{content: "\f0d9";}

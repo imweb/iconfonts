@@ -15,7 +15,7 @@ module.exports = {
 		port: 27017,
 		dbName: 'iconfonts'
 	},
-diff: 32,
+    diff: 32,
 	auth: {
 		upload: 1,
         business: 2,
