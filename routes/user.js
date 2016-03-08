@@ -5,7 +5,7 @@ var Icon = require('../models/icon.js'),
     auth = require('../midware/auth.js'),
     User = require('../models/user.js');
 
-router.get('/', function(req, res, next) {
+router.get('/', auth, function(req, res, next) {
     var cookies = req.cookies,
         user = cookies.user;
     
@@ -19,7 +19,7 @@ router.get('/', function(req, res, next) {
             var params = {
                 all: icons,
                 user: user
-            }
+            };
             if(err || users.length == 0) {
                 res.render('user', params);
                 return;
@@ -28,6 +28,7 @@ router.get('/', function(req, res, next) {
             if((users[0].auth & conf.auth.updateIcon) != 0) {
                 params.update = 1;
             }
+
             if((users[0].auth & conf.auth.business) != 0) {
                 params.business = 1;
             }

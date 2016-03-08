@@ -6,7 +6,6 @@ var main = require('./main.js'),
     download = require('./download'),
     search = require('./search'),
     user = require('./user'),
-    business = require('./business'),
     tag = require('./tag');
 
 
@@ -14,20 +13,17 @@ router.use('/', main);
 router.use('/upload', upload);
 router.use('/download', download);
 router.use('/search', search);
+router.use('/checkin', function(req, res){
+    res.render('checkin', {
+user: req.cookies.user
+     });
+ });
 router.use('/tag', tag);
 
 router.use('/user', user);
 
-router.use('/business', business);
-
 router.get('/rule', function(req, res){
     res.render('rule',{
-        user: req.cookies.user
-    });
-});
-
-router.get('/checkin', function(req, res){
-    res.render('checkin',{
         user: req.cookies.user
     });
 });
@@ -39,7 +35,7 @@ router.get('/intro', function(req, res){
 });
 
 router.use('/update', require('./updateIcon'));
-
+router.use('/business', require('./business'));
 
 router.get('/404', function(req, res) {
     res.render('404', {

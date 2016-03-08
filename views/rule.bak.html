@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>制作规范</title>
+	<link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/marxico.css">
+	<link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/iconfont.css">
+	<link rel="stylesheet" href="css/rule.css">
+	<link rel="stylesheet" href="css/footer.css">
+	<link rel="icon" href="images/icon.png" type="image/x-icon"/>
+</head>
+<body>
+	<%- include header.html %>
+	<section class="content">
+    
+<div id="wmd-preview-section-9" class="wmd-preview-section preview-content">
+
+<h1 id="icon-font规范">icon font规范</h1>
+
+<p><a href="http://iconfont.imweb.io/" target="_blank">IMWEB icon font</a></p>
+
+</div><div id="wmd-preview-section-10" class="wmd-preview-section preview-content">
+
+<h2 id="命名规范">命名规范</h2>
+
+<p><strong>字体名字</strong></p>
+
+<p>pc上的字体名称为<code>webfont</code>，移动端上的字体名称为<code>mfont</code></p>
+
+<p><strong>图标名字</strong></p>
+
+<p>首先由设计先根据所画的svg进行英文命名，然后前端进行确认，如有疑问可讨论确定命名；</p>
+
+<p>然后平台生成的class在svg的英文名字基础上加上前缀’i-‘，（如search.svg，其对应的class就是<code>i-search</code>），使用的时候结合class<code>icon-font</code>一起使用，如<code>i.icon-font.i-search</code></p>
+
+<p>最后名字中禁止出现中文，大写字母，特殊字符，数字等，多个单词使用<code>-</code>连接</p>
+
+</div><div id="wmd-preview-section-11" class="wmd-preview-section preview-content">
+
+<h2 id="设计svg标准">设计svg标准</h2>
+
+<p>由设计补充</p>
+
+</div><div id="wmd-preview-section-12" class="wmd-preview-section preview-content">
+
+<h2 id="icon-font使用标准">icon font使用标准</h2>
+
+<p>1、 可根据自身业务的及所兼容的浏览器特点，去掉不需要的字体，字体兼容可参考<a href="http://css3files.com/font/" target="_blank">@font-face</a></p>
+
+<p>2、 所有字体放在’css/fonts’目录，布置线上环境时请注意同源策略，解决办法为<code>Access-Control-Allow-Origin *</code></p>
+
+<p>3、 需新建一个基础scss文件，如<code>_icon-font.scss</code>放置icon font样式。</p>
+
+<p>4、 考虑到非全新项目，且区别于其他图片icon或css绘制的icon，class统一采用<code>.icon-font.i-iconname</code>的形式。如search图标的class为<code>.icon-font.i-search</code></p>
+
+<p>5、 公有样式放在class<code>.icon-font</code>中，默认字体大小为16px，行高为1倍</p>
+
+<pre class="prettyprint hljs-dark"><code class="hljs css"><span class="hljs-class">.icon-font</span> <span class="hljs-rules">{
+    <span class="hljs-rule"><span class="hljs-attribute">font-family</span>:<span class="hljs-value"> <span class="hljs-string">'webfont'</span></span></span>;
+    <span class="hljs-rule"><span class="hljs-attribute">speak</span>:<span class="hljs-value"> none</span></span>;
+    <span class="hljs-rule"><span class="hljs-attribute">font-style</span>:<span class="hljs-value"> normal</span></span>;
+    <span class="hljs-rule"><span class="hljs-attribute">font-weight</span>:<span class="hljs-value"> normal</span></span>;
+    <span class="hljs-rule"><span class="hljs-attribute">font-variant</span>:<span class="hljs-value"> normal</span></span>;
+    <span class="hljs-rule"><span class="hljs-attribute">text-transform</span>:<span class="hljs-value"> none</span></span>;
+    <span class="hljs-rule"><span class="hljs-attribute">line-height</span>:<span class="hljs-value"> <span class="hljs-number">1</span></span></span>;
+    <span class="hljs-rule"><span class="hljs-attribute">font-size</span>:<span class="hljs-value"> <span class="hljs-number">16px</span></span></span>;
+    <span class="hljs-rule"><span class="hljs-attribute">position</span>:<span class="hljs-value"> relative</span></span>;
+    <span class="hljs-rule"><span class="hljs-attribute">vertical-align</span>:<span class="hljs-value"> -<span class="hljs-number">2px</span></span></span>;
+
+    <span class="hljs-comment">/* Better Font Rendering =========== */</span>
+    <span class="hljs-rule"><span class="hljs-attribute">-webkit-font-smoothing</span>:<span class="hljs-value"> antialiased</span></span>;
+    <span class="hljs-rule"><span class="hljs-attribute">-moz-osx-font-smoothing</span>:<span class="hljs-value"> grayscale</span></span>;
+<span class="hljs-rule">}</span></span>
+</code></pre>
+
+<p>6、 统一使用伪元素before或after来生成内容，如：</p>
+
+<pre class="prettyprint hljs-dark"><code class="hljs css"><span class="hljs-class">.i-search</span><span class="hljs-pseudo">:before</span> <span class="hljs-rules">{
+    <span class="hljs-rule"><span class="hljs-attribute">content</span>:<span class="hljs-value"> <span class="hljs-string">"\e617"</span></span></span>;
+<span class="hljs-rule">}</span></span>
+</code></pre>
+
+<p>7、 不同的颜色，大小或位置控制可通过父级元素来控制</p>
+
+<pre class="prettyprint hljs-dark"><code class="hljs scss"><span class="hljs-class">.search-block</span>{
+    <span class="hljs-class">.i-search</span>{
+        <span class="hljs-attribute">color</span><span class="hljs-value">: <span class="hljs-hexcolor">#fff</span>;</span>
+        <span class="hljs-attribute">font-size</span><span class="hljs-value">: <span class="hljs-number">32px</span>;</span>    
+    }
+}
+</code></pre>
+
+<p>8、 可以使用vertical-align或绝对定位对齐文字，默认使用vertical-align</p></div>
+</div>
+	</section>
+
+
+	<%- include footer.html %>
+</body>
+</html>

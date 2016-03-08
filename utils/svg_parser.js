@@ -8,6 +8,8 @@ var conf = require('../conf.js'),
 var font = fontCarrier.create(),
 	outputCss = './public/css/iconfont.css',
 	svgPath = path.join('./' + conf.svgPath);
+// 部分浏览器不支持从0开始。
+var DIFF = conf.diff;
 
 function decimal2Hex(n) {
 	var hex = n.toString(16);
@@ -70,7 +72,7 @@ function genarateFonts(icons, csspath){
 		realPath,
 		iconContent;
 	icons.forEach(function (icon) {
-		iconContent = generateIconContent(icon.iconId);
+		iconContent = generateIconContent(icon.iconId + DIFF);
 		realPath = path.join(svgPath, icon.path);
 		if(fs.existsSync(realPath)) {
 			svgsObj[iconContent] = fs.readFileSync(realPath).toString();
@@ -122,7 +124,7 @@ function refreshFonts() {
                 console.error(err);
             }
             icons.forEach(function(icon) {
-                icon.content = svgParser.generateHtmlIconContent(icon.iconId);
+                icon.content = svgParser.generateHtmlIconContent(icon.iconId + DIFF);
             });
             genarateFonts(icons);
             generateCss(icons);

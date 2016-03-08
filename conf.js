@@ -8,7 +8,6 @@ module.exports = {
 	port: 4001,
 	// svg path
 	svgPath: './store/ke.qq.com-svg',
-	downloadPath: 'download',
 	allSvgZipPath: 'download/svgs.zip',
 	// mongodb info
 	dbInfo: {
@@ -16,10 +15,10 @@ module.exports = {
 		port: 27017,
 		dbName: 'iconfonts'
 	},
+diff: 32,
 	auth: {
 		upload: 1,
-		business: 2,
-		updateIcon: 4
-	},
-	maxUploadFileSize: 5*1024
+        business: 2,
+        updateIcon: 4
+	}
 };

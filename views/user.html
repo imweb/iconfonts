@@ -34,9 +34,10 @@
             height: 34px;
         }
         .link {
-            color:#c7254e;
+            color: #c7254e;
             margin-left: 20px;
         }
+
     </style>
 </head>
 <body>
@@ -45,9 +46,9 @@
         <% if(all.length > 0) { %>
         <div  class="content-block relative">
             <h1 class="list-title">您上传的图标库 <span>| <%= all.length %>，点击图标可进入页面给图标添加标签</span>
-            <% if(typeof business != 'undefined') { %>
-                <a href="/business" class="link">添加业务</a>
-            <% } %>
+                <% if(typeof business !== 'undefined'){ %>
+                <a class="link" href="/business">添加业务</a>
+                <% } %>
             </h1>
             <ul class="icon-list clearfix js-pcList">
             <% for(var i=0;i<all.length;i++){ %>

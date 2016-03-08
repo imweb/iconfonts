@@ -75,7 +75,7 @@ _.cleanFile = function(file) {
 };
 
 // 删除某个目录下，当前时间之前 time ms的所有文件
-_.clearPreviousFiles = function(folder, time) {
+_.cleanPreviousFiles = function(folder, time) {
     var now = +new Date(),
         stat,
         createTime,

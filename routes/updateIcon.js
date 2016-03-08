@@ -15,7 +15,7 @@ var Tag = require('../utils/tag.js'),
 
 var currentPath;
 
-router.get('/',/* auth,*/ function (req, res, next) {
+router.get('/', auth, function (req, res, next) {
     var id = req.query.id,
         user = req.cookies.user;
     // update
@@ -45,7 +45,8 @@ router.get('/',/* auth,*/ function (req, res, next) {
                     }
                     res.render('updateIcon', {
                         icon: icons[0],
-                        bids: bids
+                        bids: bids,
+                        user: user
                     });
                 });
                
@@ -61,7 +62,7 @@ router.get('/',/* auth,*/ function (req, res, next) {
 });
 
 
-router.post('/',/* auth,*/ function (req, res, next) {
+router.post('/', auth, function (req, res, next) {
     var user = req.cookies.user,
         params = req.body;
     // update
@@ -109,7 +110,7 @@ router.post('/',/* auth,*/ function (req, res, next) {
 * remove record from db
 * not unlink file on disk
  */
-router.post('/del',/* auth,*/ function (req, res, next) {
+router.post('/del', auth, function (req, res, next) {
     var user = req.cookies.user,
         id = req.body.id;
     userAuthCheck(user, conf.auth.updateIcon, function(hasAuth) {

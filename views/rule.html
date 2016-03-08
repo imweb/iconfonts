@@ -1,33 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-	<meta charset="UTF-8">
-	<title>制作规范</title>
-	<link rel="stylesheet" href="css/reset.css">
+<title>制作规范</title>
+<meta charset='utf-8'>
+    <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/marxico.css">
-	<link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/iconfont.css">
-	<link rel="stylesheet" href="css/rule.css">
-	<link rel="stylesheet" href="css/footer.css">
-	<link rel="icon" href="images/icon.png" type="image/x-icon"/>
-</head>
-<body>
-	<%- include header.html %>
-	<section class="content">
-    
-<div id="wmd-preview-section-9" class="wmd-preview-section preview-content">
+    <link rel="stylesheet" href="css/rule.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="icon" href="images/icon.png" type="image/x-icon"/>
+
+</head><body>
+<%- include header.html %>
+<div id='preview-contents' class='content'>
+<div id="wmd-preview-section-2" class="wmd-preview-section preview-content">
 
 <h1 id="icon-font规范">icon font规范</h1>
 
 <p><a href="http://iconfont.imweb.io/" target="_blank">IMWEB icon font</a></p>
 
-</div><div id="wmd-preview-section-10" class="wmd-preview-section preview-content">
+</div><div id="wmd-preview-section-3" class="wmd-preview-section preview-content">
 
 <h2 id="命名规范">命名规范</h2>
 
 <p><strong>字体名字</strong></p>
 
-<p>pc上的字体名称为<code>webfont</code>，移动端上的字体名称为<code>mfont</code></p>
+<p>默认字体为<code>iconfont</code>，课堂pc上的字体名称为<code>webfont</code>，课堂mobile上的字体名称为<code>mfont</code></p>
 
 <p><strong>图标名字</strong></p>
 
@@ -37,17 +36,37 @@
 
 <p>最后名字中禁止出现中文，大写字母，特殊字符，数字等，多个单词使用<code>-</code>连接</p>
 
-</div><div id="wmd-preview-section-11" class="wmd-preview-section preview-content">
+</div><div id="wmd-preview-section-4" class="wmd-preview-section preview-content">
 
 <h2 id="设计svg标准">设计svg标准</h2>
 
-<p>由设计补充</p>
+<p><img src="images/svg-rule.png" alt="svg rule" title=""></p>
 
-</div><div id="wmd-preview-section-12" class="wmd-preview-section preview-content">
+<p>1、 尺寸：设计尺寸480x480；icon设计时主要内容控制在420x420内；实际应用场景时，保持16、24、32、48这几个尺寸</p>
+
+<p>2、1像素线：1px的线根据实际场景在icon设计制作的时候进行换算，例如实际使用场景中的icon的尺寸16px的icon，换算公式是，480/16*1。</p>
+
+<p>3、 减少节点：为了确保图标的清晰显示，在绘制时须避免水平、垂直的边缘出现半个单位。（半个单位的路径会导致图标在最终显示时边缘模糊，不清晰），弧线在绘制时要保证弧度饱满。</p>
+
+<p>4、 曲线闭合：在绘制图形的时候，曲线必须是闭合的。如果曲线是不闭合的在字体转换的过程中是无发转译未闭合曲线的图形的。</p>
+
+<p>5、颜色填充：统一填充为黑色</p>
+
+<p>6、文件输出：SVG格式和png各一份，svg去掉勾选”保留ai编辑功能”,尽量保证文件够小，png作为参考</p>
+
+<p><img src="images/svg-output.png" alt="svg output" title=""></p>
+
+<p>7、模板下载：<a href="images/svg-template.ai" target="_blank">svg模版</a></p>
+
+</div><div id="wmd-preview-section-5" class="wmd-preview-section preview-content">
 
 <h2 id="icon-font使用标准">icon font使用标准</h2>
 
 <p>1、 可根据自身业务的及所兼容的浏览器特点，去掉不需要的字体，字体兼容可参考<a href="http://css3files.com/font/" target="_blank">@font-face</a></p>
+
+</div><div id="wmd-preview-section-6" class="wmd-preview-section preview-content">
+
+<pre class="prettyprint hljs-dark"><code class="language-css hljs"><span class="hljs-comment line-number">1.</span>// <span class="hljs-tag">ie8</span>+ (<span class="hljs-tag">ie8</span>有些版本<span class="hljs-tag">eot</span>格式需要添加?#，有些不需要，所以下面是最佳<span class="hljs-tag">ie8</span>+兼容实践)<br><span class="hljs-comment line-number">2.</span>// 如果不需要兼容安卓4<span class="hljs-class">.3-</span>的平板，可以去掉<span class="hljs-tag">ttf</span><br><span class="hljs-comment line-number">3.</span><span class="hljs-at_rule">@<span class="hljs-keyword">font-face</span></span> <span class="hljs-rules">{<br><span class="hljs-comment line-number">4.</span>    <span class="hljs-rule"><span class="hljs-attribute">font-family</span>:<span class="hljs-value"> <span class="hljs-string">"webfont"</span></span></span>;<br><span class="hljs-comment line-number">5.</span>    <span class="hljs-rule"><span class="hljs-attribute">src</span>:<span class="hljs-value"> <span class="hljs-function">url</span>(<span class="hljs-string">"iconfont.eot"</span>)</span></span>;<br><span class="hljs-comment line-number">6.</span>    <span class="hljs-rule"><span class="hljs-attribute">src</span>:<span class="hljs-value"> <span class="hljs-function">url</span>(<span class="hljs-string">"fonts/iconfont.eot?#iefix"</span>) <span class="hljs-function">format</span>(<span class="hljs-string">"embedded-opentype"</span>), <span class="hljs-function">url</span>(<span class="hljs-string">"fonts/iconfont.woff"</span>) <span class="hljs-function">format</span>(<span class="hljs-string">"woff"</span>), <span class="hljs-function">url</span>(<span class="hljs-string">"fonts/iconfont.ttf"</span>) <span class="hljs-function">format</span>(<span class="hljs-string">"truetype"</span>)</span></span>;<br><span class="hljs-comment line-number">7.</span>}</span><br><span class="hljs-comment line-number">8.</span><br><span class="hljs-comment line-number">9.</span>// 移动端 <span class="hljs-tag">woff</span>+<span class="hljs-tag">ttf</span> 或 直接<span class="hljs-tag">ttf</span>(安卓4<span class="hljs-class">.3-</span>使用<span class="hljs-tag">ttf</span>)<br><span class="hljs-comment line-number">10.</span><span class="hljs-at_rule">@<span class="hljs-keyword">font-face</span></span> <span class="hljs-rules">{<br><span class="hljs-comment line-number">11.</span>    <span class="hljs-rule"><span class="hljs-attribute">font-family</span>:<span class="hljs-value"> <span class="hljs-string">"webfont"</span></span></span>;<br><span class="hljs-comment line-number">12.</span>    <span class="hljs-rule"><span class="hljs-attribute">src</span>:<span class="hljs-value"> <span class="hljs-function">url</span>(<span class="hljs-string">"fonts/iconfont.woff"</span>) <span class="hljs-function">format</span>(<span class="hljs-string">"woff"</span>), <span class="hljs-function">url</span>(<span class="hljs-string">"fonts/iconfont.ttf"</span>) <span class="hljs-function">format</span>(<span class="hljs-string">"truetype"</span>)</span></span>;<br><span class="hljs-comment line-number">13.</span>}</span><br></code></pre>
 
 <p>2、 所有字体放在’css/fonts’目录，布置线上环境时请注意同源策略，解决办法为<code>Access-Control-Allow-Origin *</code></p>
 
@@ -57,46 +76,39 @@
 
 <p>5、 公有样式放在class<code>.icon-font</code>中，默认字体大小为16px，行高为1倍</p>
 
-<pre class="prettyprint hljs-dark"><code class="hljs css"><span class="hljs-class">.icon-font</span> <span class="hljs-rules">{
-    <span class="hljs-rule"><span class="hljs-attribute">font-family</span>:<span class="hljs-value"> <span class="hljs-string">'webfont'</span></span></span>;
-    <span class="hljs-rule"><span class="hljs-attribute">speak</span>:<span class="hljs-value"> none</span></span>;
-    <span class="hljs-rule"><span class="hljs-attribute">font-style</span>:<span class="hljs-value"> normal</span></span>;
-    <span class="hljs-rule"><span class="hljs-attribute">font-weight</span>:<span class="hljs-value"> normal</span></span>;
-    <span class="hljs-rule"><span class="hljs-attribute">font-variant</span>:<span class="hljs-value"> normal</span></span>;
-    <span class="hljs-rule"><span class="hljs-attribute">text-transform</span>:<span class="hljs-value"> none</span></span>;
-    <span class="hljs-rule"><span class="hljs-attribute">line-height</span>:<span class="hljs-value"> <span class="hljs-number">1</span></span></span>;
-    <span class="hljs-rule"><span class="hljs-attribute">font-size</span>:<span class="hljs-value"> <span class="hljs-number">16px</span></span></span>;
-    <span class="hljs-rule"><span class="hljs-attribute">position</span>:<span class="hljs-value"> relative</span></span>;
-    <span class="hljs-rule"><span class="hljs-attribute">vertical-align</span>:<span class="hljs-value"> -<span class="hljs-number">2px</span></span></span>;
+<pre class="prettyprint hljs-dark"><code class="hljs css"><span class="hljs-comment line-number">1.</span><span class="hljs-class">.icon-font</span> <span class="hljs-rules">{<br><span class="hljs-comment line-number">2.</span>    <span class="hljs-rule"><span class="hljs-attribute">font-family</span>:<span class="hljs-value"> <span class="hljs-string">'webfont'</span></span></span>;<br><span class="hljs-comment line-number">3.</span>    <span class="hljs-rule"><span class="hljs-attribute">speak</span>:<span class="hljs-value"> none</span></span>;<br><span class="hljs-comment line-number">4.</span>    <span class="hljs-rule"><span class="hljs-attribute">font-style</span>:<span class="hljs-value"> normal</span></span>;<br><span class="hljs-comment line-number">5.</span>    <span class="hljs-rule"><span class="hljs-attribute">font-weight</span>:<span class="hljs-value"> normal</span></span>;<br><span class="hljs-comment line-number">6.</span>    <span class="hljs-rule"><span class="hljs-attribute">font-variant</span>:<span class="hljs-value"> normal</span></span>;<br><span class="hljs-comment line-number">7.</span>    <span class="hljs-rule"><span class="hljs-attribute">text-transform</span>:<span class="hljs-value"> none</span></span>;<br><span class="hljs-comment line-number">8.</span>    <span class="hljs-rule"><span class="hljs-attribute">line-height</span>:<span class="hljs-value"> <span class="hljs-number">1</span></span></span>;<br><span class="hljs-comment line-number">9.</span>    <span class="hljs-rule"><span class="hljs-attribute">font-size</span>:<span class="hljs-value"> <span class="hljs-number">16px</span></span></span>;<br><span class="hljs-comment line-number">10.</span>    <span class="hljs-rule"><span class="hljs-attribute">position</span>:<span class="hljs-value"> relative</span></span>;<br><span class="hljs-comment line-number">11.</span>    <span class="hljs-rule"><span class="hljs-attribute">vertical-align</span>:<span class="hljs-value"> -<span class="hljs-number">2px</span></span></span>;<br><span class="hljs-comment line-number">12.</span><br><span class="hljs-comment line-number">13.</span>    <span class="hljs-comment">/* Better Font Rendering =========== */</span><br><span class="hljs-comment line-number">14.</span>    <span class="hljs-rule"><span class="hljs-attribute">-webkit-font-smoothing</span>:<span class="hljs-value"> antialiased</span></span>;<br><span class="hljs-comment line-number">15.</span>    <span class="hljs-rule"><span class="hljs-attribute">-moz-osx-font-smoothing</span>:<span class="hljs-value"> grayscale</span></span>;<br><span class="hljs-comment line-number">16.</span>}</span><br></code></pre>
 
-    <span class="hljs-comment">/* Better Font Rendering =========== */</span>
-    <span class="hljs-rule"><span class="hljs-attribute">-webkit-font-smoothing</span>:<span class="hljs-value"> antialiased</span></span>;
-    <span class="hljs-rule"><span class="hljs-attribute">-moz-osx-font-smoothing</span>:<span class="hljs-value"> grayscale</span></span>;
-<span class="hljs-rule">}</span></span>
-</code></pre>
+<p>6、 统一使用伪元素before来生成内容，如：</p>
 
-<p>6、 统一使用伪元素before或after来生成内容，如：</p>
-
-<pre class="prettyprint hljs-dark"><code class="hljs css"><span class="hljs-class">.i-search</span><span class="hljs-pseudo">:before</span> <span class="hljs-rules">{
-    <span class="hljs-rule"><span class="hljs-attribute">content</span>:<span class="hljs-value"> <span class="hljs-string">"\e617"</span></span></span>;
-<span class="hljs-rule">}</span></span>
-</code></pre>
+<pre class="prettyprint hljs-dark"><code class="hljs css"><span class="hljs-comment line-number">1.</span><span class="hljs-class">.i-search</span><span class="hljs-pseudo">:before</span> <span class="hljs-rules">{<br><span class="hljs-comment line-number">2.</span>    <span class="hljs-rule"><span class="hljs-attribute">content</span>:<span class="hljs-value"> <span class="hljs-string">"\e617"</span></span></span>;<br><span class="hljs-comment line-number">3.</span>}</span><br></code></pre>
 
 <p>7、 不同的颜色，大小或位置控制可通过父级元素来控制</p>
 
-<pre class="prettyprint hljs-dark"><code class="hljs scss"><span class="hljs-class">.search-block</span>{
-    <span class="hljs-class">.i-search</span>{
-        <span class="hljs-attribute">color</span><span class="hljs-value">: <span class="hljs-hexcolor">#fff</span>;</span>
-        <span class="hljs-attribute">font-size</span><span class="hljs-value">: <span class="hljs-number">32px</span>;</span>    
-    }
-}
-</code></pre>
+<pre class="prettyprint hljs-dark"><code class="hljs less"><span class="hljs-comment line-number">1.</span><span class="hljs-class">.search-block</span>{<br><span class="hljs-comment line-number">2.</span>    <span class="hljs-class">.i-search</span>{<br><span class="hljs-comment line-number">3.</span>        <span class="hljs-attribute">color</span>: <span class="hljs-hexcolor">#fff</span>;<br><span class="hljs-comment line-number">4.</span>        <span class="hljs-attribute">font-size</span>: <span class="hljs-number">32px</span>;    <br><span class="hljs-comment line-number">5.</span>    }<br><span class="hljs-comment line-number">6.</span>}<br></code></pre>
 
-<p>8、 可以使用vertical-align或绝对定位对齐文字，默认使用vertical-align</p></div>
-</div>
-	</section>
+<p>8、 可以使用vertical-align或绝对定位对齐文字，默认使用vertical-align</p>
 
+</div><div id="wmd-preview-section-7" class="wmd-preview-section preview-content">
 
-	<%- include footer.html %>
-</body>
-</html>
+<h2 id="关于字体的更多了解">关于字体的更多了解</h2>
+
+<ul><li><a href="http://blog.jobbole.com/50061/" target="_blank">认识字体渲染</a></li>
+</ul>
+
+<p>渲染技术： </p>
+
+<ul><li>chrome37+，ie9+，firefox都采用DirectWrite</li>
+<li>xp ie8- 采用GDI。</li>
+<li>苹果采用Quartz</li>
+</ul>
+
+<p>渲染策略： </p>
+
+<ul><li>ie9+, firefox默认使用亚像素subpixel；</li>
+<li>chrome37+ 有些字体采用阶段法，12-17px 灰度grayscale，18-48px采用亚像素subpixel，49px+采用亚像素grayscale，微软雅黑12-48px均采用亚像素subpixel；</li>
+<li>xp ie8- 使用ClearType。</li>
+<li>mac os采用亚像素渲染subpixel，ios为了减轻CPU的压力采用灰度grayscale</li>
+</ul></div></div>
+
+<%- include footer.html %>
+</body></html>
