@@ -2,7 +2,7 @@ var express = require('express'),
 	fs = require('fs');
 	path = require('path'),
 	conf = require('./conf.js'),
-	multer  = require('multer'),
+	//multer  = require('multer'),
 	ejs = require('ejs');
 
 var app = express();
@@ -23,7 +23,7 @@ app.use(express.static(path.join(__dirname, '/public')));
 
 app.use(express.static(path.join(__dirname, '/download')));
 
-app.use(multer({ dest: './uploads/'}));
+// app.use(multer({ dest: './uploads/'}));
 
 app.use(jsonParser);
 // 缺少这个，会导致 req.body = {}
@@ -40,7 +40,7 @@ app.use(require('./routes'));
 // 	errorLogfile.write(meta + err.stack + '\r\n');
 
 // 	res.status(500).send({error: 'something blew up!'});
-//     // req.end();
+// req.end();
 // });
 
 app.listen(conf.port);

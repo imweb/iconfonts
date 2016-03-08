@@ -1,15 +1,16 @@
+
 /*
- * insert business
+* insert business
  */
 var B = require('./business');
 
 var b = new B({
-    name: 'H5 公众帐号',
-    pm: 'lqlong'
+    name: '上课web化',
+    pm: 'ouvenzhang'
 });
 
-b.save(function(err) {
-    if (err) {
+ b.save(function (err, bid) {
+    if(err) {
         console.log(err);
     }
 });
