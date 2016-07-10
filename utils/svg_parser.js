@@ -71,6 +71,9 @@ function genarateFonts(icons, csspath){
 	var svgsObj = {},
 		realPath,
 		iconContent;
+	if(!icons || icons.length ===0) {
+		return;
+	}
 	icons.forEach(function (icon) {
 	    iconContent = generateIconContent(icon.iconId + DIFF);
 		realPath = path.join(svgPath, icon.path);
@@ -80,10 +83,13 @@ function genarateFonts(icons, csspath){
 		
 	});
 	font.setSvg(svgsObj);
+
+	console.log('svgsObj', svgsObj)
 	// 导出字体
 	font.output({
 		path: path.join(path.dirname(outputCss ? outputCss : csspath), 'fonts/iconfont')
     });
+
 }
 
 // 文件转化成base64
