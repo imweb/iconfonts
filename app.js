@@ -1,9 +1,12 @@
 var express = require('express'),
-	fs = require('fs');
-	path = require('path'),
-	conf = require('./conf.js'),
-	//multer  = require('multer'),
-	ejs = require('ejs');
+    ejs = require('ejs'),
+    //multer  = require('multer'),
+    passport = require('passport');
+
+var fs = require('fs'),
+	path = require('path');
+
+var conf = require('./conf.js');
 
 var app = express();
 
@@ -26,7 +29,6 @@ app.use(express.static(path.join(__dirname, '/download')));
 // app.use(multer({ dest: './uploads/'}));
 
 app.use(jsonParser);
-// 缺少这个，会导致 req.body = {}
 app.use(urlencodedParser);
 
 // cookie
@@ -34,11 +36,20 @@ var cookieParser = require('cookie-parser');
 app.use(cookieParser());
 app.use(require('./routes'));
 
+// 授权成功将整个user对象存入session
+passport.serializeUser(function(user, done) {
+  done(null, user);
+});
+passport.deserializeUser(function(obj, done) {
+  done(null, obj);
+});
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 // app.use(function(err, req, res, next) {
 // 	var meta = '[' + new Date() + '] ' + req.url + '\r\n';
 // 	errorLogfile.write(meta + err.stack + '\r\n');
-
 // 	res.status(500).send({error: 'something blew up!'});
 // req.end();
 // });

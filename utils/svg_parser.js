@@ -84,7 +84,7 @@ function genarateFonts(icons, csspath){
 	});
 	font.setSvg(svgsObj);
 
-	console.log('svgsObj', svgsObj)
+	// console.log('svgsObj', svgsObj)
 	// 导出字体
 	font.output({
 		path: path.join(path.dirname(outputCss ? outputCss : csspath), 'fonts/iconfont')

@@ -29,7 +29,7 @@ function getAllIcons(cb) {
 }
 
 router.get(['/', '/index'], function(req, res, next) {
-    clean.cleanPreviousFiles(path.dirname(conf.allSvgZipPath), 24*3600*1000);
+    // clean.cleanPreviousFiles(path.dirname(conf.allSvgZipPath), 24*3600*1000);
     getAllIcons(function(err, icons, ret){
         if (err) {
             return next(err);

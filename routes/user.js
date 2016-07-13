@@ -1,9 +1,59 @@
 var express = require('express'),
     router = express.Router();
 
+var passport = require('passport');
+var StrategyQQ = require('passport-qq').Strategy;
+
+var conf = require('../conf.js');
 var Icon = require('../models/icon.js'),
     auth = require('../midware/auth.js'),
     User = require('../models/user.js');
+
+// QQ第三方登录
+passport.use(new StrategyQQ({
+    clientID: conf.appId,
+    clientSecret: conf.appKey,
+    callbackURL: conf.origin + '/user/auth/qq/callback',
+    state: 1
+}, function(accessToken, refreshToken, profile, done) {
+    // json格式详情见 http://wiki.connect.qq.com/get_user_info
+    // profile = {
+    //     id: openid,
+    //     nickname: nickname,
+    //     _json: json
+    // }
+    User.find({
+        profile: {
+            id: profile.id
+        }
+    }).exec(function(err, user) {
+        if (user) {
+            return done(err, user);
+        }
+
+        new User({
+            user: profile.nickname,
+            profile: {
+                id: profile.id,
+                info: profile._json
+            }
+        }).save(function(err, doc) {
+            return done(err, user);
+        });
+    });
+}));
+
+router.get('/auth/qq', passport.authenticate('qq'));
+
+router.get(
+    '/auth/qq/callback',
+    // todo: 失败重定向需提示
+    passport.authenticate('qq', {failureRedirect: '/?err=1'}),
+    function(req, res) {
+        res.redirect('/');
+    }
+);
+
 
 router.get('/', auth, function(req, res, next) {
     var cookies = req.cookies,
@@ -38,17 +88,5 @@ router.get('/', auth, function(req, res, next) {
     });
 
 });
-
-/*
-* 检查用户是否有上传权限
-* upload: 1
- */
-function checkAdmin(user, cb) {
-    User.find({
-        user: user
-    }).exec(function(err, users) {
-        typeof cb === 'function' && cb(users.length > 0);
-    });
-}
 
 module.exports = router;
