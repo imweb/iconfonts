@@ -27,8 +27,10 @@
     "multer": "^0.1.8",
     "q": "^1.4.1",
     "unzip": "^0.1.11",
-    "mongoose-auto-increment": "^4.0.0",
-    "eventemitter2": "^0.4.14"
+    "mongoose-auto-increment": "^5.0.1",
+    "eventemitter2": "^0.4.14",
+    "passport": "^0.3.2",
+    "passport-qq": "0.0.3"
   },
   "devDependencies": {
     "pm2": "*"

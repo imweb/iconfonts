@@ -3,7 +3,8 @@ var express = require('express'),
 	path = require('path'),
 	conf = require('./conf.js'),
 	//multer  = require('multer'),
-	ejs = require('ejs');
+	ejs = require('ejs'),
+	passport = require('passport');
 
 var app = express();
 
@@ -32,9 +33,19 @@ app.use(urlencodedParser);
 // cookie
 var cookieParser = require('cookie-parser');
 app.use(cookieParser());
+
+
+// 授权成功将整个user对象存入session
+passport.serializeUser(function(user, done){
+	done(null, user);
+});
+passport.deserializeUser(function(obj, done){
+	done(null, obj);
+})
+
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(require('./routes'));
-
-
 // app.use(function(err, req, res, next) {
 // 	var meta = '[' + new Date() + '] ' + req.url + '\r\n';
 // 	errorLogfile.write(meta + err.stack + '\r\n');

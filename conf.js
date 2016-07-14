@@ -15,6 +15,13 @@ module.exports = {
 		port: 27017,
 		dbName: 'iconfonts'
 	},
+
+	// QQ互联应用信息
+	appId: 101334858,
+	appKey: '6db56cd9b88dc0074cc468d0c444cd0a',
+	origin: 'http://iconfont.imweb.io',
+
+	
     diff: 32,
 	auth: {
 		upload: 1,
