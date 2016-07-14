@@ -12,6 +12,12 @@
                 <a href="/user"><%=user%></a>
             </li>
             <% } %>
+            
+            <% if(typeof user === 'undefined') { %>
+            <li class="menu-item" id="logIn">
+                <a href="javascript:void(0)">登录</a>
+            </li>
+            <% } %>
             <li class="menu-item search-panel">
                 <form class="search-form" id="search_form" action="/search">
                     <input type="text" name="q" placeholder="搜索图标">
