@@ -16,6 +16,10 @@
 			});
 			location.href = '/download/' + ids.join('-');
 		});
+
+		$('#logIn').on('click', function(){
+			$('#loginReg').toggle();
+		})
 	}
 
 	function init(){

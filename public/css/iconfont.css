@@ -36,7 +36,6 @@ url("./fonts/iconfont.svg#iconfont") format("svg");}
 .i-phone:before{content: "\f044";}
 .i-weixin-border:before{content: "\f045";}
 .i-user-group-border:before{content: "\f047";}
-.i-time:before{content: "\f049";}
 .i-pen:before{content: "\f04a";}
 .i-star-border:before{content: "\f04c";}
 .i-close:before{content: "\f04d";}
@@ -102,7 +101,6 @@ url("./fonts/iconfont.svg#iconfont") format("svg");}
 .i-picture:before{content: "\f0b6";}
 .i-view:before{content: "\f0b9";}
 .i-praise:before{content: "\f0ba";}
-.i-forum:before{content: "\f0bb";}
 .i-news:before{content: "\f0bc";}
 .i-interest:before{content: "\f0bd";}
 .i-consultation:before{content: "\f0be";}
@@ -126,3 +124,20 @@ url("./fonts/iconfont.svg#iconfont") format("svg");}
 .i-insert:before{content: "\f0d7";}
 .i-progress-now:before{content: "\f0d8";}
 .i-ke-comment:before{content: "\f0d9";}
+.i-d-bottom:before{content: "\f0e0";}
+.i-d-top:before{content: "\f0e1";}
+.i-home3:before{content: "\f0e2";}
+.i-forum2:before{content: "\f0e3";}
+.i-plan2:before{content: "\f0e4";}
+.i-center2:before{content: "\f0e5";}
+.i-volume:before{content: "\f0e6";}
+.i-schedule:before{content: "\f0ec";}
+.i-pause:before{content: "\f0f0";}
+.i-time:before{content: "\f0f1";}
+.i-m-hot:before{content: "\f0f2";}
+.i-scot:before{content: "\f0f3";}
+.i-right-light:before{content: "\f0f4";}
+.i-course-replay:before{content: "\f0f5";}
+.i-installment:before{content: "\f0f6";}
+.i-smile:before{content: "\f0fd";}
+.i-cry:before{content: "\f0fe";}
