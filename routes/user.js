@@ -23,6 +23,13 @@ passport.use(new StrategyQQ({
     //     nickname: nickname,
     //     _json: json
     // }
+    process.nextTick(function () {
+      // To keep the example simple, the user's qq profile is returned to
+      // represent the logged-in user.  In a typical application, you would want
+      // to associate the qq account with a user record in your database,
+      // and return that user instead.
+      return done(null, profile);
+    });
     User.find({
         profile: {
             id: profile.id
@@ -31,7 +38,6 @@ passport.use(new StrategyQQ({
         if (user) {
             return done(err, user);
         }
-        console.log("1");
         new User({
             user: profile.nickname,
             profile: {
@@ -43,6 +49,7 @@ passport.use(new StrategyQQ({
         });
     });
 }));
+
 
 
 router.get('/', auth, function(req, res, next) {
@@ -78,6 +85,10 @@ router.get('/', auth, function(req, res, next) {
     });
 
 });
+
+
+
+
 
 router.get('/auth/qq', passport.authenticate('qq'));
 

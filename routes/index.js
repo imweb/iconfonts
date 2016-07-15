@@ -15,7 +15,7 @@ router.use('/download', download);
 router.use('/search', search);
 router.use('/checkin', function(req, res){
     res.render('checkin', {
-user: req.cookies.user
+        user: req.cookies.user
      });
  });
 router.use('/tag', tag);
@@ -30,7 +30,7 @@ router.get('/rule', function(req, res){
 
 router.get('/intro', function(req, res){
     res.render('intro', {
-        user: req.cookies.user
+        user: req.user
     });
 });
 
