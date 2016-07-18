@@ -7,7 +7,8 @@ var express = require('express'),
 	passport = require('passport'),
 	bodyParser = require('body-parser'),
 	cookieParser = require('cookie-parser'),
-	session = require('express-session');
+	session = require('express-session'),
+	StrategyQQ = require('passport-qq').Strategy;
 
 var app = express();
 var jsonParser = bodyParser.json();
@@ -20,18 +21,24 @@ app.set('view engine', 'html');
 app.set('views', path.join(__dirname, '/views'));
 
 
+app.use(cookieParser());
+app.use(bodyParser());
+app.use(session({ secret: 'keyboard cat' }));
 
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(require('./routes'));
+
+app.use(express.static(path.join(__dirname, '/public')));
 app.use(express.static(path.join(__dirname, '/download')));
 // app.use(multer({ dest: './uploads/'}));
 app.use(jsonParser);
 // 缺少这个，会导致 req.body = {}
 app.use(urlencodedParser);
 // cookie
-app.use(cookieParser());
-app.use(passport.initialize());
-app.use(passport.session());
-app.use(require('./routes'));
-app.use(express.static(path.join(__dirname, '/public')));
+
+
+
 
 
 // 授权成功将整个user对象存入session
@@ -44,10 +51,6 @@ passport.deserializeUser(function(obj, done){
 
 
 
-
-app.get('/proctise', function(req, res){
-  res.render('proctise', { user: "req.user" });
-});
 // app.use(function(err, req, res, next) {
 // 	var meta = '[' + new Date() + '] ' + req.url + '\r\n';
 // 	errorLogfile.write(meta + err.stack + '\r\n');

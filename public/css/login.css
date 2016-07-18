@@ -12,6 +12,8 @@
 }
 .loginReg h1{
 	color: #fff;
+	font-size: 20px;
+	font-weight: normal;
 	margin: 10px 0 0 20px;
 }
 
@@ -51,3 +53,5 @@
 .otherLogin a:hover{
 	color: #81d9fd;
 }
+
+

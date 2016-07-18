@@ -10,48 +10,6 @@ var StrategyQQ = require('passport-qq').Strategy;
 
 var conf = require('../conf.js');
 
-// QQ第三方登录
-passport.use(new StrategyQQ({
-    clientID: conf.appId,
-    clientSecret: conf.appKey,
-    callbackURL: conf.origin + '/user/auth/qq/callback',
-    state: 1
-},function(accessToken, refreshToken, profile, done){
-    // json格式详情见 http://wiki.connect.qq.com/get_user_info
-    // profile = {
-    //     id: openid,
-    //     nickname: nickname,
-    //     _json: json
-    // }
-    process.nextTick(function () {
-      // To keep the example simple, the user's qq profile is returned to
-      // represent the logged-in user.  In a typical application, you would want
-      // to associate the qq account with a user record in your database,
-      // and return that user instead.
-      return done(null, profile);
-    });
-    User.find({
-        profile: {
-            id: profile.id
-        }
-    }).exec(function(err, user){
-        if (user) {
-            return done(err, user);
-        }
-        new User({
-            user: profile.nickname,
-            profile: {
-                id: profile.id,
-                info: profile._json
-            }
-        }).save(function(err, doc){
-            return done(err, user);
-        });
-    });
-}));
-
-
-
 router.get('/', auth, function(req, res, next) {
     var cookies = req.cookies,
         user = cookies.user;
@@ -86,19 +44,6 @@ router.get('/', auth, function(req, res, next) {
 
 });
 
-
-
-
-
-router.get('/auth/qq', passport.authenticate('qq'));
-
-router.get(
-    '/auth/qq/callback', 
-    passport.authenticate('qq',{failureRedirect: '/?err=1'}),
-    function(req, res){
-        res.redirect('/');
-    }
-)
 
 /*
 * 检查用户是否有上传权限

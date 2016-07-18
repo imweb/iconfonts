@@ -22,7 +22,13 @@
                 <li class="menu-item" id="logIn"><a href="javascript:void(0)">登录</a></li>
             <% } else { %>
                 <li class="menu-item user-name">
-                    <a href="/user"><%=user%></a>
+                    <img src="images/icon.png" id="personImg">
+                    <a href="javascript:void(0);" id="person"><%= user.nickname %></a>
+                    <ul id="personOption">
+                        <li><a href="/user">个人中心</a></li>
+                        <li><a href="/logout">注销</a></li>
+                    </ul>
+                    <span class="arrow"></span>
                 </li>
             <% } %>
             <li class="menu-item search-panel">
@@ -30,15 +36,7 @@
                     <input type="text" name="q" placeholder="搜索图标">
                     <a href="javascript:$('#search_form').submit();" class="icon-font i-search search-btn"> </a>
                     <script src="lib/jquery-2.1.4.min.js"></script>
-                    <script type="text/javascript">
-                    var $searchForm = $('#search_form');
-                    var ENTER_KEY = 13;
-                    function searchHandler (event) {
-                        if (event.charCode === ENTER_KEY)
-                            $searchForm.submit();
-                    }
-                    $searchForm.keypress(searchHandler);
-                    </script>
+                    <script src="js/search.js"></script>
                 </form>
             </li>
 		</ul>

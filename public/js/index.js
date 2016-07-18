@@ -17,9 +17,21 @@
 			location.href = '/download/' + ids.join('-');
 		});
 
-		$('#logIn').on('click', function(){
+		$(document).on('click', function(){
+			$('#personOption,#loginReg,.arrow').hide();
+		});
+
+		$('#logIn').on('click', function(e){
+			e.stopPropagation();
 			$('#loginReg').toggle();
-		})
+		});
+
+		$('#person,#personImg').on('click', function(e){
+			e.stopPropagation();
+			$('#personOption,.arrow').toggle();
+		});
+
+
 	}
 
 	function init(){
