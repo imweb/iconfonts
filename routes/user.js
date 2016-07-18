@@ -5,10 +5,15 @@ var Icon = require('../models/icon.js'),
     auth = require('../midware/auth.js'),
     User = require('../models/user.js');
 
+var passport = require('passport');
+var StrategyQQ = require('passport-qq').Strategy;
+
+var conf = require('../conf.js');
+
 router.get('/', auth, function(req, res, next) {
     var cookies = req.cookies,
         user = cookies.user;
-    
+    // console.log(cookies);
     Icon.find({
         // author: user
     }).exec(function(err, icons) {
@@ -39,16 +44,17 @@ router.get('/', auth, function(req, res, next) {
 
 });
 
+
 /*
 * 检查用户是否有上传权限
 * upload: 1
  */
-function checkAdmin(user, cb) {
-    User.find({
-        user: user
-    }).exec(function(err, users) {
-        typeof cb === 'function' && cb(users.length > 0);
-    });
-}
+// function checkAdmin(user, cb) {
+//     User.find({
+//         user: user
+//     }).exec(function(err, users) {
+//         typeof cb === 'function' && cb(users.length > 0);
+//     });
+// }
 
 module.exports = router;

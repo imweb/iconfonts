@@ -47,7 +47,7 @@ router.get(['/', '/index'], function(req, res, next) {
             });
             res.render('index', {
                 all: icons,
-                user: req.cookies.user,
+                user: req.user,
                 bMaps: bMaps
             });
         });

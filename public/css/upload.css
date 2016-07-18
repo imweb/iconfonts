@@ -1,0 +1,86 @@
+.form-control{
+	width: 960px;
+	display: block;
+	margin: 50px auto 0;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 20px;
+    color: #555;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+.upload-block{
+	width: 960px;
+	margin: 20px auto 50px;
+	height: 350px;
+	padding-top: 200px;
+	border: 1px solid #ddd;
+	position: relative;
+}
+.upload-block p{
+	color: #666;
+	font-size: 14px;
+	line-height: 30px;
+	text-align: center;
+	
+}
+.upload-block .highlight{
+	color: red;
+}
+.u-info {
+	width: 960px;
+	margin: 20px auto;
+	display: none;
+	min-height: 500px;
+}
+.u-title {
+	height: 50px;
+	line-height: 50px;
+	font-size: 20px;
+}
+.info li {
+	height: 30px;
+	line-height: 30px;
+}
+.info .error {
+	color: red;
+}
+.mask {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: #999;
+	z-index: 10;
+	display: none;
+}
+
+.mask p {
+	display: block;
+	height: 32px;
+	line-height: 32px;
+	font-size: 20px;
+	position: absolute;
+	width: 100%;
+	top: 50%;
+	text-align: center;
+	margin-top: -16px;
+	color: #fff;
+}
+
+.form-control{
+	width: 960px;
+	display: block;
+	margin: 50px auto 0;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 20px;
+    color: #555;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}

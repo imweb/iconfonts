@@ -6,99 +6,14 @@
 	<link rel="stylesheet" href="css/reset.css">
 	<link rel="stylesheet" href="css/header.css">
 	<link rel="stylesheet" href="css/footer.css">
+	<link rel="stylesheet" href="css/login.css">
+	<link rel="stylesheet" href="css/upload.css">
 	<link rel="stylesheet" href="css/iconfont.css">
 	<link rel="icon" href="images/icon.png" type="image/x-icon"/>
-	<style>
-	.form-control{
-		width: 960px;
-		display: block;
-		margin: 50px auto 0;
-	    height: 34px;
-	    padding: 6px 12px;
-	    font-size: 14px;
-	    line-height: 20px;
-	    color: #555;
-	    background-color: #fff;
-	    border: 1px solid #ccc;
-	    border-radius: 4px;
-	}
-	.upload-block{
-		width: 960px;
-		margin: 20px auto 50px;
-		height: 350px;
-		padding-top: 200px;
-		border: 1px solid #ddd;
-		position: relative;
-	}
-	.upload-block p{
-		color: #666;
-		font-size: 14px;
-		line-height: 30px;
-		text-align: center;
-		
-	}
-	.upload-block .highlight{
-		color: red;
-	}
-	.u-info {
-		width: 960px;
-		margin: 20px auto;
-		display: none;
-		min-height: 500px;
-	}
-	.u-title {
-		height: 50px;
-		line-height: 50px;
-		font-size: 20px;
-	}
-	.info li {
-		height: 30px;
-		line-height: 30px;
-	}
-	.info .error {
-		color: red;
-	}
-	.mask {
-		position: absolute;
-		top: 0;
-		left: 0;
-		right: 0;
-		bottom: 0;
-		background: #999;
-		z-index: 10;
-		display: none;
-	}
-
-	.mask p {
-		display: block;
-		height: 32px;
-		line-height: 32px;
-		font-size: 20px;
-		position: absolute;
-		width: 100%;
-		top: 50%;
-		text-align: center;
-		margin-top: -16px;
-		color: #fff;
-	}
-
-	.form-control{
-		width: 960px;
-		display: block;
-		margin: 50px auto 0;
-	    height: 34px;
-	    padding: 6px 12px;
-	    font-size: 14px;
-	    line-height: 20px;
-	    color: #555;
-	    background-color: #fff;
-	    border: 1px solid #ccc;
-	    border-radius: 4px;
-	}
-	</style>
 </head>
 <body>
 	<%- include header.html %>
+	<%- include login.html %>
 	<select id="js-business" class="form-control" name="business"> 
 		<option value="-1">-- 请选择项目 --</option>  
 		<% for(var i=0;i<bids.length;i++){ %>
@@ -120,110 +35,7 @@
 	</div>
 	<%- include footer.html %>
 	<script src="lib/jquery-2.1.4.min.js"></script>
-	<script>
-	var obj = $("#upload"),
-		$mask = $('.js-mask'),
-		$select = $('#js-business'),
-		select = $select[0];
-
-	$select.on('change', function() {
-		if(select.value == -1) {
-	    	$mask.find('p').text('请选择项目！');
-	    	$mask.show();
-		} else {
-			$mask.hide();
-		}
-	});
-	obj.on('dragenter', function (e){
-	    e.stopPropagation();
-	    e.preventDefault();
-	    $(this).css('border', '2px solid #0B85A1');
-	});
-	obj.on('dragover', function (e) {
-	     e.stopPropagation();
-	     e.preventDefault();
-	});
-	obj.on('drop', function (e) {
-	 
-	    $(this).css('border', '2px dotted #0B85A1');
-	    e.preventDefault();
-	    var files = e.originalEvent.dataTransfer.files;
-	 
-	     //We need to send dropped files to Server
-	     //console.log(files)
-	     //
-	    if(select.value == -1) {
-	    	$mask.find('p').text('请选择项目！');
-	    	$mask.show();
-	    } else {
-	    	$mask.find('p').text('上传中...');
-	    	$mask.show();
-	    	handleFileUpload(files,obj);
-	    }
-	    
-	});
-
-	function handleFileUpload(files,obj){
-	    for (var i = 0; i < files.length; i++){
-	        var fd = new FormData();
-	        fd.append('file', files[i]);
-	        fd.append('business', select.value);
-	        sendFileToServer(fd,status);
-	    }
-	}
-
-	function sendFileToServer(formData,status){
-		
-	    var uploadURL ="/upload"; //Upload URL
-	    var extraData ={}; //Extra Data.
-	    var jqXHR = $.ajax({
-	        xhr: function() {
-	            var xhrobj = $.ajaxSettings.xhr();
-	            if (xhrobj.upload) {
-	                    xhrobj.upload.addEventListener('progress', function(event) {
-	                        var percent = 0;
-	                        var position = event.loaded || event.position;
-	                        var total = event.total;
-	                        if (event.lengthComputable) {
-	                            percent = Math.ceil(position / total * 100);
-	                        }
-	                        //Set progress
-	                        //status.setProgress(percent);
-	                    }, false);
-	                }
-	            return xhrobj;
-	        },
-	        url: uploadURL,
-	        type: "POST",
-	        contentType:false,
-	        processData: false,
-	        cache: false,
-	        data: formData,
-	        success: function(data){
-	        	if(data.retcode == 0) {
-	        		data = data.result;
-	        		$('#upload').hide();
-	        		var succInfo = [],
-	        			errInfo = []
-	        		for(var i in data) {
-	        			if(data[i]) { 
-	        				errInfo.push('<li class="error">' + i + '  :  ' + data[i] + '</li>') 				
-	        			} else {
-	        				succInfo.push('<li>' + i + '  :  ' + '添加成功 </li>');
-	        			}
-	        			
-	        		}
-	        		$('#js-info').append(errInfo.concat(succInfo).join(''));
-	        		$('#js-upInfo').show();
-	        	}       
-	        },
-	        error: function(){
-        		$('#js-info').append('<li class="error">服务错误！请联系管理员！</li>');
-        		$('#js-upInfo').show();
-	        }
-	    });  
-	}
-
-	</script>
+	<script src="js/index.js"></script>
+	<script src="js/upload.js"></script>
 </body>
 </html>
