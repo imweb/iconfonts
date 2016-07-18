@@ -5,7 +5,6 @@ node_modules
 docs/ke.qq.com-svg.7z
 docs/webfont.zip
 demo
-*.bat
 error.log
 public/css/fonts/
 public/css/iconfont.css

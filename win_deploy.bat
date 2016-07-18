@@ -1,0 +1,1 @@
+rsync -rtzvlC --exclude upload --exclude public_dist --exclude node_modules --exclude '.git' ./ "imweb@test.imweb.io":"/data/www/iconfont.imweb.io"
