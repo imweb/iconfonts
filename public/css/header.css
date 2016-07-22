@@ -11,6 +11,7 @@
 
 .menu ul {
 	position: relative;
+	z-index: 20;
 }
 .menu-item{
 	float: left;
@@ -29,7 +30,12 @@
 	color: #fff;
 }
 
-
+#logIn img{
+	vertical-align: middle;
+}
+#logIn a{
+	font-size: 14px;
+}
 .user-name {
 	position: absolute;
 	right: 200px;

@@ -3,7 +3,7 @@
 * tag database operation.
  */
 
-var Tag = require('../models/tag');
+var Tag = require('../model/tag');
 
 /*
 * add tag

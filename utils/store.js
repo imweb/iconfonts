@@ -3,7 +3,7 @@ var path = require('path'),
     fs = require('fs'),
     unzip = require('unzip');
 var conf = require('../conf.js'),
-    Icon = require('../models/icon.js');
+    Icon = require('../model/icon.js');
 
 function storeSvg (file, cb) {
     var filePath = file.path,

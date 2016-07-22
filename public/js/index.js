@@ -21,15 +21,21 @@
 			$('#personOption,#loginReg,.arrow').hide();
 		});
 
-		$('#logIn').on('click', function(e){
-			e.stopPropagation();
-			$('#loginReg').toggle();
-		});
+		// $('#logIn').on('click', function(e){
+		// 	e.stopPropagation();
+		// 	$('#loginReg').toggle();
+		// });
 
 		$('#person,#personImg').on('click', function(e){
 			e.stopPropagation();
 			$('#personOption,.arrow').toggle();
 		});
+
+		$('.add').on('click', function(){
+			$('.addProject').toggle();
+			$('#project').focus();
+			$('.addProject span').text("")
+		})
 
 
 	}
