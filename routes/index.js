@@ -8,11 +8,19 @@ var main = require('./main.js'),
     user = require('./user'),
     tag = require('./tag');
 
+
+var myupload = require('../route/upload'),
+    mybusiness = require('../route/business'),
+    mymain = require('../route/main'),
+    myuser = require('../route/user'),
+    mytag = require('../route/tag');
+
 var conf = require('../conf.js');
 var User = require('../models/user.js');
 
 router.use('/', main);
-router.use('/upload', upload);
+
+router.use('/upload', myupload);
 router.use('/download', download);
 router.use('/search', search);
 router.use('/checkin', function(req, res){
@@ -41,30 +49,30 @@ passport.use(new StrategyQQ({
       // and return that user instead.
       return done(null, profile);
     });
-    User.find({
-        profile: {
-            id: profile.id
-        }
-    }).exec(function(err, user){
-        if (user) {
-            return done(err, user);
-        }
-        new User({
-            user: profile.nickname,
-            profile: {
-                id: profile.id,
-                info: profile._json
-            }
-        }).save(function(err, doc){
-            return done(err, user);
-        });
-    });
+    // User.find({
+    //     profile: {
+    //         id: profile.id
+    //     }
+    // }).exec(function(err, user){
+    //     if (user) {
+    //         return done(err, user);
+    //     }
+    //     new User({
+    //         user: profile.nickname,
+    //         profile: {
+    //             id: profile.id,
+    //             info: profile._json
+    //         }
+    //     }).save(function(err, doc){
+    //         return done(err, user);
+    //     });
+    // });
 }));
 
 
-router.use('/tag', tag);
+router.use('/tag', mytag);
 
-router.use('/user', user);
+router.use('/user', myuser);
 
 router.get('/rule', function(req, res){
     res.render('rule',{
@@ -72,14 +80,17 @@ router.get('/rule', function(req, res){
     });
 });
 
-router.get('/intro', function(req, res){
+router.use('/intro', function(req, res){
     res.render('intro', {
         user: req.user
-    });
-});
-
+     });
+ });
+router.use('/myindex', mymain);
+// router.get('/myindex', function(req, res){
+//   res.send("ok");
+// });
 router.use('/update', require('./updateIcon'));
-router.use('/business', require('./business'));
+router.use('/business', mybusiness);
 
 router.get('/404', function(req, res) {
     res.render('404', {

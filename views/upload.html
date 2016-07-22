@@ -14,12 +14,22 @@
 <body>
 	<%- include header.html %>
 	<%- include login.html %>
-	<select id="js-business" class="form-control" name="business"> 
-		<option value="-1">-- 请选择项目 --</option>  
-		<% for(var i=0;i<bids.length;i++){ %>
-		<option value="<%=bids[i].bid %>"><%=bids[i].name %></option>
-		<% } %>
-	</select>
+	<div class="option">
+		<select id="js-business" class="form-control" name="business"> 
+			<option value="-1">-- 请选择项目 --</option>  
+			<% for(var i=0;i<bids.length;i++){ %>
+			<option value="<%=bids[i].bid %>"><%=bids[i].name %></option>
+			<% } %>
+		</select>
+		<a href="javascript:void(0)" class="add">添加项目</a>
+	</div>
+	<div class="addProject">
+		<form>
+			<label for="project">项目名称：</label>
+			<input type="text" name="project" id="project" autocomplete="off"><span></span>
+			<input type="button" class="submit" value="提交">
+		</form>
+	</div>
 	<div id="upload" class="upload-block">
 		<p>将svg文件拖拽至框中上传，<span class="highlight">SVG名以H-(h-), M-(m-)开头被认为是移动端icon，其他默认为pc端icon</span>。</p>
 		<p>可以将 svg 文件打包成 zip 压缩包批量上传。<span class="highlight">(目前只支持 zip 压缩包)</span></p>
@@ -35,6 +45,7 @@
 	</div>
 	<%- include footer.html %>
 	<script src="lib/jquery-2.1.4.min.js"></script>
+	<script src="js/uploadAjax.js"></script>
 	<script src="js/index.js"></script>
 	<script src="js/upload.js"></script>
 </body>
