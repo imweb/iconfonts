@@ -1,31 +1,36 @@
 var express = require('express'),
     router = express.Router();
 
-var main = require('./main.js'),
-    upload = require('./upload'),
-    download = require('./download'),
-    search = require('./search'),
-    user = require('./user'),
-    tag = require('./tag');
+// var main = require('../routes/main.js'),
+//     upload = require('./upload'),
+//     download = require('./download'),
+//     search = require('./search'),
+//     user = require('./user'),
+//     tag = require('./tag');
 
 
 var myupload = require('../route/upload'),
-    mybusiness = require('../route/business'),
+    // mybusiness = require('../route/business'),
     mymain = require('../route/main'),
     myuser = require('../route/user'),
     mytag = require('../route/tag'),
-    myupdate = require('../route/updateIcon');
+    myupdate = require('../route/updateIcon'),
+    mydownload = require('../route/download'),
+    mysearch = require('../route/search'),
+    management = require('../route/management');
     
 var addUserToMongo = require('../midware/addUserToMongo.js');
 
 var conf = require('../conf.js');
-var User = require('../models/user.js');
+// var User = require('../models/user.js');
 
-router.use('/', main);
+router.use('/', mymain);
 
 router.use('/upload', myupload);
-router.use('/download', download);
-router.use('/search', search);
+router.use('/download', mydownload);
+router.use('/search', mysearch);
+router.use('/management', management);
+
 router.use('/checkin', function(req, res){
     res.render('checkin', {
         user: req.user
@@ -66,7 +71,6 @@ router.get('/rule', function(req, res){
 });
 
 router.use('/intro', function(req, res){
-
     res.render('intro', {
         user: req.user
      });
@@ -76,7 +80,11 @@ router.use('/myindex', mymain);
 //   res.send("ok");
 // });
 router.use('/update', myupdate);
-router.use('/business', mybusiness);
+router.get('/business',function(req, res) {
+    res.render('404', {
+        user: req.user
+    });
+});
 
 router.get('/404', function(req, res) {
     res.render('404', {

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>制作规范</title>
+	<link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/marxico.css">
+    <link rel="stylesheet" href="css/iconfont.css">
+	<link rel="stylesheet" href="css/header.css">
+	<link rel="stylesheet" href="css/login.css">
+	<link rel="stylesheet" href="css/management.css">
+	<link rel="stylesheet" href="css/footer.css">
+	<link rel="icon" href="images/icon.png" type="image/x-icon"/>
+</head>
+<body>
+	<%- include header.html %>
+	<div class="wrap">
+		<table>
+			<tr>
+				<td>用户头像</td>
+				<td>用户名</td>
+				<td>权限设置</td>
+			</tr>
+			<% if(all.length > 0) { %>	
+			<% for(var i=0;i<all.length;i++){ %>        
+			<tr>
+				<td><img src="<%= all[i].img %>"></td>
+				<td data-id="<%= all[i].id %>"><%= all[i].user %></td>
+				<td><a href="javascript:void(0)" class="userAuth" data-value="<%= all[i].auth %>">
+					<% if(all[i].auth) { %>
+						取消权限
+					<% } else { %>
+	   					设置权限
+	        		<% } %>
+				</a></td>
+			</tr>
+			<% } %>
+
+			<% } else { %>
+	        <h1 class="empty">暂无用户！</h1>
+	        <% } %>
+		</table>
+
+	</div>
+	<%- include footer.html %>
+	<script src="js/index.js"></script>
+	<script src="js/management.js"></script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+.wrap{
+	width: 960px;
+	margin: 0 auto;
+}
+a{
+	color: #000;
+}
+.wrap table{
+	margin-top: 20px;
+}
+table tr td{
+	text-align: center;
+	vertical-align: middle;
+}
+table #userAuth{
+
+}

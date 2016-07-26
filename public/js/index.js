@@ -7,8 +7,17 @@
 		$('body').on('click', '.js-pcList li', function(){
 			var $this = $(this);
 			$this.toggleClass('i-right');
-			$('#js-download-btn')[$('.i-right').length > 0 ? 'show' : 'hide']();
+			$('#js-download-btn')[$('.js-pcList .i-right').length > 0 ? 'show' : 'hide']();
 		});
+
+		$('.downloadAllBtn').on('click', function() {
+			var $list = $(this).siblings('.icon-list').children();
+			$list.each(function(){
+				$(this).addClass('i-right');
+			})
+			$('#js-download-btn').show();		
+		})
+
 		$('#js-download-btn').on('click', function(){
 			var ids = [];
 			$('.js-pcList li.i-right').each(function(index, item){
@@ -36,7 +45,6 @@
 			$('#project').focus();
 			$('.addProject span').text("")
 		})
-
 
 	}
 

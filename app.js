@@ -27,7 +27,7 @@ app.use(session({ secret: 'keyboard cat' }));
 
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(require('./routes'));
+app.use(require('./route'));
 
 app.use(express.static(path.join(__dirname, '/public')));
 app.use(express.static(path.join(__dirname, '/download')));

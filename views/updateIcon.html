@@ -101,6 +101,7 @@
     </div>
     <%- include footer.html %>
     <script src="lib/jquery-2.1.4.min.js"></script>
+    <script src="js/index.js"></script>
     <script>
     (function(exports){
         var query = function (n) {
@@ -134,6 +135,7 @@
                         }
                     },
                     error: function(data) {
+                        console.log(data.retcode);
                     }   
                 });
             });

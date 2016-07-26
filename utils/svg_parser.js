@@ -2,7 +2,7 @@
 var conf = require('../conf.js'),
 	path = require('path'),
 	fontCarrier = require('font-carrier'),
-	Icon = require('../models/icon.js'),
+	Icon = require('../model/icon.js'),
 	fs = require('fs');
 
 var font = fontCarrier.create(),
@@ -84,7 +84,7 @@ function genarateFonts(icons, csspath){
 	});
 	font.setSvg(svgsObj);
 
-	console.log('svgsObj', svgsObj)
+	// console.log('svgsObj', svgsObj)
 	// 导出字体
 	font.output({
 		path: path.join(path.dirname(outputCss ? outputCss : csspath), 'fonts/iconfont')

@@ -1,3 +1,7 @@
+'use strict';
+/*
+ * @author helondeng, moxhe,junmo
+ */
 var express = require('express'),
     path = require('path'),
     fs = require('fs'),
@@ -21,16 +25,13 @@ var allowExts = ['.svg', '.zip'],
     maxUploadFileSize = 50*1024;
 
 var Business = require('../model/business.js');
+var addUserToMongo = require('../midware/addUserToMongo.js');
 
-router.get('/', function(req, res, next){
+router.get('/', addUserToMongo, function(req, res, next){
 	var user = req.user;
-	if (!user) {
-		res.render('intro', {
-	        user: req.user
-	    });
-		return console.log("未登录")
-	}
-	Business.find({}).exec(function(err, bids){
+	Business.find({
+        pm: req.user.nickname
+    }).exec(function(err, bids){
 		// console.log(bids);
 		if (err) {
 			console.error(err);
@@ -66,7 +67,7 @@ router.post('/addproject', function(req, res){
 		}
 		Business.create(newBusiness, function(err){
 			if (err) return console.log("添加数据库失败");
-			console.log("添加数据库成功");
+			// console.log("添加数据库成功");
 
 			Business.find({}).exec(function(err, bids){
 				// console.log(bids);
@@ -93,6 +94,7 @@ router.post('/', jsonParser, upMulter, function(req, res, next) {
     var file = req.files.file,
         extname = path.extname(file.path);
 
+    console.log(file);
     logger.logMulty({
         source: file.originalname,
         dest: file.name,
@@ -184,3 +186,4 @@ function upload(file, cb) {
 
 
 module.exports = router;
+
