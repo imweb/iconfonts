@@ -5,20 +5,25 @@
 		});
 
 		$('body').on('click', '.js-pcList li', function(){
-			var $this = $(this);
+			var $this = $(this),
+				$downloadBtn = $this.parents(".icon-list").siblings('h1').children('#js-download-btn');
+				
+
+
 			$this.toggleClass('i-right');
-			$('#js-download-btn')[$('.js-pcList .i-right').length > 0 ? 'show' : 'hide']();
+			var $li = $this.parents('.icon-list').children('.i-right');
+			$downloadBtn[$li.length > 0 ? 'show' : 'hide']();
 		});
 
 		$('.downloadAllBtn').on('click', function() {
-			var $list = $(this).siblings('.icon-list').children();
+			var $list = $(this).parents("h1").siblings('.icon-list').children();
 			$list.each(function(){
 				$(this).addClass('i-right');
 			})
-			$('#js-download-btn').show();		
+			$(this).siblings('.downloadBtn').show();		
 		})
 
-		$('#js-download-btn').on('click', function(){
+		$('.downloadBtn').on('click', function(){
 			var ids = [];
 			$('.js-pcList li.i-right').each(function(index, item){
 				ids.push($(item).data('id'));

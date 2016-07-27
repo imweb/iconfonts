@@ -72,12 +72,12 @@
 }
 
 li.i-right:before{
-	content: "hehe";
+	/*content: "hehe";*/
     position: absolute;
     color: #ff4400;
     top: 0;
     right: 0;
-    background: rgb(245, 245, 245);
+    /*background: rgb(245, 245, 245);*/
 }
 
 .icon .icon-content{

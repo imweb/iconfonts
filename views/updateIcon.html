@@ -8,75 +8,9 @@
     <link rel="stylesheet" href="css/iconfont.css">
     <link rel="stylesheet" href="css/index.css">
     <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/updateIcon.css">
     <link rel="icon" href="images/icon.png" type="image/x-icon"/>
-    <style>
-        .container {
-            width: 960px;
-            margin: 50px auto 0;
-            height: 500px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
 
-        .side-left {
-            width: 340px;
-            float: left;
-            padding: 30px;
-            height: 100%;
-        }
-
-        .s-name {
-            margin-top: 50px;
-            display: block;
-            font-size: 20px;
-            margin-bottom: 20px;
-        }
-
-        .icon-font {
-            display: block;
-            font-size: 200px;
-        }
-        .side-right {
-            float: left;
-            padding: 30px;
-            width: 500px;
-        }
-
-        .add-form input {
-            margin-top: 20px; 
-            height: 40px;
-            line-height: 40px;
-            outline: none;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            font-size: 16px;
-            padding: 0 10px;
-        }
-        .btn {
-            display: block;
-            height: 40px;
-            line-height: 40px;
-            width: 140px;
-            text-align: center;
-            background: #38b7ea;
-            color: #fff;
-            border-radius: 5px;
-            margin-top: 20px;
-        }
-        .add-form select{
-            width: 208px;
-            display: block;
-            margin-top: 20px;
-            height: 42px;
-            padding: 6px 12px;
-            font-size: 16px;
-            line-height: 20px;
-            color: #555;
-            background-color: #fff;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-    </style>
 </head>
 <body>
     <%- include header.html %>
@@ -102,67 +36,6 @@
     <%- include footer.html %>
     <script src="lib/jquery-2.1.4.min.js"></script>
     <script src="js/index.js"></script>
-    <script>
-    (function(exports){
-        var query = function (n) {
-            var m = window.location.search.match(new RegExp("(\\?|&)" + n + "=([^&]*)(&|$)"));
-            return !m ? "" : decodeURIComponent(m[2]);
-        };
-
-
-        var id = query('id'),
-            $updateBtn = $('#js-update'),
-            $form = $('#js-form'),
-            $input = $form.find('input[name="newname"]'),
-            $delBtn = $('#js-del');
-
-        exports.bindEvents = function() {
-            $updateBtn.on('click', function() {
-                var val = $input.val();
-                $.ajax({
-                    url: '/update',
-                    type: 'post', 
-                    dataType: 'json',
-                    data: {
-                        id: id,
-                        name: val,
-                        business: $('#js-business').val()
-                    },
-                    success: function(data) {
-                        console.log(data);
-                        if(data.retcode === 0) {
-                            alert('更新成功');
-                        }
-                    },
-                    error: function(data) {
-                        console.log(data.retcode);
-                    }   
-                });
-            });
-
-            $delBtn.on('click', function() {
-                $.ajax({
-                    url: '/update/del',
-                    type: 'post', 
-                    dataType: 'json',
-                    data: {
-                        id: id,
-                    },
-                    success: function(data) {
-                        if(data.retcode === 0) {
-                            alert('删除成功');
-                        }
-                    },
-                    error: function(data) {
-                    }   
-                });
-            });
-        };
-
-
-    })(this)
-
-    this.bindEvents();
-    </script>
+    <script src="js/updateIcon.js"></script>
 </body>
 </html>

@@ -58,12 +58,13 @@ router.get('/', addUserToMongo, function(req, res, next){
 });
 
 router.post('/addproject', function(req, res){
-	console.log(req.body);
+	// console.log(req.body);
 	if (req.body.project) {
 
 		var newBusiness = {
 			name: req.body.project,
-			pm: req.user.nickname
+			pm: req.user.nickname,
+            id: req.user.id
 		}
 		Business.create(newBusiness, function(err){
 			if (err) return console.log("添加数据库失败");
@@ -89,12 +90,13 @@ router.post('/addproject', function(req, res){
  * upload 成功后，重新生成字体和css
  */
 router.post('/', jsonParser, upMulter, function(req, res, next) {
-    var user = req.user.nickname;
+    var user = req.user.nickname,
+        id = req.user.id;
 
     var file = req.files.file,
         extname = path.extname(file.path);
 
-    console.log(file);
+    // console.log(file);
     logger.logMulty({
         source: file.originalname,
         dest: file.name,
@@ -103,6 +105,7 @@ router.post('/', jsonParser, upMulter, function(req, res, next) {
 
     file.author = user;
     file.business = req.body.business;
+    file.id = id;
 
     
     if (allowExts.indexOf(extname) == -1) {

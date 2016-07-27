@@ -27,7 +27,7 @@ router.post('/delete', function(req, res, next){
 router.get('/', addUserToMongo, function(req, res, next) {
     function getAllIcons(cb) {
         Icon.find({
-            author: req.user.nickname
+            id: req.user.id
         }).sort({
                 iconId: 1
             }).exec(function(err, icons) {
@@ -61,7 +61,7 @@ router.get('/', addUserToMongo, function(req, res, next) {
         // }
 
         Business.find({
-            pm: req.user.nickname
+            id: req.user.id
         }).exec(function(err, bids) {
             var bMaps = {};
             bids.forEach(function(b) {

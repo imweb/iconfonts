@@ -1,6 +1,8 @@
 var express = require('express'),
     router = express.Router();
-
+var User = require('../model/user.js'),
+    Business = require('../model/business.js'),
+    Icon = require('../model/icon.js');
 // var main = require('../routes/main.js'),
 //     upload = require('./upload'),
 //     download = require('./download'),
@@ -50,13 +52,49 @@ passport.use(new StrategyQQ({
     //     nickname: nickname,
     //     _json: json
     // }
-    process.nextTick(function () {
-      // To keep the example simple, the user's qq profile is returned to
-      // represent the logged-in user.  In a typical application, you would want
-      // to associate the qq account with a user record in your database,
-      // and return that user instead.
-      return done(null, profile);
-    });
+
+    var newuser = {
+      user: profile.nickname,
+      id: profile.id,
+      img: profile._json.figureurl_qq_1
+    };
+    User.find({
+      id: newuser.id
+    }).exec(function(err, user){
+      if (user.length !== 0) {
+          console.log(user)
+          Business.update({
+            pm: user[0].user
+          },{
+            "$set":{"id" :user[0].id}
+          },{multi: 1}).exec(function(err){
+            if (err) {
+              console.log(err)
+            }
+            console.log("更新成功");
+          })
+
+
+          Icon.update({
+            author: user[0].user
+          },{
+            "$set":{"id" :user[0].id}
+          },{multi: true}).exec(function(err){
+            if (err) {
+              console.log(err)
+            }
+            console.log("更新成功");
+          })
+
+          return done(err, profile);
+      }
+      User.create(newuser, function(err){
+        if (err) return console.log(err);
+        return done(err, profile);
+      });
+
+    })
+    
 }));
 
 

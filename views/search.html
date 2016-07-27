@@ -27,8 +27,10 @@
 
 		<% if(all[k].length > 0) { %>
 		<div  class="content-block relative">
-			<h1 class="list-title"><%=item %> - 图标库<span>| <%= all[k].length %></span></h1>
-			<a class="rightBtn" id="js-download-btn" href="javascript:;">下载</a>
+			<h1 class="list-title"><%=item %> - 图标库<span>| <%= all[k].length %></span>
+			<a class="downloadAllBtn" href="javascript:void(0);">全选</a>
+			<a class="downloadBtn" id="js-download-btn" href="javascript:void(0);">下载</a></h1>
+
 			<ul class="icon-list clearfix js-pcList">
 			<% for(var i=0;i<all[k].length;i++){ %>
 				<li class="icon icon-font" data-id="<%= all[k][i].iconId %>">

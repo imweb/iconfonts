@@ -22,11 +22,11 @@ function addUserToMongo(req, res, next){
 			img: req.user._json.figureurl_qq_1
 		};
 
-		if (user.length === 0) {
-			User.create(newuser, function(err){
-				if (err) return console.log(err);
-			});
-		}
+		// if (user.length === 0) {
+		// 	User.create(newuser, function(err){
+		// 		if (err) return console.log(err);
+		// 	});
+		// }
 
 		User.update({
 			id: req.user.id

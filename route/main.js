@@ -17,12 +17,15 @@ router.get(['/', '/index'], function(req, res, next) {
             // console.log(users)
             if (users.length == 0) {
                 // return console.error(err);
-                return res.send("没有icon");
+                res.render('index', {
+                    user: req.user,
+                    bMaps: undefined
+                });
             }
 
             var newUsers = [];
             users.forEach(function(user) {
-                newUsers.push({"author": user.user})
+                newUsers.push({"id": user.id})
             })
             // console.log(newUsers)
             Icon.find({
@@ -64,7 +67,7 @@ router.get(['/', '/index'], function(req, res, next) {
         // }
         var newBusiness = [];
             users.forEach(function(user) {
-                newBusiness.push({"pm": user.user})
+                newBusiness.push({"id": user.id})
             })
             // console.log('newBusiness',newBusiness)
         Business.find({

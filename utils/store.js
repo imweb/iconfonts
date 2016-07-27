@@ -22,9 +22,11 @@ function storeSvg (file, cb) {
                 name: path.basename(fileName, '.svg'),
                 author: file.author,
                 path: '/' + fileName,
-                business: file.business
+                business: file.business,
+                id: file.id
             }, function(errMaps) {
                 // 删除临时文件
+                // console.log(file);
                 if(fs.existsSync(filePath)) {
                     fs.unlinkSync(filePath);
                 }
@@ -64,7 +66,8 @@ function storeZip (file, cb) {
                     name: path.basename(fileInfo.name, '.svg'),
                     path: fileInfo.path,
                     author: file.author,
-                    business: file.business
+                    business: file.business,
+                    id: file.id
                 });
             } else {
                 entry.autodrain();
