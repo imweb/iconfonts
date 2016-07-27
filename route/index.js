@@ -27,19 +27,17 @@ var conf = require('../conf.js');
 // var User = require('../models/user.js');
 
 router.use('/', mymain);
-
 router.use('/upload', myupload);
 router.use('/download', mydownload);
 router.use('/search', mysearch);
 router.use('/management', management);
-
 router.use('/checkin', function(req, res){
     res.render('checkin', {
         user: req.user
      });
  });
 
-
+// QQ接口登录设置
 passport.use(new StrategyQQ({
     clientID: conf.appId,
     clientSecret: conf.appKey,
@@ -62,29 +60,28 @@ passport.use(new StrategyQQ({
       id: newuser.id
     }).exec(function(err, user){
       if (user.length !== 0) {
-          console.log(user)
-          Business.update({
-            pm: user[0].user
-          },{
-            "$set":{"id" :user[0].id}
-          },{multi: 1}).exec(function(err){
-            if (err) {
-              console.log(err)
-            }
-            console.log("更新成功");
-          })
+          // Business.update({
+          //   pm: user[0].user
+          // },{
+          //   "$set":{"id" :user[0].id}
+          // },{multi: 1}).exec(function(err){
+          //   if (err) {
+          //     console.log(err)
+          //   }
+          //   console.log("更新成功");
+          // })
 
 
-          Icon.update({
-            author: user[0].user
-          },{
-            "$set":{"id" :user[0].id}
-          },{multi: true}).exec(function(err){
-            if (err) {
-              console.log(err)
-            }
-            console.log("更新成功");
-          })
+          // Icon.update({
+          //   author: user[0].user
+          // },{
+          //   "$set":{"id" :user[0].id}
+          // },{multi: true}).exec(function(err){
+          //   if (err) {
+          //     console.log(err)
+          //   }
+          //   console.log("更新成功");
+          // })
 
           return done(err, profile);
       }

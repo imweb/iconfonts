@@ -30,7 +30,7 @@ var addUserToMongo = require('../midware/addUserToMongo.js');
 router.get('/', addUserToMongo, function(req, res, next){
 	var user = req.user;
 	Business.find({
-        pm: req.user.nickname
+        id: req.user.id
     }).exec(function(err, bids){
 		// console.log(bids);
 		if (err) {
@@ -60,7 +60,6 @@ router.get('/', addUserToMongo, function(req, res, next){
 router.post('/addproject', function(req, res){
 	// console.log(req.body);
 	if (req.body.project) {
-
 		var newBusiness = {
 			name: req.body.project,
 			pm: req.user.nickname,
