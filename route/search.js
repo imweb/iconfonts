@@ -19,7 +19,7 @@ router.get('/', function (req, res, next) {
             });
             res.render('search', {
                 all: arr,
-                user: req.cookies.user,
+                user: req.user,
                 bMaps: bMaps
             });
         });

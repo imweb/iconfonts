@@ -14,7 +14,7 @@
 <body>
     <%- include header.html %>
     <div class="layout">
-
+        <% if(bMaps.business !== "none") { %>
         <% 
         var item;
         for(var k in bMaps) { 
@@ -24,8 +24,8 @@
         %>
         <div  class="content-block relative">
             <h1 class="list-title"><%=item %> - 图标库 <span  > |<%= all[k].length %></span>
-                <a class="del" href="javascript:void(0)" data-name="<%=item %>">删除</a>
-                <a class="downloadAllBtn" href="javascript:void(0);">全选</a>
+                <a class="del" href="javascript:void(0)" data-name="<%=item %>">全部删除</a>
+                <a class="selectAllBtn" href="javascript:void(0);" data-value="0">全选</a>
                 <a class="downloadBtn" id="js-download-btn" href="javascript:void(0);">下载</a>
             </h1>
             
@@ -46,7 +46,10 @@
         </div>
         <% }
         }
-         %>
+        %>
+        <% } else { %>
+        <h1 class="empty">暂无上传 icon ！</h1>
+        <% } %>
     </div>
     <%- include footer.html %>
     <script src="lib/jquery-2.1.4.min.js"></script>

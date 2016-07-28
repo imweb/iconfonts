@@ -77,7 +77,10 @@ router.get(['/', '/index'], function(req, res, next) {
             bids.forEach(function(b) {
                 bMaps[b.bid] = b.name;
             });
-            // console.log(bids)
+            var empty = isEmptyObject(bMaps);
+            if (empty) {
+                bMaps.business = "none"
+            }
             res.render('index', {
                 all: rets,
                 user: req.user,
@@ -88,6 +91,11 @@ router.get(['/', '/index'], function(req, res, next) {
     });
 });
 
-
+function isEmptyObject(obj) {
+    for (var key in obj) {
+        return false;
+    }
+    return true;
+}
 
 module.exports = router;

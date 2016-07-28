@@ -143,7 +143,7 @@ router.get('/user/auth/qq',
 router.get('/user/auth/qq/callback', 
   passport.authenticate('qq', { failureRedirect: '/login' }),
   function(req, res) {
-    res.redirect('/intro');
+    res.redirect('/');
   });
 
 router.get('/logout', function(req, res){

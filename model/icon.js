@@ -65,7 +65,7 @@ IconSchema.statics.insertByOrder = function (icons, finishCb) {
 IconSchema.statics.insertOne = function (obj) {
     this.find({
         name: obj.name,
-        author: obj.author
+        id: obj.id
     }).exec(function (err, icons) {
         // console.log('obj是这个:',obj);
         if (!icons.length) {

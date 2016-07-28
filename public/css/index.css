@@ -21,7 +21,7 @@
 .relative{
 	position: relative;
 }
-.downloadAllBtn{
+.selectAllBtn{
 	display: inline-block !important;
 	margin-left: 30px;
 	height: 35px;
@@ -33,6 +33,9 @@
 	background-color: #38b7ea;
 	color: #fff;
 }
+.disabled{
+	background-color: #d2d3d4;
+}
 .downloadBtn{
 	margin-top: 29px;
 	float: right;
@@ -42,16 +45,20 @@
 	width: 100px;
 	border-radius: 4px;
 	text-align: center;
-	background-color: #38b7ea;
+	/*background-color: #38b7ea;*/
+	background-color: #d2d3d4;
 	color: #fff;
-	display: none;
+	/*display: none;*/
+}
+.disabled{
+	background-color: #38b7ea;
 }
 .icon{
-	margin: 10px 0;
+	padding: 20px 0 0 0;
 	color:#333;
-	width: 100px;
+	width: 110px;
 	text-align: center;
-	height: 100px;
+	height: 110px;
 	float: left;
 }
 
@@ -95,7 +102,7 @@ li.i-right:before{
 
 
 .icon:hover{
-	background: rgb(245, 245, 245);
+	background: #efefef;
 }
 
 .back2top{

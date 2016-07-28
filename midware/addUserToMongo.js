@@ -5,7 +5,7 @@ var User = require('../model/user.js');
 function addUserToMongo(req, res, next){
 	var user = req.user;
 	if (!user) {
-		return res.redirect('http://iconfont.imweb.io/intro');
+		return res.redirect('http://iconfont.imweb.io/user/auth/qq');
 	}
 
 

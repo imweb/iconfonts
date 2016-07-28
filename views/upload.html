@@ -25,8 +25,8 @@
 	</div>
 	<div class="addProject">
 		<form>
-			<label for="project">项目名称：</label>
-			<input type="text" name="project" id="project" autocomplete="off"><span></span>
+			<input type="text" name="project" id="project" autocomplete="off" placeholder="项目名称">
+			<!-- <span></span> -->
 			<input type="button" class="submit" value="提交">
 		</form>
 	</div>
@@ -39,10 +39,11 @@
 	</div>
 
 	<div id="js-upInfo" class="u-info">
-		<h1 class="u-title">上传结果：</h1>
+		<h1 class="u-title">上传结果：(上传之后如发现部分icon不能正常显示，建议重启浏览器)</h1>
 		<ul id="js-info" class="info">
 		</ul>
 	</div>
+	<div class="bg"></div>
 	<%- include footer.html %>
 	<script src="lib/jquery-2.1.4.min.js"></script>
 	<script src="js/uploadAjax.js"></script>

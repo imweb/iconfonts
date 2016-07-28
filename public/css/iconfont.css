@@ -6,3 +6,12 @@ url("./fonts/iconfont.woff") format("woff"),
 url("./fonts/iconfont.ttf") format("truetype"),
 url("./fonts/iconfont.svg#iconfont") format("svg");}
 .icon-font{font-family:"iconfont";font-size:16px;font-style:normal;font-weight: normal;font-variant: normal;text-transform: none;line-height: 1;position: relative;vertical-align:-2px;-webkit-font-smoothing: antialiased;-moz-osx-font-smoothing: grayscale;}
+.i-course-q-a:before{content: "\f125";}
+.i-course-record:before{content: "\f126";}
+.i-course-record-border:before{content: "\f127";}
+.i-course-test:before{content: "\f128";}
+.i-c-remind:before{content: "\f129";}
+.i-class:before{content: "\f12a";}
+.i-computor:before{content: "\f12b";}
+.i-computor2:before{content: "\f12d";}
+.i-coupon:before{content: "\f12f";}
