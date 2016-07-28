@@ -1,0 +1,52 @@
+.loginReg{
+	width: 240px;
+	height: 140px;
+	background: #38b7ea;
+	display: none;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-left: -120px;
+	margin-top: -70px;
+	z-index: 10;
+}
+.loginReg h1{
+	color: #fff;
+	font-size: 20px;
+	font-weight: normal;
+	margin: 10px 0 0 20px;
+}
+
+.wayLogin{
+	margin-top: 20px;
+}
+.wayLogin a{
+	color: #fff;
+}
+.wayLogin a:hover{
+	color: #12536d;
+}
+.wayLogin div{
+	color: #fff;
+	width: 115px;
+	display: inline-block;
+	text-align: center;
+}
+.wayLogin .icon-font{
+	font-size: 48px;
+}
+
+.wayLogin span{
+	font-size: 12px;
+	display: block;
+	/*text-align: center;*/
+}
+
+.otherLogin a,.otherLogin span{
+	color: #81d9fd;
+}
+.otherLogin a:hover{
+	color: #81d9fd;
+}
+
+

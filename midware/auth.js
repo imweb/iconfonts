@@ -14,7 +14,8 @@ var authOptions = {
 };
 
 function authCheck(req, res, next) {
-    if (req.cookies.accessToken) {
+    if (req.user.accessToken) {
+        console.log(req.user);
         authOptions.path = AUTH_URL;
         ['uin', 'skey', 'accessToken'].forEach(function(key) {
             authOptions.path += '/' + req.cookies[key];
@@ -28,7 +29,7 @@ function authCheck(req, res, next) {
             res.on('end', function () {
                 var d = JSON.parse(data);
                 if(d.retcode !== 200) {
-                    return res.redirect('http://imweb.io');
+                    return res.redirect('http://iconfont.imweb.io/intro');
                 }
                 next();
             });
@@ -38,7 +39,8 @@ function authCheck(req, res, next) {
         });
         return authReq.end();
     }
-    res.redirect('http://imweb.io');
+    console.log(req.user);
+    res.redirect('http://iconfont.imweb.io/intro');
 }
 
 module.exports = authCheck;

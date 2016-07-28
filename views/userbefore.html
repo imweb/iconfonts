@@ -1,0 +1,53 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta property="qc:admins" content="3750656077667646157526177" />
+    <title>iconfont 平台</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <!-- <link rel="stylesheet" href="css/marxico.css"> -->
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/iconfont.css">
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="icon" href="images/icon.png" type="image/x-icon"/>
+</head>
+<body>
+    <%- include header.html %>
+    <%- include login.html %>
+    <div class="layout">
+        <% 
+        var item;
+        for(var k in all) { 
+            if(all.hasOwnProperty(k)) {
+                item = all[k];
+        %>
+        <div  class="content-block relative">
+            <h1 class="list-title"><%=bMaps[k] %> - 图标库<span>| <%= item.length %></span></h1>
+            <a class="rightBtn" id="js-download-btn" href="javascript:;">下载</a>
+            <ul class="icon-list clearfix js-pcList">
+            <% for(var i=0;i<item.length;i++){ %>
+                <li class="icon icon-font" data-id="<%= item[i].iconId %>">
+                    <i class="icon-font <%= item[i].className %>"></i>
+                    <span class="icon-content"><%= item[i].content %></span>
+                    <span class="icon-name"><%= item[i].className %></span>
+                    <a class="add" href="/tag?id=<%= item[i].iconId %>">加标签</a>
+                    <!-- <a href="/update?id=<%= item[i].iconId %>" class="icon-font <%= item[i].className %>">修改信息</a> -->
+                    <a href="/update?id=<%= item[i].iconId %>" >修改信息</a>
+                </li>
+            <% } %>
+            </ul>
+        </div>
+        <% }
+        }
+         %>
+    </div>
+    <section id="js-back2top" class="back2top icon-font i-to-top">  
+    </section>
+    <%- include footer.html %>
+    <script src="lib/jquery-2.1.4.min.js"></script>
+    <script src="js/index.js"></script>
+</body>
+</html>

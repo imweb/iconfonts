@@ -5,22 +5,33 @@
 .menu{
 	width: 1000px;
 	margin: 0 auto;
-	height: 70px;
+	height: 50px;
 	
 }
 
 .menu ul {
 	position: relative;
+	z-index: 20;
 }
 .menu-item{
 	float: left;
-	height: 70px;
-	line-height: 70px;
-	font-size: 18px;
+	height: 50px;
+	line-height: 50px;
+	font-size: 16px;
+}
+.menu-item:hover{
+	background-color: #38a0ea;
+}
+.user-name:hover{
+	background-color: #38b7ea;
+}
+.search-panel:hover{
+	background-color: #38b7ea;
 }
 .menu-item a {
 	color: #fff;
-	display: block;
+	display: inline-block;
+
 	padding: 0 15px;
 }
 .menu-item a:hover{
@@ -28,11 +39,62 @@
 	color: #fff;
 }
 
-
+#logIn img{
+	vertical-align: middle;
+}
+#logIn a{
+	font-size: 14px;
+}
 .user-name {
 	position: absolute;
 	right: 200px;
+	width: 110px;
 }
+
+.user-name img{
+	height: 23px;
+	width: 23px;
+	vertical-align: middle;
+}
+.user-name ul li:first-child{
+	margin-top: 6px;
+}
+.user-name ul li{
+	background-color: #38b7ea;
+	text-align: center;
+	height: 40px;
+	color: #000;
+	/*margin-top: 6px;*/
+}
+.user-name ul li:hover{
+	background-color: #38a0ea;
+}
+.user-name:hover #personOption{
+	display: block;		
+}
+.user-name ul li a{
+	height: inherit;
+	font-size: 14px;
+	line-height: 40px;
+	position: relative;
+	top: -5px;
+}
+#personOption{
+	display: none;
+	margin-top: -6px;
+}
+.arrow{
+	display: none;
+	width: 0;
+	height: 0;
+	border: 6px solid;
+	border-color: transparent transparent #38b7ea transparent;
+	border-style: dashed dashed solid dashed;
+	position: absolute;
+	top: 44px;
+	left: 44px;
+}
+
 .search-panel {
 	float: right;
 	padding-right: 0;
@@ -56,5 +118,5 @@
     position: absolute;
     right: 5px;
     font-size: 20px;
-    top: 26px;
+    top: 16px;
 }

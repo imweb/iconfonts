@@ -4,7 +4,7 @@
 * 判断用户是否有某个权限
 * 二进制权限验证方式
  */
-var User = require('../models/user.js');
+var User = require('../model/user.js');
 
 function checkUserAuth(user, auth, cb) { 
     User.find({

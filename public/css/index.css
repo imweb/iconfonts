@@ -21,28 +21,44 @@
 .relative{
 	position: relative;
 }
-.rightBtn{
-	position: absolute;
-	display: block;
-	right: 0;
-	top: 20px;
-	height: 40px;
-	line-height: 40px;
-	font-size: 16px;
-	width: 120px;
+.selectAllBtn{
+	display: inline-block !important;
+	margin-left: 30px;
+	height: 35px;
+	line-height: 35px;
+	font-size: 14px;
+	width: 100px;
 	border-radius: 4px;
 	text-align: center;
 	background-color: #38b7ea;
 	color: #fff;
-	display: none;
 }
-
-.icon{
-	margin: 10px 0;
-	color:#333;
+.disabled{
+	background-color: #d2d3d4;
+}
+.downloadBtn{
+	margin-top: 29px;
+	float: right;
+	height: 35px;
+	line-height: 35px;
+	font-size: 14px;
 	width: 100px;
+	border-radius: 4px;
 	text-align: center;
-	height: 100px;
+	/*background-color: #38b7ea;*/
+	background-color: #d2d3d4;
+	color: #fff;
+	/*display: none;*/
+}
+.disabled{
+	background-color: #38b7ea;
+}
+.icon{
+	padding: 20px 0 0 0;
+	color:#333;
+	width: 110px;
+	text-align: center;
+	height: 110px;
 	float: left;
 }
 
@@ -63,11 +79,12 @@
 }
 
 li.i-right:before{
+	/*content: "hehe";*/
     position: absolute;
     color: #ff4400;
     top: 0;
     right: 0;
-    background: rgb(245, 245, 245);
+    /*background: rgb(245, 245, 245);*/
 }
 
 .icon .icon-content{
@@ -85,7 +102,7 @@ li.i-right:before{
 
 
 .icon:hover{
-	background: rgb(245, 245, 245);
+	background: #efefef;
 }
 
 .back2top{
@@ -104,3 +121,14 @@ li.i-right:before{
     background: rgb(245, 245, 245);
     margin-top: 10px;
 }
+
+#selectAll{
+	width: 15px;
+	height: 15px;
+	vertical-align: middle;
+	margin-left: 20px;
+}
+#allSelect{
+	vertical-align: middle;
+}
+

@@ -7,7 +7,7 @@
 
 var path = require('path'),
     fs = require('fs'),
-    Icon = require('../models/icon.js'),
+    Icon = require('../model/icon.js'),
     conf = require('../conf.js');
 
 

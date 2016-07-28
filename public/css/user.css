@@ -1,0 +1,33 @@
+.empty {
+    width: 960px;
+    margin: 20px auto;
+    line-height: 300px;
+    text-align: center;
+    font-size: 50px;
+}
+.icon {
+    /*height: 120px;*/
+}
+.icon:hover {
+    background: none;
+}
+.icon:hover .add {
+    display: block;
+	line-height: 20px;
+}
+.icon:hover .add:hover{
+	color: #000;
+
+}
+.icon .add {
+    display: none;
+    color: #c7254e;
+    font-size: 12px;
+}
+.icon-name {
+    height: 20px;
+}
+.del {
+    color: #c7254e;
+    margin-left: 20px;
+}
