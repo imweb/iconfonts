@@ -14,7 +14,8 @@ var IconSchema = mongoose.Schema({
     //content: String, // content 根据 iconId生成，不需要存储
     business: String, // 业务相关，方便后续分类
     author: String,
-    path: String // 文件路径
+    path: String, // 文件路径
+    id: String
 });
 
 // iconId 自增，确保唯一性
@@ -63,15 +64,18 @@ IconSchema.statics.insertByOrder = function (icons, finishCb) {
 
 IconSchema.statics.insertOne = function (obj) {
     this.find({
-        name: obj.name
+        name: obj.name,
+        id: obj.id
     }).exec(function (err, icons) {
+        // console.log('obj是这个:',obj);
         if (!icons.length) {
             var icon = new Icon({
                 name: obj.name,
                 business: obj.business,
                 path: obj.path,
                 author: obj.author,
-                className: 'i-' + obj.name
+                className: 'i-' + obj.name,
+                id: obj.id
             });
             icon.save(function (err, icon) {
                 emitter.emit('insert_success', err, obj);

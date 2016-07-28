@@ -4,9 +4,8 @@
 			<li class="menu-item"><a href="/">首页</a></li>
 			<li class="menu-item"><a href="/intro">功能介绍</a></li>
 			<li class="menu-item"><a href="/rule">规范</a></li>
-			<li class="menu-item"><a href="/upload">上传</a></li>
+			<!-- <li class="menu-item"><a href="/upload">上传</a></li> -->
             <li class="menu-item"><a href="/checkin">构建接入</a></li>
-            <li class="menu-item"><a href="/myindex">个人中心</a></li>
             <li class="menu-item"><a href="http://imweb.io">IMWEB社区</a></li>
             <!-- <% if(typeof user !== 'undefined') { %>
             <li class="menu-item user-name">
@@ -20,15 +19,20 @@
             </li>
             <% } %> -->
             <% if (!user) { %>           
-                <li class="menu-item" id="logIn"><a href="/user/auth/qq"><img src="images/Connect_logo_1.png">QQ登录</a></li>
+                <li class="menu-item user-name" id="logIn"><a href="/user/auth/qq">
+                <!-- <img src="images/Connect_logo_1.png"> -->
+                QQ登录</a></li>
             <% } else { %>
                 <li class="menu-item user-name">
                     <img src="<%= user._json.figureurl_qq_1 %>" id="personImg"><a href="javascript:void(0);" id="person"><%= user.nickname %></a>
                     <ul id="personOption">
-                        <li><a href="/myindex">个人中心</a></li>
+                        <li><a href="/upload">上传图标</a></li>
+                        <li><a href="/user">管理图标</a></li>
                         <li><a href="/logout">注销</a></li>
+
                     </ul>
-                    <span class="arrow"></span>
+                    <!-- 三角箭头 -->
+                    <!-- <span class="arrow"></span> -->
                 </li>
             <% } %>
             <li class="menu-item search-panel">

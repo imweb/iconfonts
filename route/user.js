@@ -1,52 +1,92 @@
 var express = require('express'),
-	router = express.Router();
+    router = express.Router(),
+    Icon = require('../model/icon.js'),
+    Business = require('../model/business.js'),
+    conf = require('../conf.js'),
+    clean = require('../utils/file.js'),
+    svgParser = require('../utils/svg_parser.js');
 
-var User = require('../model/user.js'),
-	Icon = require('../model/icon.js');
+var addUserToMongo = require('../midware/addUserToMongo.js');
 
-router.get('/', function(req, res, next){
-	var user = req.user;
-	if (!user) {
-		res.render('intro', {
-	        user: req.user
-	    });
-		return console.log("未登录")
-	}
-	
-	Icon.find({
-		author: user.nickname
-	}).exec(function(err, icons){
-		User.find({
-			user: user.nickname
-		}).exec(function(err, user){
-			// console.log(user);
-			if (err) {
-				return console.log("find user出错")
-			}
 
-			var params = {
-				all: icons,
-				user: req.user
-			}
-			if (user.length === 0) {
-				var newuser = {
-					user: req.user.nickname,
-					id: req.user.id
-				};
-				User.create(newuser, function(err){
-					if (err) return console.log("添加数据库失败");
-					// console.log("添加数据库成功");
-				});
-			}
-				// console.log("已登录")
-				// res.render('intro', {
-			 //        user: req.user
-			 //    });
-			    res.render('user', params);
-		})
-	})
+router.post('/delete', function(req, res, next){
+    var name = req.body.name;
+    Business.remove({
+        name: name
+    }).exec(function(err, next){
+        if (err) {
+            return console.log(err)
+        }
+        res.status(200).send({
+            retcode: 0
+        });
+    })
+})
 
-	
+
+router.get('/', addUserToMongo, function(req, res, next) {
+    function getAllIcons(cb) {
+        Icon.find({
+            id: req.user.id
+        }).sort({
+                iconId: 1
+            }).exec(function(err, icons) {
+                if (err) {
+                    console.error(err);
+                    return typeof cb === 'function' && cb(err, icons);
+                }
+
+                var rets = {};
+                icons.forEach(function(icon) {
+                    icon.content = svgParser.generateHtmlIconContent(icon.iconId + conf.diff);
+                    if(!rets[icon.business]) {
+                        rets[icon.business] = [];
+                    } 
+                    rets[icon.business].push(icon);
+                });
+                typeof cb === 'function' && cb(err, rets, icons);
+            });
+    }
+
+
+    clean.cleanPreviousFiles(path.dirname(conf.allSvgZipPath), 24*3600*1000);
+    getAllIcons(function(err, icons, ret){
+        if (err) {
+            return next(err);
+        }
+        // if(icons.length > 0) {
+            // svg 文件不存在情况兼容
+             svgParser.genarateFonts(ret);
+             svgParser.generateCss(ret);
+        // }
+
+        Business.find({
+            id: req.user.id
+        }).exec(function(err, bids) {
+            var bMaps = {};
+            bids.forEach(function(b) {
+                bMaps[b.bid] = b.name;
+            });
+            var empty = isEmptyObject(bMaps);
+            if (empty) {
+                bMaps.business = "none"
+            }
+            res.render('user', {
+                all: icons,
+                user: req.user,
+                bMaps: bMaps
+            });
+        });
+
+    });
 });
+
+function isEmptyObject(obj) {
+    for (var key in obj) {
+        return false;
+    }
+    return true;
+}
+
 
 module.exports = router;

@@ -7,7 +7,8 @@ var mongoose = require('mongoose'),
 
 var BusinessSchema = mongoose.Schema({
     name: String,
-    pm: String
+    pm: String,
+    id: String
 });
 
 

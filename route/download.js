@@ -1,12 +1,15 @@
 var express = require('express'),
 	router = express.Router();
 
-var Icon = require('../models/icon.js'),
+var Icon = require('../model/icon.js'),
+    conf = require('../conf.js'),
 	svgParser = require('../utils/svg_parser.js'),
 	download = require('../utils/download.js');
 
-router.get('/:ids', function (req, res, next) {
-	var ids = req.params.ids.split('-');
+
+router.get(['/:ids', '/:ids/:bid'], function (req, res, next) {
+	var ids = req.params.ids.split('-'),
+		bid = req.params.bid;
 	var handler = function(err, p){
 		if (err) return next(err);
  		res.setHeader('Content-Type', 'application/zip');
@@ -16,7 +19,7 @@ router.get('/:ids', function (req, res, next) {
 			if(err) console.log(err);
 		});
 	};
-	if (ids[0] === '$svgs') downloadSvgs(handler);
+	if (ids[0] === '$svgs') download.packUpSvgs(handler, bid);
 	else downloadIconfonts(req.params.ids.split('-'), handler);
 });
 
@@ -36,7 +39,7 @@ function downloadIconfonts(ids, cb) {
 			return cb(err, icons);
 		}
 		icons.forEach(function (icon) {
-			icon.content = svgParser.generateHtmlIconContent(icon.iconId);
+			icon.content = svgParser.generateHtmlIconContent(icon.iconId + conf.diff);
 		});
 		download.packUpIconfonts(icons, cb);
 	});

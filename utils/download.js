@@ -4,7 +4,7 @@ var path = require('path'),
 
 var Q = require('q'),
     fontCarrier = require('font-carrier'),
-    Icon = require('../models/icon.js'),
+    Icon = require('../model/icon.js'),
     font = fontCarrier.create();
 
 var conf = require('../conf.js'),

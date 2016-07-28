@@ -9,6 +9,7 @@ var UserSchema =new mongoose.Schema({
 	// imweb.io cookie user's name
     user: String,
     id: String,
+    img: String,
     // 有无更新权限
     auth: {
     	type: Number,
@@ -18,6 +19,6 @@ var UserSchema =new mongoose.Schema({
 
 
 
-var User = mongoose.model('newUser', UserSchema);
+var User = mongoose.model('newUsers', UserSchema);
 
 module.exports = User;

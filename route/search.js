@@ -1,9 +1,9 @@
 var express = require('express'),
     router = express.Router();
 
-var Icon = require('../models/icon.js'),
-    Tag = require('../models/tag.js'),
-    Business = require('../models/business.js'),
+var Icon = require('../model/icon.js'),
+    Tag = require('../model/tag.js'),
+    Business = require('../model/business.js'),
     EventEmitter = require('eventemitter2').EventEmitter2,
     emitter = new EventEmitter();
     svgParser = require('../utils/svg_parser.js');
@@ -17,9 +17,9 @@ router.get('/', function (req, res, next) {
             bids.forEach(function(b) {
                 bMaps[b.bid] = b.name;
             });
-            res.render('index', {
+            res.render('search', {
                 all: arr,
-                user: req.cookies.user,
+                user: req.user,
                 bMaps: bMaps
             });
         });

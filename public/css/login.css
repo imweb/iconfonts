@@ -35,12 +35,7 @@
 .wayLogin .icon-font{
 	font-size: 48px;
 }
-.i-qq:before{
-	content: "\f036";
-}
-.i-user:before{
-	content: "\f053";
-}
+
 .wayLogin span{
 	font-size: 12px;
 	display: block;

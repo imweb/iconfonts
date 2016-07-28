@@ -6,10 +6,12 @@ url("./fonts/iconfont.woff") format("woff"),
 url("./fonts/iconfont.ttf") format("truetype"),
 url("./fonts/iconfont.svg#iconfont") format("svg");}
 .icon-font{font-family:"iconfont";font-size:16px;font-style:normal;font-weight: normal;font-variant: normal;text-transform: none;line-height: 1;position: relative;vertical-align:-2px;-webkit-font-smoothing: antialiased;-moz-osx-font-smoothing: grayscale;}
-.i-1:before{content: "\f102";}
-.i-2:before{content: "\f103";}
-.i-social-16px_logo-behance:before{content: "\f104";}
-.i-social-16px_logo-facebook:before{content: "\f105";}
-.i-3:before{content: "\f106";}
-.i-social-color-1_logo-feedly:before{content: "\f107";}
-.i-social-color-1_logo-slack:before{content: "\f108";}
+.i-course-q-a:before{content: "\f125";}
+.i-course-record:before{content: "\f126";}
+.i-course-record-border:before{content: "\f127";}
+.i-course-test:before{content: "\f128";}
+.i-c-remind:before{content: "\f129";}
+.i-class:before{content: "\f12a";}
+.i-computor:before{content: "\f12b";}
+.i-computor2:before{content: "\f12d";}
+.i-coupon:before{content: "\f12f";}

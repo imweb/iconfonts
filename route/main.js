@@ -4,57 +4,98 @@ var express = require('express'),
     Business = require('../model/business.js'),
     conf = require('../conf.js'),
     clean = require('../utils/file.js'),
-    svgParser = require('../utils/svg_parser.js');
+    svgParser = require('../utils/svg_parser.js'),
+    User = require('../model/user.js');
 
-function getAllIcons(cb) {
-    Icon.find()
-        .sort({
-            iconId: 1
-        }).exec(function(err, icons) {
-            if (err) {
-                console.error(err);
-                return typeof cb === 'function' && cb(err, icons);
+var author = ['imweb'];
+router.get(['/', '/index'], function(req, res, next) {
+    
+    function getAllIcons(cb) {
+        User.find({
+            auth: 1
+        }).exec(function(err, users){
+            // console.log(users)
+            if (users.length == 0) {
+                // return console.error(err);
+                res.render('index', {
+                    user: req.user,
+                    bMaps: undefined
+                });
             }
 
-            var rets = {};
-            icons.forEach(function(icon) {
-                icon.content = svgParser.generateHtmlIconContent(icon.iconId + conf.diff);
-                if(!rets[icon.business]) {
-                    rets[icon.business] = [];
-                } 
-                rets[icon.business].push(icon);
-            });
-            typeof cb === 'function' && cb(err, rets, icons);
-        });
-}
+            var newUsers = [];
+            users.forEach(function(user) {
+                newUsers.push({"id": user.id})
+            })
+            // console.log(newUsers)
+            Icon.find({
+                // author: newUsers
+                $or: newUsers
+                //这里用作设置权限
+            }).sort({
+                    iconId: 1
+                }).exec(function(err, icons) {
+                    if (err) {
+                        console.error(err);
+                        return typeof cb === 'function' && cb(err, icons);
+                    }
+                    // console.log(icons)
+                    var rets = {};
+                    icons.forEach(function(icon) {
+                        icon.content = svgParser.generateHtmlIconContent(icon.iconId + conf.diff);
+                        if(!rets[icon.business]) {
+                            rets[icon.business] = [];
+                        } 
+                        rets[icon.business].push(icon);
+                    });
+                    // console.log(rets)
+                    typeof cb === 'function' && cb(err, rets, icons, users);
+                });
+        })
+    }
 
-router.get('/', function(req, res, next) {
+
     clean.cleanPreviousFiles(path.dirname(conf.allSvgZipPath), 24*3600*1000);
-    getAllIcons(function(err, icons, ret){
+    getAllIcons(function(err, rets, icons, users){
         if (err) {
             return next(err);
         }
         // if(icons.length > 0) {
             // svg 文件不存在情况兼容
-             svgParser.genarateFonts(ret);
-             svgParser.generateCss(ret);
+             svgParser.genarateFonts(icons);
+             svgParser.generateCss(icons);
         // }
-
-        Business.find().exec(function(err, bids) {
+        var newBusiness = [];
+            users.forEach(function(user) {
+                newBusiness.push({"id": user.id})
+            })
+            // console.log('newBusiness',newBusiness)
+        Business.find({
+            $or: newBusiness
+        }).exec(function(err, bids) {
             var bMaps = {};
             bids.forEach(function(b) {
                 bMaps[b.bid] = b.name;
             });
-            res.render('myindex', {
-                all: icons,
+            var empty = isEmptyObject(bMaps);
+            if (empty) {
+                bMaps.business = "none"
+            }
+            res.render('index', {
+                all: rets,
                 user: req.user,
-                bMaps: bMaps
+                bMaps: bMaps,
             });
         });
 
     });
 });
 
-
+function isEmptyObject(obj) {
+    for (var key in obj) {
+        return false;
+    }
+    return true;
+}
 
 module.exports = router;
